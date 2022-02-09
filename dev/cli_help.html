@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Command Line &#8212; OpenPifPaf Guide DEV</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,19 +32,19 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -58,14 +55,17 @@
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Plugins" href="plugins_overview.html" />
     <link rel="prev" title="Training" href="train.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -74,32 +74,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  <img src="_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">OpenPifPaf Guide DEV</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OpenPifPaf Guide DEV</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
    Introduction
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting Started
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_cli.html">
    Prediction
@@ -111,15 +115,20 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Chapters
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_api.html">
    Prediction API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compute.html">
+   Compute
   </a>
  </li>
  <li class="toctree-l1">
@@ -153,15 +162,40 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Tutorials
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_custom.html">
+   Custom Dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_animalpose.html">
+   Animal Keypoints
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_wholebody.html">
+   WholeBody
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_apollocar3d.html">
+   Car Keypoints
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="plugins_crowdpose.html">
    CrowdPose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_nuscenes.html">
+   NuScenes 2D detection
   </a>
  </li>
  <li class="toctree-l1">
@@ -175,12 +209,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="moduledocs.html">
    Modules
@@ -192,12 +226,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="dev.html">
    Contribute
@@ -209,18 +243,17 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/vita-epfl/openpifpaf">
+  <a class="reference external" href="https://github.com/openpifpaf/openpifpaf">
    GitHub
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
-  This is the dev version of the Guide. Here is the <a href="https://vita-epfl.github.io/openpifpaf/">stable version</a>.
+  This is the dev version of the Guide. Here is the <a href="https://openpifpaf.github.io">stable version</a>.
 </div>
 
 </div>
@@ -260,7 +293,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -271,20 +304,18 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/vita-epfl/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/openpifpaf/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        
+        <a class="issues-button"
+            href="https://github.com/openpifpaf/openpifpaf/issues/new?title=Issue%20on%20page%20%2Fcli_help.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -293,7 +324,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/vita-epfl/openpifpaf/dev?urlpath=tree/guide/cli_help.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/openpifpaf/openpifpaf/main?urlpath=tree/guide/cli_help.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -308,13 +339,13 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> On this page
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> On this page
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#predict">
    predict
@@ -357,17 +388,74 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Command Line</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> On this page </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict">
+   predict
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#video">
+   video
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train">
+   train
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eval">
+   eval
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-onnx">
+   export_onnx
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#export-coreml">
+   export_coreml
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benchmark">
+   benchmark
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logs">
+   logs
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="command-line">
+  <div class="tex2jax_ignore mathjax_ignore section" id="command-line">
 <h1>Command Line<a class="headerlink" href="#command-line" title="Permalink to this headline">¶</a></h1>
 <p>This is a reference for all the <code class="docutils literal notranslate"><span class="pre">--help</span></code> message from all of OpenPifPaf’s command line interfaces (CLIs).</p>
 <div class="section" id="predict">
@@ -398,34 +486,49 @@ optional arguments:
   --json-output [JSON_OUTPUT]
                         Whether to output a json file, with the option to
                         specify the output path or directory (default: None)
-  --batch-size BATCH_SIZE
-                        processing batch size (default: 1)
-  --long-edge LONG_EDGE
-                        rescale the long side of the image (aspect ratio
-                        maintained) (default: None)
-  --loader-workers LOADER_WORKERS
-                        number of workers for data loading (default: None)
   --disable-cuda        disable CUDA (default: False)
 
 decoder configuration:
   --decoder DECODER [DECODER ...]
-                        Decoders to be considered: [&#39;cifcaf&#39;, &#39;cifdet&#39;].
+                        Decoders to be considered: [&#39;trackingpose&#39;,
+                        &#39;cifcafdense&#39;, &#39;posesimilarity&#39;, &#39;cifcaf&#39;, &#39;cifdet&#39;].
                         (default: None)
   --seed-threshold SEED_THRESHOLD
-                        minimum threshold for seeds (default: 0.5)
+                        minimum threshold for seeds (default: 0.2)
   --instance-threshold INSTANCE_THRESHOLD
-                        filter instances by score (0.0 with --force-complete-
-                        pose else 0.15) (default: None)
+                        filter instances by score (default is 0.0 with
+                        --force-complete-pose and 0.15 otherwise) (default:
+                        None)
   --decoder-workers DECODER_WORKERS
                         number of workers for pose decoding (default: None)
-  --caf-seeds           [experimental] (default: False)
   --profile-decoder [PROFILE_DECODER]
                         specify out .prof file or nothing for default file
                         name (default: None)
 
 CifCaf decoders:
-  --cif-th CIF_TH       cif threshold (default: 0.1)
-  --caf-th CAF_TH       caf threshold (default: 0.2)
+  --cif-th CIF_TH       cif threshold (default: 0.3)
+  --caf-th CAF_TH       caf threshold (default: 0.3)
+
+Decoder for tracking:
+  --tr-single-pose-threshold TR_SINGLE_POSE_THRESHOLD
+                        Single-pose threshold for tracking. (default: 0.3)
+  --tr-multi-pose-threshold TR_MULTI_POSE_THRESHOLD
+                        multi-pose threshold for tracking. (default: 0.2)
+  --tr-multi-pose-n TR_MULTI_POSE_N
+                        multi-pose n for tracking. (default: 3)
+  --tr-minimum-threshold TR_MINIMUM_THRESHOLD
+                        minimum-pose threshold for tracking. (default: 0.1)
+
+trackingpose decoder:
+  --trackingpose-track-recovery
+  --trackingpose-single-seed
+
+CifCafDense decoder:
+  --dense-connections [DENSE_CONNECTIONS]
+
+PoseSimilarity:
+  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
+  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
 
 CifCaf decoder:
   --force-complete-pose
@@ -444,7 +547,8 @@ CifCaf decoder:
   --connection-method {max,blend}
                         connection method to use, max is faster (default:
                         blend)
-  --dense-connections [DENSE_CONNECTIONS]
+  --cifcaf-block-joints
+                        block joints (default: False)
   --no-reverse-match
   --ablation-cifseeds-nms
   --ablation-cifseeds-no-rescore
@@ -456,16 +560,16 @@ logger:
   --debug               print debug messages (default: False)
   --log-stats           enable stats logging (default: False)
 
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
-SqueezeNet:
-  --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
-
 MobileNetV2:
   --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -499,22 +603,77 @@ ResNet:
                         create a network without the last block (default:
                         False)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
+
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
+
+SqueezeNet:
+  --squeezenet-no-pretrain
+                        use randomly initialized models (default: True)
+
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;,
-                        &quot;shufflenetv2k16-apollo-24&quot;,
-                        &quot;shufflenetv2k16-apollo-66&quot;, &quot;resnet50-crowdpose&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -523,6 +682,17 @@ network configuration:
                         consolidation strategy for a checkpoint&#39;s head
                         networks and the heads specified by the datamodule
                         (default: filter_and_extend)
+
+Predictor:
+  --batch-size BATCH_SIZE
+                        processing batch size (default: 1)
+  --loader-workers LOADER_WORKERS
+                        number of workers for data loading (default: None)
+  --long-edge LONG_EDGE
+                        rescale the long side of the image (aspect ratio
+                        maintained) (default: None)
+  --precise-rescaling   use more exact image rescaling (requires scipy)
+                        (default: True)
 
 show:
   --save-all [SAVE_ALL]
@@ -537,11 +707,11 @@ show:
                         None)
   --image-dpi-factor IMAGE_DPI_FACTOR
                         increase dpi of output image by this factor (default:
-                        1.0)
+                        2.0)
   --image-min-dpi IMAGE_MIN_DPI
                         minimum dpi of image output (default: 50.0)
   --show-file-extension SHOW_FILE_EXTENSION
-                        default file extension (default: png)
+                        default file extension (default: jpeg)
   --textbox-alpha TEXTBOX_ALPHA
                         transparency of annotation text box (default: 0.5)
   --text-color TEXT_COLOR
@@ -629,13 +799,23 @@ optional arguments:
                         video output file or &quot;virtualcam&quot; (default: None)
   --json-output [JSON_OUTPUT]
                         json output file (default: None)
-  --long-edge LONG_EDGE
-                        long edge of input images (default: None)
   --separate-debug-ax
   --disable-cuda        disable CUDA (default: False)
 
+SqueezeNet:
+  --squeezenet-no-pretrain
+                        use randomly initialized models (default: True)
+
 MobileNetV2:
   --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -669,30 +849,73 @@ ResNet:
                         create a network without the last block (default:
                         False)
 
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
 
-SqueezeNet:
-  --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;,
-                        &quot;shufflenetv2k16-apollo-24&quot;,
-                        &quot;shufflenetv2k16-apollo-66&quot;, &quot;resnet50-crowdpose&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -704,23 +927,45 @@ network configuration:
 
 decoder configuration:
   --decoder DECODER [DECODER ...]
-                        Decoders to be considered: [&#39;cifcaf&#39;, &#39;cifdet&#39;].
-                        (default: None)
+                        Decoders to be considered: [&#39;cifdet&#39;,
+                        &#39;posesimilarity&#39;, &#39;trackingpose&#39;, &#39;cifcafdense&#39;,
+                        &#39;cifcaf&#39;]. (default: None)
   --seed-threshold SEED_THRESHOLD
-                        minimum threshold for seeds (default: 0.5)
+                        minimum threshold for seeds (default: 0.2)
   --instance-threshold INSTANCE_THRESHOLD
-                        filter instances by score (0.0 with --force-complete-
-                        pose else 0.15) (default: None)
+                        filter instances by score (default is 0.0 with
+                        --force-complete-pose and 0.15 otherwise) (default:
+                        None)
   --decoder-workers DECODER_WORKERS
                         number of workers for pose decoding (default: None)
-  --caf-seeds           [experimental] (default: False)
   --profile-decoder [PROFILE_DECODER]
                         specify out .prof file or nothing for default file
                         name (default: None)
 
 CifCaf decoders:
-  --cif-th CIF_TH       cif threshold (default: 0.1)
-  --caf-th CAF_TH       caf threshold (default: 0.2)
+  --cif-th CIF_TH       cif threshold (default: 0.3)
+  --caf-th CAF_TH       caf threshold (default: 0.3)
+
+Decoder for tracking:
+  --tr-single-pose-threshold TR_SINGLE_POSE_THRESHOLD
+                        Single-pose threshold for tracking. (default: 0.3)
+  --tr-multi-pose-threshold TR_MULTI_POSE_THRESHOLD
+                        multi-pose threshold for tracking. (default: 0.2)
+  --tr-multi-pose-n TR_MULTI_POSE_N
+                        multi-pose n for tracking. (default: 3)
+  --tr-minimum-threshold TR_MINIMUM_THRESHOLD
+                        minimum-pose threshold for tracking. (default: 0.1)
+
+PoseSimilarity:
+  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
+  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
+
+trackingpose decoder:
+  --trackingpose-track-recovery
+  --trackingpose-single-seed
+
+CifCafDense decoder:
+  --dense-connections [DENSE_CONNECTIONS]
 
 CifCaf decoder:
   --force-complete-pose
@@ -739,7 +984,8 @@ CifCaf decoder:
   --connection-method {max,blend}
                         connection method to use, max is faster (default:
                         blend)
-  --dense-connections [DENSE_CONNECTIONS]
+  --cifcaf-block-joints
+                        block joints (default: False)
   --no-reverse-match
   --ablation-cifseeds-nms
   --ablation-cifseeds-no-rescore
@@ -750,6 +996,17 @@ logger:
   -q, --quiet           only show warning messages or above (default: False)
   --debug               print debug messages (default: False)
   --log-stats           enable stats logging (default: False)
+
+Predictor:
+  --batch-size BATCH_SIZE
+                        processing batch size (default: 1)
+  --loader-workers LOADER_WORKERS
+                        number of workers for data loading (default: None)
+  --long-edge LONG_EDGE
+                        rescale the long side of the image (aspect ratio
+                        maintained) (default: None)
+  --precise-rescaling   use more exact image rescaling (requires scipy)
+                        (default: True)
 
 show:
   --save-all [SAVE_ALL]
@@ -764,11 +1021,11 @@ show:
                         None)
   --image-dpi-factor IMAGE_DPI_FACTOR
                         increase dpi of output image by this factor (default:
-                        1.0)
+                        2.0)
   --image-min-dpi IMAGE_MIN_DPI
                         minimum dpi of image output (default: 50.0)
   --show-file-extension SHOW_FILE_EXTENSION
-                        default file extension (default: png)
+                        default file extension (default: jpeg)
   --textbox-alpha TEXTBOX_ALPHA
                         transparency of annotation text box (default: 0.5)
   --text-color TEXT_COLOR
@@ -863,6 +1120,10 @@ logger:
   --debug               print debug messages (default: False)
   --log-stats           enable stats logging (default: False)
 
+SqueezeNet:
+  --squeezenet-no-pretrain
+                        use randomly initialized models (default: True)
+
 shufflenetv2k:
   --shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE
                         stride of the optional 2nd input convolution (default:
@@ -879,8 +1140,16 @@ shufflenetv2k:
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
 
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
 MobileNetV2:
   --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
                         use randomly initialized models (default: True)
 
 ResNet:
@@ -898,30 +1167,73 @@ ResNet:
                         create a network without the last block (default:
                         False)
 
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
 
-SqueezeNet:
-  --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;,
-                        &quot;shufflenetv2k16-apollo-24&quot;,
-                        &quot;shufflenetv2k16-apollo-66&quot;, &quot;resnet50-crowdpose&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -945,22 +1257,16 @@ losses:
                         [experimental] (default: 0.0)
 
 Composite Loss:
+  --soft-clamp SOFT_CLAMP
+                        soft clamp (default: 5.0)
+
+Composite Loss by Components:
   --loss-prescale LOSS_PRESCALE
   --regression-loss {smoothl1,l1,laplace}
                         type of regression loss (default: laplace)
-
-Laplace Loss:
-  --laplace-soft-clamp LAPLACE_SOFT_CLAMP
-                        soft clamp for Laplace (default: 5.0)
-
-Bce Loss:
-  --r-smooth R_SMOOTH   r_{smooth} for SmoothL1 regressions (default: 0.0)
-
-Scale Loss:
-  --b-scale B_SCALE     Laplace width b for scale loss (default: 1.0)
-  --scale-log
-  --scale-soft-clamp SCALE_SOFT_CLAMP
-                        soft clamp for scale (default: 5.0)
+  --bce-total-soft-clamp BCE_TOTAL_SOFT_CLAMP
+                        per feature clamp value applied to the total (default:
+                        None)
 
 Bce Loss:
   --background-weight BACKGROUND_WEIGHT
@@ -975,6 +1281,21 @@ Bce Loss:
   --bce-min BCE_MIN     gradient clipped below (default: 0.0)
   --bce-soft-clamp BCE_SOFT_CLAMP
                         soft clamp for BCE (default: 5.0)
+  --bce-background-clamp BCE_BACKGROUND_CLAMP
+                        background clamp for BCE (default: -15.0)
+
+Laplace Loss:
+  --laplace-soft-clamp LAPLACE_SOFT_CLAMP
+                        soft clamp for Laplace (default: 5.0)
+
+Bce Loss:
+  --r-smooth R_SMOOTH   r_{smooth} for SmoothL1 regressions (default: 0.0)
+
+Scale Loss:
+  --b-scale B_SCALE     Laplace width b for scale loss (default: 1.0)
+  --scale-log
+  --scale-soft-clamp SCALE_SOFT_CLAMP
+                        soft clamp for scale (default: 5.0)
 
 trainer:
   --epochs EPOCHS       number of epochs to train (default: None)
@@ -1011,6 +1332,10 @@ encoders:
                         CAF width relative to its length (default: 0.0)
   --encoder-no-suppress-selfhidden
                         [experimental] (default: True)
+  --encoder-suppress-invisible
+                        [experimental] (default: False)
+  --encoder-suppress-collision
+                        [experimental] (default: False)
 
 optimizer:
   --momentum MOMENTUM   SGD momentum, beta1 in Adam (default: 0.9)
@@ -1054,6 +1379,38 @@ generic data module parameters:
   --dataset-weights DATASET_WEIGHTS [DATASET_WEIGHTS ...]
                         n-1 weights for the datasets (default: None)
 
+data module Animal:
+  --animal-train-annotations ANIMAL_TRAIN_ANNOTATIONS
+  --animal-val-annotations ANIMAL_VAL_ANNOTATIONS
+  --animal-train-image-dir ANIMAL_TRAIN_IMAGE_DIR
+  --animal-val-image-dir ANIMAL_VAL_IMAGE_DIR
+  --animal-square-edge ANIMAL_SQUARE_EDGE
+                        square edge of input images (default: 513)
+  --animal-extended-scale
+                        augment with an extended scale range (default: False)
+  --animal-orientation-invariant ANIMAL_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --animal-blur ANIMAL_BLUR
+                        augment with blur (default: 0.0)
+  --animal-no-augmentation
+                        do not apply data augmentation (default: True)
+  --animal-rescale-images ANIMAL_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --animal-upsample ANIMAL_UPSAMPLE
+                        head upsample stride (default: 1)
+  --animal-min-kp-anns ANIMAL_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --animal-bmin ANIMAL_BMIN
+                        b minimum in pixels (default: 1)
+  --animal-eval-test2017
+  --animal-eval-testdev2017
+  --animal-no-eval-annotation-filter
+  --animal-eval-long-edge ANIMAL_EVAL_LONG_EDGE
+                        set to zero to deactivate rescaling (default: 0)
+  --animal-eval-extended-scale
+  --animal-eval-orientation-invariant ANIMAL_EVAL_ORIENTATION_INVARIANT
+
 data module Apollo:
   --apollo-train-annotations APOLLO_TRAIN_ANNOTATIONS
   --apollo-val-annotations APOLLO_VAL_ANNOTATIONS
@@ -1078,6 +1435,9 @@ data module Apollo:
                         (default: 1)
   --apollo-bmin APOLLO_BMIN
                         b minimum in pixels (default: 1)
+  --apollo-apply-local-centrality-weights
+                        Weigh the CIF and CAF head during training. (default:
+                        False)
   --apollo-no-eval-annotation-filter
   --apollo-eval-long-edge APOLLO_EVAL_LONG_EDGE
                         set to zero to deactivate rescaling (default: 0)
@@ -1114,9 +1474,16 @@ data module CocoDet:
 
 data module CocoKp:
   --cocokp-train-annotations COCOKP_TRAIN_ANNOTATIONS
+                        train annotations (default: data-
+                        mscoco/annotations/person_keypoints_train2017.json)
   --cocokp-val-annotations COCOKP_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        mscoco/annotations/person_keypoints_val2017.json)
   --cocokp-train-image-dir COCOKP_TRAIN_IMAGE_DIR
+                        train image dir (default: data-
+                        mscoco/images/train2017/)
   --cocokp-val-image-dir COCOKP_VAL_IMAGE_DIR
+                        val image dir (default: data-mscoco/images/val2017/)
   --cocokp-square-edge COCOKP_SQUARE_EDGE
                         square edge of input images (default: 385)
   --cocokp-with-dense   train with dense connections (default: False)
@@ -1170,6 +1537,119 @@ data module CrowdPose:
   --crowdpose-eval-orientation-invariant CROWDPOSE_EVAL_ORIENTATION_INVARIANT
   --crowdpose-index {easy,medium,hard}
 
+data module NuScenes:
+  --nuscenes-train-annotations NUSCENES_TRAIN_ANNOTATIONS
+  --nuscenes-val-annotations NUSCENES_VAL_ANNOTATIONS
+  --nuscenes-train-image-dir NUSCENES_TRAIN_IMAGE_DIR
+  --nuscenes-val-image-dir NUSCENES_VAL_IMAGE_DIR
+  --nuscenes-square-edge NUSCENES_SQUARE_EDGE
+                        square edge of input images (default: 513)
+  --nuscenes-extended-scale
+                        augment with an extended scale range (default: False)
+  --nuscenes-orientation-invariant NUSCENES_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --nuscenes-blur NUSCENES_BLUR
+                        augment with blur (default: 0.0)
+  --nuscenes-no-augmentation
+                        do not apply data augmentation (default: True)
+  --nuscenes-rescale-images NUSCENES_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --nuscenes-upsample NUSCENES_UPSAMPLE
+                        head upsample stride (default: 1)
+
+data module Posetrack2018:
+  --posetrack2018-train-annotations POSETRACK2018_TRAIN_ANNOTATIONS
+                        train annotations (default: data-
+                        posetrack2018/annotations/train/*.json)
+  --posetrack2018-val-annotations POSETRACK2018_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        posetrack2018/annotations/val/*.json)
+  --posetrack2018-eval-annotations POSETRACK2018_EVAL_ANNOTATIONS
+                        eval annotations (default: data-
+                        posetrack2018/annotations/val/*.json)
+  --posetrack2018-data-root POSETRACK2018_DATA_ROOT
+                        data root (default: data-posetrack2018)
+
+data module Posetrack:
+  --posetrack-square-edge POSETRACK_SQUARE_EDGE
+                        square edge of input images (default: 385)
+  --posetrack-with-dense
+                        train with dense connections (default: False)
+  --posetrack-no-augmentation
+                        do not apply data augmentation (default: True)
+  --posetrack-rescale-images POSETRACK_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --posetrack-upsample POSETRACK_UPSAMPLE
+                        head upsample stride (default: 1)
+  --posetrack-min-kp-anns POSETRACK_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --posetrack-bmin POSETRACK_BMIN
+  --posetrack-sample-pairing POSETRACK_SAMPLE_PAIRING
+                        blend two samples together (default: 0.0)
+  --posetrack-image-augmentations POSETRACK_IMAGE_AUGMENTATIONS
+                        autocontrast, equalize, invert, solarize (default:
+                        0.0)
+  --posetrack-max-shift POSETRACK_MAX_SHIFT
+                        max shift (default: 30.0)
+  --posetrack-eval-long-edge POSETRACK_EVAL_LONG_EDGE
+  --posetrack-eval-extended-scale
+  --posetrack-eval-orientation-invariant POSETRACK_EVAL_ORIENTATION_INVARIANT
+  --posetrack-ablation-without-tcaf
+
+data module Posetrack2017:
+  --posetrack2017-eval-annotations POSETRACK2017_EVAL_ANNOTATIONS
+                        eval annotations (default: data-
+                        posetrack2017/annotations/val/*.json)
+  --posetrack2017-data-root POSETRACK2017_DATA_ROOT
+                        data root (default: data-posetrack2017)
+
+data module CocoKpSt:
+  --cocokpst-max-shift COCOKPST_MAX_SHIFT
+                        max shift (default: 30.0)
+
+data module wholebody:
+  --wholebody-train-annotations WHOLEBODY_TRAIN_ANNOTATIONS
+                        train annotations (default: data-mscoco/annotations/pe
+                        rson_keypoints_train2017_wholebody_pifpaf_style.json)
+  --wholebody-val-annotations WHOLEBODY_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        mscoco/annotations/coco_wholebody_val_v1.0.json)
+  --wholebody-train-image-dir WHOLEBODY_TRAIN_IMAGE_DIR
+                        train image dir (default: data-
+                        mscoco/images/train2017/)
+  --wholebody-val-image-dir WHOLEBODY_VAL_IMAGE_DIR
+                        val image dir (default: data-mscoco/images/val2017)
+  --wholebody-square-edge WHOLEBODY_SQUARE_EDGE
+                        square edge of input images (default: 385)
+  --wholebody-extended-scale
+                        augment with an extended scale range (default: False)
+  --wholebody-orientation-invariant WHOLEBODY_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --wholebody-blur WHOLEBODY_BLUR
+                        augment with blur (default: 0.0)
+  --wholebody-no-augmentation
+                        do not apply data augmentation (default: True)
+  --wholebody-rescale-images WHOLEBODY_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --wholebody-upsample WHOLEBODY_UPSAMPLE
+                        head upsample stride (default: 1)
+  --wholebody-min-kp-anns WHOLEBODY_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --wholebody-bmin WHOLEBODY_BMIN
+                        bmin (default: 1.0)
+  --wholebody-apply-local-centrality-weights
+                        Weigh the CIF and CAF head during training. (default:
+                        False)
+  --wholebody-eval-test2017
+  --wholebody-eval-testdev2017
+  --wholebody-no-eval-annotation-filter
+  --wholebody-eval-long-edge WHOLEBODY_EVAL_LONG_EDGE
+                        set to zero to deactivate rescaling (default: 641)
+  --wholebody-eval-extended-scale
+  --wholebody-eval-orientation-invariant WHOLEBODY_EVAL_ORIENTATION_INVARIANT
+
 show:
   --save-all [SAVE_ALL]
                         every plot is saved (optional to specify directory)
@@ -1183,11 +1663,11 @@ show:
                         None)
   --image-dpi-factor IMAGE_DPI_FACTOR
                         increase dpi of output image by this factor (default:
-                        1.0)
+                        2.0)
   --image-min-dpi IMAGE_MIN_DPI
                         minimum dpi of image output (default: 50.0)
   --show-file-extension SHOW_FILE_EXTENSION
-                        default file extension (default: png)
+                        default file extension (default: jpeg)
   --textbox-alpha TEXTBOX_ALPHA
                         transparency of annotation text box (default: 0.5)
   --text-color TEXT_COLOR
@@ -1256,12 +1736,18 @@ optional arguments:
   --skip-existing       skip if output eval file exists already (default:
                         False)
   --no-skip-epoch0      do not skip eval for epoch 0 (default: True)
-  --watch [WATCH]
+  --watch [WATCH]       Watch a directory for new checkpoint files. Optionally
+                        specify the number of seconds between checks.
+                        (default: False)
   --disable-cuda        disable CUDA (default: False)
   --write-predictions   write a json and a zip file of the predictions
                         (default: False)
-  --show-final-image
+  --show-final-image    show the final image (default: False)
   --show-final-ground-truth
+                        show the final image with ground truth annotations
+                        (default: False)
+  --n-images N_IMAGES
+  --loader-warmup LOADER_WARMUP
 
 generic data module parameters:
   --dataset DATASET
@@ -1271,6 +1757,38 @@ generic data module parameters:
                         batch size (default: 1)
   --dataset-weights DATASET_WEIGHTS [DATASET_WEIGHTS ...]
                         n-1 weights for the datasets (default: None)
+
+data module Animal:
+  --animal-train-annotations ANIMAL_TRAIN_ANNOTATIONS
+  --animal-val-annotations ANIMAL_VAL_ANNOTATIONS
+  --animal-train-image-dir ANIMAL_TRAIN_IMAGE_DIR
+  --animal-val-image-dir ANIMAL_VAL_IMAGE_DIR
+  --animal-square-edge ANIMAL_SQUARE_EDGE
+                        square edge of input images (default: 513)
+  --animal-extended-scale
+                        augment with an extended scale range (default: False)
+  --animal-orientation-invariant ANIMAL_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --animal-blur ANIMAL_BLUR
+                        augment with blur (default: 0.0)
+  --animal-no-augmentation
+                        do not apply data augmentation (default: True)
+  --animal-rescale-images ANIMAL_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --animal-upsample ANIMAL_UPSAMPLE
+                        head upsample stride (default: 1)
+  --animal-min-kp-anns ANIMAL_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --animal-bmin ANIMAL_BMIN
+                        b minimum in pixels (default: 1)
+  --animal-eval-test2017
+  --animal-eval-testdev2017
+  --animal-no-eval-annotation-filter
+  --animal-eval-long-edge ANIMAL_EVAL_LONG_EDGE
+                        set to zero to deactivate rescaling (default: 0)
+  --animal-eval-extended-scale
+  --animal-eval-orientation-invariant ANIMAL_EVAL_ORIENTATION_INVARIANT
 
 data module Apollo:
   --apollo-train-annotations APOLLO_TRAIN_ANNOTATIONS
@@ -1296,6 +1814,9 @@ data module Apollo:
                         (default: 1)
   --apollo-bmin APOLLO_BMIN
                         b minimum in pixels (default: 1)
+  --apollo-apply-local-centrality-weights
+                        Weigh the CIF and CAF head during training. (default:
+                        False)
   --apollo-no-eval-annotation-filter
   --apollo-eval-long-edge APOLLO_EVAL_LONG_EDGE
                         set to zero to deactivate rescaling (default: 0)
@@ -1332,9 +1853,16 @@ data module CocoDet:
 
 data module CocoKp:
   --cocokp-train-annotations COCOKP_TRAIN_ANNOTATIONS
+                        train annotations (default: data-
+                        mscoco/annotations/person_keypoints_train2017.json)
   --cocokp-val-annotations COCOKP_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        mscoco/annotations/person_keypoints_val2017.json)
   --cocokp-train-image-dir COCOKP_TRAIN_IMAGE_DIR
+                        train image dir (default: data-
+                        mscoco/images/train2017/)
   --cocokp-val-image-dir COCOKP_VAL_IMAGE_DIR
+                        val image dir (default: data-mscoco/images/val2017/)
   --cocokp-square-edge COCOKP_SQUARE_EDGE
                         square edge of input images (default: 385)
   --cocokp-with-dense   train with dense connections (default: False)
@@ -1388,25 +1916,160 @@ data module CrowdPose:
   --crowdpose-eval-orientation-invariant CROWDPOSE_EVAL_ORIENTATION_INVARIANT
   --crowdpose-index {easy,medium,hard}
 
+data module NuScenes:
+  --nuscenes-train-annotations NUSCENES_TRAIN_ANNOTATIONS
+  --nuscenes-val-annotations NUSCENES_VAL_ANNOTATIONS
+  --nuscenes-train-image-dir NUSCENES_TRAIN_IMAGE_DIR
+  --nuscenes-val-image-dir NUSCENES_VAL_IMAGE_DIR
+  --nuscenes-square-edge NUSCENES_SQUARE_EDGE
+                        square edge of input images (default: 513)
+  --nuscenes-extended-scale
+                        augment with an extended scale range (default: False)
+  --nuscenes-orientation-invariant NUSCENES_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --nuscenes-blur NUSCENES_BLUR
+                        augment with blur (default: 0.0)
+  --nuscenes-no-augmentation
+                        do not apply data augmentation (default: True)
+  --nuscenes-rescale-images NUSCENES_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --nuscenes-upsample NUSCENES_UPSAMPLE
+                        head upsample stride (default: 1)
+
+data module Posetrack2018:
+  --posetrack2018-train-annotations POSETRACK2018_TRAIN_ANNOTATIONS
+                        train annotations (default: data-
+                        posetrack2018/annotations/train/*.json)
+  --posetrack2018-val-annotations POSETRACK2018_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        posetrack2018/annotations/val/*.json)
+  --posetrack2018-eval-annotations POSETRACK2018_EVAL_ANNOTATIONS
+                        eval annotations (default: data-
+                        posetrack2018/annotations/val/*.json)
+  --posetrack2018-data-root POSETRACK2018_DATA_ROOT
+                        data root (default: data-posetrack2018)
+
+data module Posetrack:
+  --posetrack-square-edge POSETRACK_SQUARE_EDGE
+                        square edge of input images (default: 385)
+  --posetrack-with-dense
+                        train with dense connections (default: False)
+  --posetrack-no-augmentation
+                        do not apply data augmentation (default: True)
+  --posetrack-rescale-images POSETRACK_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --posetrack-upsample POSETRACK_UPSAMPLE
+                        head upsample stride (default: 1)
+  --posetrack-min-kp-anns POSETRACK_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --posetrack-bmin POSETRACK_BMIN
+  --posetrack-sample-pairing POSETRACK_SAMPLE_PAIRING
+                        blend two samples together (default: 0.0)
+  --posetrack-image-augmentations POSETRACK_IMAGE_AUGMENTATIONS
+                        autocontrast, equalize, invert, solarize (default:
+                        0.0)
+  --posetrack-max-shift POSETRACK_MAX_SHIFT
+                        max shift (default: 30.0)
+  --posetrack-eval-long-edge POSETRACK_EVAL_LONG_EDGE
+  --posetrack-eval-extended-scale
+  --posetrack-eval-orientation-invariant POSETRACK_EVAL_ORIENTATION_INVARIANT
+  --posetrack-ablation-without-tcaf
+
+data module Posetrack2017:
+  --posetrack2017-eval-annotations POSETRACK2017_EVAL_ANNOTATIONS
+                        eval annotations (default: data-
+                        posetrack2017/annotations/val/*.json)
+  --posetrack2017-data-root POSETRACK2017_DATA_ROOT
+                        data root (default: data-posetrack2017)
+
+data module CocoKpSt:
+  --cocokpst-max-shift COCOKPST_MAX_SHIFT
+                        max shift (default: 30.0)
+
+data module wholebody:
+  --wholebody-train-annotations WHOLEBODY_TRAIN_ANNOTATIONS
+                        train annotations (default: data-mscoco/annotations/pe
+                        rson_keypoints_train2017_wholebody_pifpaf_style.json)
+  --wholebody-val-annotations WHOLEBODY_VAL_ANNOTATIONS
+                        val annotations (default: data-
+                        mscoco/annotations/coco_wholebody_val_v1.0.json)
+  --wholebody-train-image-dir WHOLEBODY_TRAIN_IMAGE_DIR
+                        train image dir (default: data-
+                        mscoco/images/train2017/)
+  --wholebody-val-image-dir WHOLEBODY_VAL_IMAGE_DIR
+                        val image dir (default: data-mscoco/images/val2017)
+  --wholebody-square-edge WHOLEBODY_SQUARE_EDGE
+                        square edge of input images (default: 385)
+  --wholebody-extended-scale
+                        augment with an extended scale range (default: False)
+  --wholebody-orientation-invariant WHOLEBODY_ORIENTATION_INVARIANT
+                        augment with random orientations (default: 0.0)
+  --wholebody-blur WHOLEBODY_BLUR
+                        augment with blur (default: 0.0)
+  --wholebody-no-augmentation
+                        do not apply data augmentation (default: True)
+  --wholebody-rescale-images WHOLEBODY_RESCALE_IMAGES
+                        overall rescale factor for images (default: 1.0)
+  --wholebody-upsample WHOLEBODY_UPSAMPLE
+                        head upsample stride (default: 1)
+  --wholebody-min-kp-anns WHOLEBODY_MIN_KP_ANNS
+                        filter images with fewer keypoint annotations
+                        (default: 1)
+  --wholebody-bmin WHOLEBODY_BMIN
+                        bmin (default: 1.0)
+  --wholebody-apply-local-centrality-weights
+                        Weigh the CIF and CAF head during training. (default:
+                        False)
+  --wholebody-eval-test2017
+  --wholebody-eval-testdev2017
+  --wholebody-no-eval-annotation-filter
+  --wholebody-eval-long-edge WHOLEBODY_EVAL_LONG_EDGE
+                        set to zero to deactivate rescaling (default: 641)
+  --wholebody-eval-extended-scale
+  --wholebody-eval-orientation-invariant WHOLEBODY_EVAL_ORIENTATION_INVARIANT
+
 decoder configuration:
   --decoder DECODER [DECODER ...]
-                        Decoders to be considered: [&#39;cifcaf&#39;, &#39;cifdet&#39;].
-                        (default: None)
+                        Decoders to be considered: [&#39;cifdet&#39;,
+                        &#39;posesimilarity&#39;, &#39;trackingpose&#39;, &#39;cifcafdense&#39;,
+                        &#39;cifcaf&#39;]. (default: None)
   --seed-threshold SEED_THRESHOLD
-                        minimum threshold for seeds (default: 0.5)
+                        minimum threshold for seeds (default: 0.2)
   --instance-threshold INSTANCE_THRESHOLD
-                        filter instances by score (0.0 with --force-complete-
-                        pose else 0.15) (default: None)
+                        filter instances by score (default is 0.0 with
+                        --force-complete-pose and 0.15 otherwise) (default:
+                        None)
   --decoder-workers DECODER_WORKERS
                         number of workers for pose decoding (default: None)
-  --caf-seeds           [experimental] (default: False)
   --profile-decoder [PROFILE_DECODER]
                         specify out .prof file or nothing for default file
                         name (default: None)
 
 CifCaf decoders:
-  --cif-th CIF_TH       cif threshold (default: 0.1)
-  --caf-th CAF_TH       caf threshold (default: 0.2)
+  --cif-th CIF_TH       cif threshold (default: 0.3)
+  --caf-th CAF_TH       caf threshold (default: 0.3)
+
+Decoder for tracking:
+  --tr-single-pose-threshold TR_SINGLE_POSE_THRESHOLD
+                        Single-pose threshold for tracking. (default: 0.3)
+  --tr-multi-pose-threshold TR_MULTI_POSE_THRESHOLD
+                        multi-pose threshold for tracking. (default: 0.2)
+  --tr-multi-pose-n TR_MULTI_POSE_N
+                        multi-pose n for tracking. (default: 3)
+  --tr-minimum-threshold TR_MINIMUM_THRESHOLD
+                        minimum-pose threshold for tracking. (default: 0.1)
+
+PoseSimilarity:
+  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
+  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
+
+trackingpose decoder:
+  --trackingpose-track-recovery
+  --trackingpose-single-seed
+
+CifCafDense decoder:
+  --dense-connections [DENSE_CONNECTIONS]
 
 CifCaf decoder:
   --force-complete-pose
@@ -1425,7 +2088,8 @@ CifCaf decoder:
   --connection-method {max,blend}
                         connection method to use, max is faster (default:
                         blend)
-  --dense-connections [DENSE_CONNECTIONS]
+  --cifcaf-block-joints
+                        block joints (default: False)
   --no-reverse-match
   --ablation-cifseeds-nms
   --ablation-cifseeds-no-rescore
@@ -1439,6 +2103,18 @@ logger:
 
 SqueezeNet:
   --squeezenet-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV2:
+  --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -1457,10 +2133,6 @@ shufflenetv2k:
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
 
-MobileNetV2:
-  --mobilenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
 ResNet:
   --resnet-no-pretrain  use randomly initialized models (default: True)
   --resnet-pool0-stride RESNET_POOL0_STRIDE
@@ -1476,26 +2148,73 @@ ResNet:
                         create a network without the last block (default:
                         False)
 
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
+
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;,
-                        &quot;shufflenetv2k16-apollo-24&quot;,
-                        &quot;shufflenetv2k16-apollo-66&quot;, &quot;resnet50-crowdpose&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -1504,6 +2223,13 @@ network configuration:
                         consolidation strategy for a checkpoint&#39;s head
                         networks and the heads specified by the datamodule
                         (default: filter_and_extend)
+
+Predictor:
+  --long-edge LONG_EDGE
+                        rescale the long side of the image (aspect ratio
+                        maintained) (default: None)
+  --precise-rescaling   use more exact image rescaling (requires scipy)
+                        (default: True)
 
 show:
   --save-all [SAVE_ALL]
@@ -1518,11 +2244,11 @@ show:
                         None)
   --image-dpi-factor IMAGE_DPI_FACTOR
                         increase dpi of output image by this factor (default:
-                        1.0)
+                        2.0)
   --image-min-dpi IMAGE_MIN_DPI
                         minimum dpi of image output (default: 50.0)
   --show-file-extension SHOW_FILE_EXTENSION
-                        default file extension (default: png)
+                        default file extension (default: jpeg)
   --textbox-alpha TEXTBOX_ALPHA
                         transparency of annotation text box (default: 0.5)
   --text-color TEXT_COLOR
@@ -1581,8 +2307,9 @@ python3 -m openpifpaf.export_onnx --help
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: python3 -m openpifpaf.export_onnx [-h] [--version]
-                                         [--mobilenetv2-no-pretrain]
+                                         [--squeezenet-no-pretrain]
                                          [--shufflenetv2-no-pretrain]
+                                         [--mobilenetv3-no-pretrain]
                                          [--shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE]
                                          [--shufflenetv2k-input-conv2-outchannels SHUFFLENETV2K_INPUT_CONV2_OUTCHANNELS]
                                          [--shufflenetv2k-stage4-dilation SHUFFLENETV2K_STAGE4_DILATION]
@@ -1590,23 +2317,31 @@ python3 -m openpifpaf.export_onnx --help
                                          [--shufflenetv2k-conv5-as-stage]
                                          [--shufflenetv2k-instance-norm | --shufflenetv2k-group-norm]
                                          [--shufflenetv2k-leaky-relu]
+                                         [--mobilenetv2-no-pretrain]
                                          [--resnet-no-pretrain]
                                          [--resnet-pool0-stride RESNET_POOL0_STRIDE]
                                          [--resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE]
                                          [--resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE]
                                          [--resnet-block5-dilation RESNET_BLOCK5_DILATION]
                                          [--resnet-remove-last-block]
-                                         [--squeezenet-no-pretrain]
-                                         [--cf3-dropout CF3_DROPOUT]
-                                         [--cf3-no-inplace-ops]
+                                         [--xcit-out-channels XCIT_OUT_CHANNELS]
+                                         [--xcit-out-maxpool]
+                                         [--xcit-no-pretrain]
+                                         [--swin-drop-path-rate SWIN_DROP_PATH_RATE]
+                                         [--swin-input-upsample]
+                                         [--swin-use-fpn]
+                                         [--swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS]
+                                         [--swin-fpn-level SWIN_FPN_LEVEL]
+                                         [--swin-no-pretrain]
+                                         [--cf4-dropout CF4_DROPOUT]
+                                         [--cf4-no-inplace-ops]
                                          [--checkpoint CHECKPOINT]
                                          [--basenet BASENET]
                                          [--cross-talk CROSS_TALK]
                                          [--no-download-progress]
                                          [--head-consolidation {keep,create,filter_and_extend}]
                                          [--outfile OUTFILE] [--simplify]
-                                         [--polish] [--optimize] [--check]
-                                         [--input-width INPUT_WIDTH]
+                                         [--check] [--input-width INPUT_WIDTH]
                                          [--input-height INPUT_HEIGHT]
 
 Export a checkpoint as an ONNX model.
@@ -1622,19 +2357,20 @@ optional arguments:
   --version             show program&#39;s version number and exit
   --outfile OUTFILE
   --simplify
-  --polish              runs checker, optimizer and shape inference (default:
-                        False)
-  --optimize
   --check
   --input-width INPUT_WIDTH
   --input-height INPUT_HEIGHT
 
-MobileNetV2:
-  --mobilenetv2-no-pretrain
+SqueezeNet:
+  --squeezenet-no-pretrain
                         use randomly initialized models (default: True)
 
 ShuffleNetv2:
   --shufflenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -1653,6 +2389,10 @@ shufflenetv2k:
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
 
+MobileNetV2:
+  --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
 ResNet:
   --resnet-no-pretrain  use randomly initialized models (default: True)
   --resnet-pool0-stride RESNET_POOL0_STRIDE
@@ -1668,24 +2408,73 @@ ResNet:
                         create a network without the last block (default:
                         False)
 
-SqueezeNet:
-  --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
+
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -1710,13 +2499,7 @@ python3 -m openpifpaf.export_coreml --help
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>usage: python3 -m openpifpaf.export_coreml [-h] [--version]
-                                           [--resnet-no-pretrain]
-                                           [--resnet-pool0-stride RESNET_POOL0_STRIDE]
-                                           [--resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE]
-                                           [--resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE]
-                                           [--resnet-block5-dilation RESNET_BLOCK5_DILATION]
-                                           [--resnet-remove-last-block]
-                                           [--shufflenetv2-no-pretrain]
+                                           [--squeezenet-no-pretrain]
                                            [--shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE]
                                            [--shufflenetv2k-input-conv2-outchannels SHUFFLENETV2K_INPUT_CONV2_OUTCHANNELS]
                                            [--shufflenetv2k-stage4-dilation SHUFFLENETV2K_STAGE4_DILATION]
@@ -1724,10 +2507,26 @@ python3 -m openpifpaf.export_coreml --help
                                            [--shufflenetv2k-conv5-as-stage]
                                            [--shufflenetv2k-instance-norm | --shufflenetv2k-group-norm]
                                            [--shufflenetv2k-leaky-relu]
-                                           [--squeezenet-no-pretrain]
+                                           [--mobilenetv3-no-pretrain]
+                                           [--shufflenetv2-no-pretrain]
                                            [--mobilenetv2-no-pretrain]
-                                           [--cf3-dropout CF3_DROPOUT]
-                                           [--cf3-no-inplace-ops]
+                                           [--resnet-no-pretrain]
+                                           [--resnet-pool0-stride RESNET_POOL0_STRIDE]
+                                           [--resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE]
+                                           [--resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE]
+                                           [--resnet-block5-dilation RESNET_BLOCK5_DILATION]
+                                           [--resnet-remove-last-block]
+                                           [--xcit-out-channels XCIT_OUT_CHANNELS]
+                                           [--xcit-out-maxpool]
+                                           [--xcit-no-pretrain]
+                                           [--swin-drop-path-rate SWIN_DROP_PATH_RATE]
+                                           [--swin-input-upsample]
+                                           [--swin-use-fpn]
+                                           [--swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS]
+                                           [--swin-fpn-level SWIN_FPN_LEVEL]
+                                           [--swin-no-pretrain]
+                                           [--cf4-dropout CF4_DROPOUT]
+                                           [--cf4-no-inplace-ops]
                                            [--checkpoint CHECKPOINT]
                                            [--basenet BASENET]
                                            [--cross-talk CROSS_TALK]
@@ -1748,23 +2547,8 @@ optional arguments:
   --input-height INPUT_HEIGHT
   --minimum-deployment-target {iOS13,iOS14}
 
-ResNet:
-  --resnet-no-pretrain  use randomly initialized models (default: True)
-  --resnet-pool0-stride RESNET_POOL0_STRIDE
-                        stride of zero removes the pooling op (default: 0)
-  --resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE
-                        stride of the input convolution (default: 2)
-  --resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE
-                        stride of the optional 2nd input convolution (default:
-                        0)
-  --resnet-block5-dilation RESNET_BLOCK5_DILATION
-                        use dilated convs in block5 (default: 1)
-  --resnet-remove-last-block
-                        create a network without the last block (default:
-                        False)
-
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
+SqueezeNet:
+  --squeezenet-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -1783,28 +2567,100 @@ shufflenetv2k:
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
 
-SqueezeNet:
-  --squeezenet-no-pretrain
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
 MobileNetV2:
   --mobilenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
-CompositeField3:
-  --cf3-dropout CF3_DROPOUT
+ResNet:
+  --resnet-no-pretrain  use randomly initialized models (default: True)
+  --resnet-pool0-stride RESNET_POOL0_STRIDE
+                        stride of zero removes the pooling op (default: 0)
+  --resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE
+                        stride of the input convolution (default: 2)
+  --resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE
+                        stride of the optional 2nd input convolution (default:
+                        0)
+  --resnet-block5-dilation RESNET_BLOCK5_DILATION
+                        use dilated convs in block5 (default: 1)
+  --resnet-remove-last-block
+                        create a network without the last block (default:
+                        False)
+
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
+
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
+
+CompositeField4:
+  --cf4-dropout CF4_DROPOUT
                         [experimental] zeroing probability of feature in head
                         input (default: 0.0)
-  --cf3-no-inplace-ops  alternative graph without inplace ops (default: True)
+  --cf4-no-inplace-ops  alternative graph without inplace ops (default: True)
 
 network configuration:
   --checkpoint CHECKPOINT
                         Path to a local checkpoint. Or provide one of the
                         following to download a pretrained model:
-                        &quot;mobilenetv2&quot;, &quot;resnet50&quot;, &quot;shufflenetv2k16&quot;,
-                        &quot;shufflenetv2k16-withdense&quot;, &quot;shufflenetv2k30&quot;
-                        (default: None)
-  --basenet BASENET     base network, e.g. resnet50 (default: None)
+                        [&#39;shufflenetv2k30-animalpose&#39;,
+                        &#39;shufflenetv2k16-apollo-24&#39;,
+                        &#39;shufflenetv2k16-apollo-66&#39;,
+                        &#39;shufflenetv2k30-apollo-66&#39;, &#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3small&#39;, &#39;mobilenetv3large&#39;, &#39;resnet50&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k16-withdense&#39;,
+                        &#39;shufflenetv2k30&#39;, &#39;swin_s&#39;, &#39;swin_b&#39;,
+                        &#39;swin_t_input_upsample&#39;, &#39;mobilenetv3small-cocodet&#39;,
+                        &#39;resnet18-cocodet&#39;, &#39;resnet50-crowdpose&#39;,
+                        &#39;shufflenetv2k16-nuscenes&#39;, &#39;tshufflenetv2k16&#39;,
+                        &#39;tshufflenetv2k30&#39;, &#39;shufflenetv2k16-wholebody&#39;,
+                        &#39;shufflenetv2k30-wholebody&#39;] (default: None)
+  --basenet BASENET     base network, one of [&#39;mobilenetv2&#39;,
+                        &#39;mobilenetv3large&#39;, &#39;mobilenetv3small&#39;, &#39;resnet18&#39;,
+                        &#39;resnet50&#39;, &#39;resnet101&#39;, &#39;resnet152&#39;, &#39;resnext50&#39;,
+                        &#39;resnext101&#39;, &#39;shufflenetv2x1&#39;, &#39;shufflenetv2x2&#39;,
+                        &#39;shufflenetv2k16&#39;, &#39;shufflenetv2k20&#39;,
+                        &#39;shufflenetv2kx5&#39;, &#39;shufflenetv2k30&#39;,
+                        &#39;shufflenetv2k44&#39;, &#39;squeezenet&#39;, &#39;swin_t&#39;, &#39;swin_s&#39;,
+                        &#39;swin_b&#39;, &#39;swin_b_window_12&#39;, &#39;swin_l&#39;,
+                        &#39;swin_l_window_12&#39;, &#39;xcit_nano_12_p16&#39;,
+                        &#39;xcit_tiny_12_p16&#39;, &#39;xcit_tiny_24_p16&#39;,
+                        &#39;xcit_small_12_p16&#39;, &#39;xcit_small_24_p16&#39;,
+                        &#39;xcit_medium_24_p16&#39;, &#39;xcit_large_24_p16&#39;,
+                        &#39;xcit_nano_12_p8&#39;, &#39;xcit_tiny_12_p8&#39;,
+                        &#39;xcit_tiny_24_p8&#39;, &#39;xcit_small_12_p8&#39;,
+                        &#39;xcit_small_24_p8&#39;, &#39;xcit_medium_24_p8&#39;,
+                        &#39;xcit_large_24_p8&#39;, &#39;effnetv2_s&#39;, &#39;effnetv2_m&#39;,
+                        &#39;effnetv2_l&#39;, &#39;effnetv2_xl&#39;, &#39;effnetv2_s16_s&#39;,
+                        &#39;effnetv2_s16_m&#39;, &#39;effnetv2_s16_l&#39;, &#39;effnetv2_s16_xl&#39;,
+                        &#39;botnet&#39;, &#39;tshufflenetv2k16&#39;, &#39;tshufflenetv2k30&#39;,
+                        &#39;tresnet50&#39;, &#39;cifar10net&#39;] (default: None)
   --cross-talk CROSS_TALK
                         [experimental] (default: 0.0)
   --no-download-progress
@@ -1891,6 +2747,11 @@ optional arguments:
                         None)
   --show-mtl-sigmas
 
+logger:
+  -q, --quiet           only show warning messages or above (default: False)
+  --debug               print debug messages (default: False)
+  --log-stats           enable stats logging (default: False)
+
 show:
   --save-all [SAVE_ALL]
                         every plot is saved (optional to specify directory)
@@ -1904,11 +2765,11 @@ show:
                         None)
   --image-dpi-factor IMAGE_DPI_FACTOR
                         increase dpi of output image by this factor (default:
-                        1.0)
+                        2.0)
   --image-min-dpi IMAGE_MIN_DPI
                         minimum dpi of image output (default: 50.0)
   --show-file-extension SHOW_FILE_EXTENSION
-                        default file extension (default: png)
+                        default file extension (default: jpeg)
   --textbox-alpha TEXTBOX_ALPHA
                         transparency of annotation text box (default: 0.5)
   --text-color TEXT_COLOR
@@ -1969,40 +2830,46 @@ show:
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="train.html" title="previous page">Training</a>
-    <a class='right-next' id="next-link" href="plugins_overview.html" title="next page">Plugins</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="train.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Training</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="plugins_overview.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plugins</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/vita-epfl/openpifpaf/graphs/contributors">contributors</a>.<br/>
-        
-            &copy; Copyright 2020-2021.<br/>
-          <div class="extra_footer">
-            <div>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</div>
+    <footer class="footer">
+  <p>
+    
+      By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/openpifpaf/openpifpaf/graphs/contributors">contributors</a>.<br/>
+    
+        &copy; Copyright 2020-2021.<br/>
+      <div class="extra_footer">
+        <p>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</p>
 
-          </div>
-      </p>
-    </div>
-  </footer>
+      </div>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

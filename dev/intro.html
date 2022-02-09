@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Introduction &#8212; OpenPifPaf Guide DEV</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,19 +32,19 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
@@ -57,14 +54,17 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Prediction" href="predict_cli.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -73,32 +73,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  <img src="_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">OpenPifPaf Guide DEV</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OpenPifPaf Guide DEV</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
- <li class="toctree-l1 current active">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1 current">
   <a class="reference internal" href="#">
    Introduction
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting Started
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_cli.html">
    Prediction
@@ -110,15 +114,20 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Chapters
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_api.html">
    Prediction API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compute.html">
+   Compute
   </a>
  </li>
  <li class="toctree-l1">
@@ -152,15 +161,40 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Tutorials
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_custom.html">
+   Custom Dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_animalpose.html">
+   Animal Keypoints
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_wholebody.html">
+   WholeBody
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_apollocar3d.html">
+   Car Keypoints
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="plugins_crowdpose.html">
    CrowdPose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_nuscenes.html">
+   NuScenes 2D detection
   </a>
  </li>
  <li class="toctree-l1">
@@ -174,12 +208,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="moduledocs.html">
    Modules
@@ -191,12 +225,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="dev.html">
    Contribute
@@ -208,18 +242,17 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/vita-epfl/openpifpaf">
+  <a class="reference external" href="https://github.com/openpifpaf/openpifpaf">
    GitHub
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
-  This is the dev version of the Guide. Here is the <a href="https://vita-epfl.github.io/openpifpaf/">stable version</a>.
+  This is the dev version of the Guide. Here is the <a href="https://openpifpaf.github.io">stable version</a>.
 </div>
 
 </div>
@@ -259,7 +292,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -270,33 +303,31 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/vita-epfl/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/openpifpaf/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        
+        <a class="issues-button"
+            href="https://github.com/openpifpaf/openpifpaf/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> On this page
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> On this page
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#demo">
    Demo
@@ -305,11 +336,6 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#install">
    Install
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#about-this-guide">
-   About this Guide
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -323,6 +349,11 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#executable-guide">
+   Executable Guide
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#citation">
    Citation
   </a>
@@ -331,26 +362,76 @@
   <a class="reference internal nav-link" href="#commercial-license">
    Commercial License
   </a>
-  <ul class="nav section-nav flex-column">
-  </ul>
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> On this page </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demo">
+   Demo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install">
+   Install
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pre-trained-models">
+   Pre-trained Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#related-projects">
+   Related Projects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#executable-guide">
+   Executable Guide
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citation">
+   Citation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commercial-license">
+   Commercial License
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="introduction">
+  <div class="tex2jax_ignore mathjax_ignore section" id="introduction">
 <span id="id1"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Continuously tested on Linux, MacOS and Windows:
-<a class="reference external" href="https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3ATests"><img alt="Tests" src="https://github.com/vita-epfl/openpifpaf/workflows/Tests/badge.svg?branch=main" /></a>
-<a class="reference external" href="https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3Adeploy-guide"><img alt="deploy-guide" src="https://github.com/vita-epfl/openpifpaf/workflows/deploy-guide/badge.svg" /></a>
+<a class="reference external" href="https://github.com/openpifpaf/openpifpaf/actions?query=workflow%3ATests"><img alt="Tests" src="https://github.com/openpifpaf/openpifpaf/workflows/Tests/badge.svg?branch=main" /></a>
+<a class="reference external" href="https://github.com/openpifpaf/openpifpaf/actions?query=workflow%3Adeploy-guide"><img alt="deploy-guide" src="https://github.com/openpifpaf/openpifpaf/workflows/deploy-guide/badge.svg" /></a>
 <a class="reference external" href="https://pepy.tech/project/openpifpaf"><img alt="Downloads" src="https://pepy.tech/badge/openpifpaf" /></a>
 <br />
 <a class="reference external" href="https://arxiv.org/abs/2103.02440"><strong>New</strong> 2021 paper</a>:</p>
@@ -380,11 +461,15 @@ urban mobility such as self-driving cars and delivery robots.</p>
 <p><img alt="example image with overlaid pose predictions" src="_images/000000081988.jpg.predictions.jpeg" /></p>
 <p>Image credit: “<a class="reference external" href="https://www.flickr.com/photos/fotologic/6038911779/in/photostream/">Learning to surf</a>” by fotologic which is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/2.0/">CC-BY-2.0</a>.<br />
 Created with
-<a class="reference internal" href="cli_help.html#cli-help-predict"><span class="std std-ref">python3 -m openpifpaf.predict docs/coco/000000081988.jpg –image-min-dpi=200 –show-file-extension=jpeg –image-output</span></a>.</p>
+<a class="reference internal" href="cli_help.html#cli-help-predict"><span class="std std-ref">python3 -m openpifpaf.predict docs/coco/000000081988.jpg –image-output</span></a>.</p>
+<p><img alt="example image with overlaid wholebody pose predictions" src="https://raw.githubusercontent.com/openpifpaf/openpifpaf/main/docs/soccer.jpeg.predictions.jpeg" />
+Image credit: <a class="reference external" href="https://de.wikipedia.org/wiki/Kamil_Vacek#/media/Datei:Kamil_Vacek_20200627.jpg">Photo</a> by <a class="reference external" href="https://commons.wikimedia.org/wiki/User:Lokomotive74">Lokomotive74</a> which is licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>.<br />
+Created with
+<a class="reference internal" href="cli_help.html#cli-help-predict"><span class="std std-ref">python3 -m openpifpaf.predict docs/wholebody/soccer.jpeg –checkpoint=shufflenetv2k30-wholebody –line-width=2 –image-output</span></a>.</p>
 <p>More demos:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/vita-epfl/openpifpafwebdemo">openpifpafwebdemo</a> project (best performance). <a class="reference external" href="https://vitademo.epfl.ch">Live</a>.</p></li>
-<li><p>OpenPifPaf <a class="reference external" href="https://vita-epfl.github.io/openpifpafwebdemo/">running in your browser: vita-epfl.github.io/openpifpafwebdemo</a> (experimental)</p></li>
+<li><p><a class="reference external" href="https://github.com/openpifpaf/openpifpafwebdemo">openpifpafwebdemo</a> project (best performance). <a class="reference external" href="https://vitademo.epfl.ch">Live</a>.</p></li>
+<li><p>OpenPifPaf <a class="reference external" href="https://openpifpaf.github.io/openpifpafwebdemo/">running in your browser: openpifpaf.github.io/openpifpafwebdemo</a> (experimental)</p></li>
 <li><p>the <a class="reference internal" href="cli_help.html#cli-help-video"><span class="std std-ref">python3 -m openpifpaf.video</span></a> command (requires OpenCV)</p></li>
 <li><p><a class="reference external" href="https://colab.research.google.com/drive/1H8T4ZE6wc0A9xJE4oGnhgHpUpAH5HL7W">Google Colab demo</a></p></li>
 </ul>
@@ -392,73 +477,98 @@ Created with
 </div>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Python 3 is required. Python 2 is not supported.
-Do not clone this repository
-and make sure there is no folder named <code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code> in your current directory.</p>
+<p>Do not clone this repository.
+Make sure there is no folder named <code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code> in your current directory.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install openpifpaf
 </pre></div>
 </div>
-<p>You need to install <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to produce visual outputs.</p>
-<p>To modify openpifpaf itself, please follow <a class="reference internal" href="dev.html#modify-code"><span class="std std-ref">Modify Code</span></a>.</p>
+<p>You need to install <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to produce visual outputs.
+To modify OpenPifPaf itself, please follow <a class="reference internal" href="dev.html#modify-code"><span class="std std-ref">Modify Code</span></a>.</p>
 <p>For a live demo, we recommend to try the
-<a class="reference external" href="https://github.com/vita-epfl/openpifpafwebdemo">openpifpafwebdemo</a> project.
+<a class="reference external" href="https://github.com/openpifpaf/openpifpafwebdemo">openpifpafwebdemo</a> project.
 Alternatively, <a class="reference internal" href="cli_help.html#cli-help-video"><span class="std std-ref">python3 -m openpifpaf.video</span></a> (requires OpenCV)
 provides a live demo as well.</p>
-</div>
-<div class="section" id="about-this-guide">
-<h2>About this Guide<a class="headerlink" href="#about-this-guide" title="Permalink to this headline">¶</a></h2>
-<p>This is an executable book.
-Many sections of this book, like <a class="reference internal" href="predict_cli.html"><span class="doc">Prediction</span></a>, are generated from the code
-shown on the page itself:
-most pages are based on Jupyter Notebooks
-that can be downloaded or launched interactively in the cloud by clicking on the rocket
-at the top and selecting a cloud provider like <em>Binder</em>.
-The code on the page is all the code required to reproduce that particular page.</p>
+<p><em>Only on MacOS (Dec 2021)</em>: There seems to be an issue with Torch 1.10. Please try
+to stick with Torch 1.9 for now.</p>
 </div>
 <div class="section" id="pre-trained-models">
 <h2>Pre-trained Models<a class="headerlink" href="#pre-trained-models" title="Permalink to this headline">¶</a></h2>
 <p>Performance metrics on the COCO val set obtained with a GTX1080Ti:</p>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="text-align:right head"><p>Checkpoint</p></th>
+<tr class="row-odd"><th class="text-align:right head"><p>Name</p></th>
 <th class="text-align:center head"><p>AP</p></th>
-<th class="text-align:center head"><p>APᴹ</p></th>
-<th class="text-align:center head"><p>APᴸ</p></th>
-<th class="text-align:center head"><p>t_{total} [ms]</p></th>
-<th class="text-align:center head"><p>t_{dec} [ms]</p></th>
+<th class="text-align:center head"><p>AP0.5</p></th>
+<th class="text-align:center head"><p>AP0.75</p></th>
+<th class="text-align:center head"><p>APM</p></th>
+<th class="text-align:center head"><p>APL</p></th>
+<th class="text-align:right head"><p>t_{total} [ms]</p></th>
+<th class="text-align:right head"><p>t_{NN} [ms]</p></th>
+<th class="text-align:right head"><p>t_{dec} [ms]</p></th>
 <th class="text-align:right head"><p>size</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:right"><p><a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub/releases/download/v0.12.2/resnet50-210224-202010-cocokp-o10s-d020d7f1.pkl">resnet50</a></p></td>
-<td class="text-align:center"><p><strong>68.2</strong></p></td>
-<td class="text-align:center"><p>65.8</p></td>
-<td class="text-align:center"><p>72.7</p></td>
-<td class="text-align:center"><p>64</p></td>
-<td class="text-align:center"><p>22</p></td>
-<td class="text-align:right"><p>98.0MB</p></td>
+<tr class="row-even"><td class="text-align:right"><p><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases/download/v0.13/mobilenetv3small-210822-213409-cocokp-slurm726252-edge513-o10s-803b24ae.pkl">mobilenetv3small</a></p></td>
+<td class="text-align:center"><p><strong>47.1</strong></p></td>
+<td class="text-align:center"><p>73.9</p></td>
+<td class="text-align:center"><p>49.5</p></td>
+<td class="text-align:center"><p>40.1</p></td>
+<td class="text-align:center"><p>58.0</p></td>
+<td class="text-align:right"><p>26</p></td>
+<td class="text-align:right"><p>9</p></td>
+<td class="text-align:right"><p>14</p></td>
+<td class="text-align:right"><p>5.8MB</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:right"><p><a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub/releases/download/v0.12b4/shufflenetv2k16-210214-123448-cocokp-o10s-e2ae3708.pkl">shufflenetv2k16</a></p></td>
-<td class="text-align:center"><p><strong>67.2</strong></p></td>
-<td class="text-align:center"><p>62.7</p></td>
-<td class="text-align:center"><p>74.6</p></td>
-<td class="text-align:center"><p>51</p></td>
-<td class="text-align:center"><p>19</p></td>
-<td class="text-align:right"><p>39.3MB</p></td>
+<tr class="row-odd"><td class="text-align:right"><p><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases/download/v0.13/mobilenetv3large-210820-184901-cocokp-slurm725985-edge513-o10s-6c76cbfb.pkl">mobilenetv3large</a></p></td>
+<td class="text-align:center"><p><strong>58.4</strong></p></td>
+<td class="text-align:center"><p>82.3</p></td>
+<td class="text-align:center"><p>63.4</p></td>
+<td class="text-align:center"><p>52.3</p></td>
+<td class="text-align:center"><p>67.9</p></td>
+<td class="text-align:right"><p>34</p></td>
+<td class="text-align:right"><p>19</p></td>
+<td class="text-align:right"><p>12</p></td>
+<td class="text-align:right"><p>15.0MB</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:right"><p><a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub/releases/download/v0.12.2/shufflenetv2k30-210224-074128-cocokp-o10s-59ca2b89.pkl">shufflenetv2k30</a></p></td>
-<td class="text-align:center"><p><strong>71.0</strong></p></td>
-<td class="text-align:center"><p>66.6</p></td>
-<td class="text-align:center"><p>78.5</p></td>
-<td class="text-align:center"><p>92</p></td>
-<td class="text-align:center"><p>16</p></td>
-<td class="text-align:right"><p>115.6MB</p></td>
+<tr class="row-even"><td class="text-align:right"><p><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases/download/v0.13/resnet50-210830-150728-cocokp-slurm728641-edge513-o10s-ecd30da4.pkl">resnet50</a></p></td>
+<td class="text-align:center"><p><strong>68.1</strong></p></td>
+<td class="text-align:center"><p>87.8</p></td>
+<td class="text-align:center"><p>74.4</p></td>
+<td class="text-align:center"><p>65.4</p></td>
+<td class="text-align:center"><p>73.0</p></td>
+<td class="text-align:right"><p>53</p></td>
+<td class="text-align:right"><p>38</p></td>
+<td class="text-align:right"><p>12</p></td>
+<td class="text-align:right"><p>97.4MB</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:right"><p><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases/download/v0.13/shufflenetv2k16-210820-232500-cocokp-slurm726069-edge513-o10s-7189450a.pkl">shufflenetv2k16</a></p></td>
+<td class="text-align:center"><p><strong>68.1</strong></p></td>
+<td class="text-align:center"><p>87.6</p></td>
+<td class="text-align:center"><p>74.5</p></td>
+<td class="text-align:center"><p>63.0</p></td>
+<td class="text-align:center"><p>76.0</p></td>
+<td class="text-align:right"><p>40</p></td>
+<td class="text-align:right"><p>28</p></td>
+<td class="text-align:right"><p>10</p></td>
+<td class="text-align:right"><p>38.9MB</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:right"><p><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases/download/v0.13/shufflenetv2k30-210821-003923-cocokp-slurm726072-edge513-o10s-5fe1c400.pkl">shufflenetv2k30</a></p></td>
+<td class="text-align:center"><p><strong>71.8</strong></p></td>
+<td class="text-align:center"><p>89.4</p></td>
+<td class="text-align:center"><p>78.1</p></td>
+<td class="text-align:center"><p>67.0</p></td>
+<td class="text-align:center"><p>79.5</p></td>
+<td class="text-align:right"><p>81</p></td>
+<td class="text-align:right"><p>71</p></td>
+<td class="text-align:right"><p>8</p></td>
+<td class="text-align:right"><p>115.0MB</p></td>
 </tr>
 </tbody>
 </table>
 <p>Command to reproduce this table: <a class="reference internal" href="cli_help.html#cli-help-benchmark"><span class="std std-ref">python -m openpifpaf.benchmark –checkpoints resnet50 shufflenetv2k16 shufflenetv2k30</span></a>.</p>
 <p>Pretrained model files are shared in the
-<strong><a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub/releases">openpifpaf-torchhub</a></strong>
+<strong><a class="reference external" href="https://github.com/openpifpaf/torchhub/releases">openpifpaf/torchhub</a></strong>
 repository and linked from the checkpoint names in the table above.
 The pretrained models are downloaded automatically when
 using the command line option <code class="docutils literal notranslate"><span class="pre">--checkpoint</span> <span class="pre">checkpointasintableabove</span></code>.</p>
@@ -466,28 +576,44 @@ using the command line option <code class="docutils literal notranslate"><span c
 <div class="section" id="related-projects">
 <h2>Related Projects<a class="headerlink" href="#related-projects" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/vita-epfl/openpifpaf_posetrack">pose tracker</a>: “OpenPifPaf: Composite Fields for Semantic Keypoint Detection and Spatio-Temporal Association”.</p></li>
+<li><p><a class="reference internal" href="plugins_wholebody.html"><span class="doc">Keypoint Communities</span></a>: plugin for wholebody human poses, <a class="reference external" href="https://huggingface.co/spaces/akhaliq/Keypoint_Communities">HuggingFace Demo</a>, <a class="reference external" href="https://paperswithcode.com/paper/keypoint-communities">PapersWithCode</a>.</p></li>
 <li><p><a class="reference external" href="https://neuralet.com/article/pose-estimation-on-nvidia-jetson-platforms-using-openpifpaf/">neuralet</a>: TensorRT execution, including Docker images for NVidia Jetson.</p></li>
 <li><p><a class="reference external" href="https://towardsdatascience.com/fall-detection-using-pose-estimation-a8f7fd77081d">fall detection using pose estimation</a>: illustrated with many example video clips.</p></li>
 <li><p><a class="reference external" href="https://medium.com/&#64;_samkitjain/physio-pose-a-virtual-physiotherapy-assistant-7d1c17db3159">physio pose</a>: “A virtual physiotherapy assistant”.</p></li>
 <li><p><a class="reference external" href="https://github.com/vita-epfl/monstereo">monstereo</a>: “MonStereo: When Monocular and Stereo Meet at the Tail of 3D Human Localization”.</p></li>
 <li><p><a class="reference external" href="https://github.com/vita-epfl/monoloco">monoloco</a>: “Monocular 3D Pedestrian Localization and Uncertainty Estimation”.</p></li>
-<li><p><a class="reference external" href="https://github.com/vita-epfl/openpifpafwebdemo">openpifpafwebdemo</a>: Web server and frontend. Docker image. Kubernetes config. <a class="reference external" href="https://vitademo.epfl.ch">Live</a>.</p></li>
-<li><p><a class="reference external" href="https://github.com/vita-epfl/openpifpaf/network/dependents">GitHub dependency graph</a>: auto-detected Github repositories that use OpenPifPaf.</p></li>
+<li><p><a class="reference external" href="https://github.com/openpifpaf/openpifpafwebdemo">openpifpafwebdemo</a>: Web server and frontend. Docker image. Kubernetes config. <a class="reference external" href="https://vitademo.epfl.ch">Live</a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/openpifpaf/openpifpaf/network/dependents">GitHub dependency graph</a>: auto-detected Github repositories that use OpenPifPaf.</p></li>
 </ul>
-<p>Open an <a class="reference external" href="https://github.com/vita-epfl/openpifpaf/issues">issue</a> to suggest more projects.</p>
+<p>Open an <a class="reference external" href="https://github.com/openpifpaf/openpifpaf/issues">issue</a> to suggest more projects.</p>
+</div>
+<div class="section" id="executable-guide">
+<h2>Executable Guide<a class="headerlink" href="#executable-guide" title="Permalink to this headline">¶</a></h2>
+<p>This is a <a class="reference external" href="https://jupyterbook.org/intro.html">jupyter-book</a> or “executable book”.
+Many sections of this book, like <a class="reference internal" href="predict_cli.html"><span class="doc">Prediction</span></a>, are generated from the code
+shown on the page itself:
+most pages are based on Jupyter Notebooks
+that can be downloaded or launched interactively in the cloud by clicking on the rocket
+at the top and selecting a cloud provider like <em>Binder</em>.
+The code on the page is all the code required to reproduce that particular page.</p>
 </div>
 <div class="section" id="citation">
-<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<span id="id2"></span><h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<p>Reference <span id="id3">[<a class="reference internal" href="bibliography.html#id3">KBA21</a>]</span>,
+<a class="reference external" href="https://arxiv.org/abs/2103.02440">arxiv.org/abs/2103.02440</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">kreiss2021openpifpaf</span><span class="p">,</span>
   <span class="n">title</span> <span class="o">=</span> <span class="p">{{</span><span class="n">OpenPifPaf</span><span class="p">:</span> <span class="n">Composite</span> <span class="n">Fields</span> <span class="k">for</span> <span class="n">Semantic</span> <span class="n">Keypoint</span> <span class="n">Detection</span> <span class="ow">and</span> <span class="n">Spatio</span><span class="o">-</span><span class="n">Temporal</span> <span class="n">Association</span><span class="p">}},</span>
   <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Sven</span> <span class="n">Kreiss</span> <span class="ow">and</span> <span class="n">Lorenzo</span> <span class="n">Bertoni</span> <span class="ow">and</span> <span class="n">Alexandre</span> <span class="n">Alahi</span><span class="p">},</span>
-  <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">arXiv</span> <span class="n">preprint</span> <span class="n">arXiv</span><span class="p">:</span><span class="mf">2103.02440</span><span class="p">},</span>
+  <span class="n">journal</span> <span class="o">=</span> <span class="p">{</span><span class="n">IEEE</span> <span class="n">Transactions</span> <span class="n">on</span> <span class="n">Intelligent</span> <span class="n">Transportation</span> <span class="n">Systems</span><span class="p">},</span>
+  <span class="n">pages</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="o">-</span><span class="mi">14</span><span class="p">},</span>
   <span class="n">month</span> <span class="o">=</span> <span class="p">{</span><span class="n">March</span><span class="p">},</span>
   <span class="n">year</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2021</span><span class="p">}</span>
 <span class="p">}</span>
-
-<span class="nd">@InProceedings</span><span class="p">{</span><span class="n">kreiss2019pifpaf</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>Reference <span id="id4">[<a class="reference internal" href="bibliography.html#id2">KBA19</a>]</span>,
+<a class="reference external" href="https://arxiv.org/abs/1903.06593">arxiv.org/abs/1903.06593</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@InProceedings</span><span class="p">{</span><span class="n">kreiss2019pifpaf</span><span class="p">,</span>
   <span class="n">author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Kreiss</span><span class="p">,</span> <span class="n">Sven</span> <span class="ow">and</span> <span class="n">Bertoni</span><span class="p">,</span> <span class="n">Lorenzo</span> <span class="ow">and</span> <span class="n">Alahi</span><span class="p">,</span> <span class="n">Alexandre</span><span class="p">},</span>
   <span class="n">title</span> <span class="o">=</span> <span class="p">{{</span><span class="n">PifPaf</span><span class="p">:</span> <span class="n">Composite</span> <span class="n">Fields</span> <span class="k">for</span> <span class="n">Human</span> <span class="n">Pose</span> <span class="n">Estimation</span><span class="p">}},</span>
   <span class="n">booktitle</span> <span class="o">=</span> <span class="p">{</span><span class="n">The</span> <span class="n">IEEE</span> <span class="n">Conference</span> <span class="n">on</span> <span class="n">Computer</span> <span class="n">Vision</span> <span class="ow">and</span> <span class="n">Pattern</span> <span class="n">Recognition</span> <span class="p">(</span><span class="n">CVPR</span><span class="p">)},</span>
@@ -496,13 +622,11 @@ using the command line option <code class="docutils literal notranslate"><span c
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>References: <span id="id2">[<a class="reference internal" href="bibliography.html#id3"><span>KBA21</span></a>,<a class="reference internal" href="bibliography.html#id2"><span>KBA19</span></a>]</span></p>
 </div>
 <div class="section" id="commercial-license">
 <h2>Commercial License<a class="headerlink" href="#commercial-license" title="Permalink to this headline">¶</a></h2>
 <p>This software is available for licensing via the EPFL Technology Transfer
 Office (<a class="reference external" href="https://tto.epfl.ch/">https://tto.epfl.ch/</a>, <a class="reference external" href="mailto:info&#46;tto&#37;&#52;&#48;epfl&#46;ch">info<span>&#46;</span>tto<span>&#64;</span>epfl<span>&#46;</span>ch</a>).</p>
-<div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -512,6 +636,7 @@ Office (<a class="reference external" href="https://tto.epfl.ch/">https://tto.ep
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -537,39 +662,39 @@ Office (<a class="reference external" href="https://tto.epfl.ch/">https://tto.ep
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="predict_cli.html" title="next page">Prediction</a>
-
-        </div>
-        
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="predict_cli.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Prediction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/vita-epfl/openpifpaf/graphs/contributors">contributors</a>.<br/>
-        
-            &copy; Copyright 2020-2021.<br/>
-          <div class="extra_footer">
-            <div>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</div>
+    <footer class="footer">
+  <p>
+    
+      By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/openpifpaf/openpifpaf/graphs/contributors">contributors</a>.<br/>
+    
+        &copy; Copyright 2020-2021.<br/>
+      <div class="extra_footer">
+        <p>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</p>
 
-          </div>
-      </p>
-    </div>
-  </footer>
+      </div>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>
