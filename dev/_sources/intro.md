@@ -2,8 +2,8 @@
 # Introduction
 
 Continuously tested on Linux, MacOS and Windows:
-[![Tests](https://github.com/openpifpaf/openpifpaf/workflows/Tests/badge.svg?branch=main)](https://github.com/openpifpaf/openpifpaf/actions?query=workflow%3ATests)
-[![deploy-guide](https://github.com/openpifpaf/openpifpaf/workflows/deploy-guide/badge.svg)](https://github.com/openpifpaf/openpifpaf/actions?query=workflow%3Adeploy-guide)
+[![Tests](https://github.com/vita-epfl/openpifpaf/workflows/Tests/badge.svg?branch=main)](https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3ATests)
+[![deploy-guide](https://github.com/vita-epfl/openpifpaf/workflows/deploy-guide/badge.svg)](https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3Adeploy-guide)
 [![Downloads](https://pepy.tech/badge/openpifpaf)](https://pepy.tech/project/openpifpaf)
 <br />
 [__New__ 2021 paper](https://arxiv.org/abs/2103.02440):
@@ -39,7 +39,7 @@ Image credit: "[Learning to surf](https://www.flickr.com/photos/fotologic/603891
 Created with
 {ref}`python3 -m openpifpaf.predict docs/coco/000000081988.jpg --image-output <cli-help-predict>`.
 
-![example image with overlaid wholebody pose predictions](https://raw.githubusercontent.com/openpifpaf/openpifpaf/main/docs/soccer.jpeg.predictions.jpeg)
+![example image with overlaid wholebody pose predictions](https://raw.githubusercontent.com/vita-epfl/openpifpaf/main/docs/soccer.jpeg.predictions.jpeg)
 Image credit: [Photo](https://de.wikipedia.org/wiki/Kamil_Vacek#/media/Datei:Kamil_Vacek_20200627.jpg) by [Lokomotive74](https://commons.wikimedia.org/wiki/User:Lokomotive74) which is licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).<br />
 Created with
 {ref}`python3 -m openpifpaf.predict docs/wholebody/soccer.jpeg --checkpoint=shufflenetv2k30-wholebody --line-width=2 --image-output <cli-help-predict>`.
@@ -96,9 +96,8 @@ Performance metrics on the COCO val set obtained with a GTX1080Ti:
 
 Command to reproduce this table: {ref}`python -m openpifpaf.benchmark --checkpoints resnet50 shufflenetv2k16 shufflenetv2k30 <cli-help-benchmark>`.
 
-Pretrained model files are shared in the
-__[openpifpaf/torchhub](https://github.com/openpifpaf/torchhub/releases)__
-repository and linked from the checkpoint names in the table above.
+Pretrained model files are shared in the __[vita-epfl/openpifpaf-torchhub](https://github.com/vita-epfl/openpifpaf-torchhub/releases)__ and __[openpifpaf/torchhub](https://github.com/openpifpaf/torchhub/releases)__
+repositories and linked from the checkpoint names in the table above.
 The pretrained models are downloaded automatically when
 using the command line option `--checkpoint checkpointasintableabove`.
 
@@ -112,9 +111,9 @@ using the command line option `--checkpoint checkpointasintableabove`.
 * [monstereo](https://github.com/vita-epfl/monstereo): "MonStereo: When Monocular and Stereo Meet at the Tail of 3D Human Localization".
 * [monoloco](https://github.com/vita-epfl/monoloco): "Monocular 3D Pedestrian Localization and Uncertainty Estimation".
 * [openpifpafwebdemo](https://github.com/openpifpaf/openpifpafwebdemo): Web server and frontend. Docker image. Kubernetes config. [Live](https://vitademo.epfl.ch).
-* [GitHub dependency graph](https://github.com/openpifpaf/openpifpaf/network/dependents): auto-detected Github repositories that use OpenPifPaf.
+* [GitHub dependency graph](https://github.com/vita-epfl/openpifpaf/network/dependents): auto-detected Github repositories that use OpenPifPaf.
 
-Open an [issue](https://github.com/openpifpaf/openpifpaf/issues) to suggest more projects.
+Open an [issue](https://github.com/vita-epfl/openpifpaf/issues) to suggest more projects.
 
 
 ## Executable Guide

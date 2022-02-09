@@ -243,7 +243,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference external" href="https://github.com/openpifpaf/openpifpaf">
+  <a class="reference external" href="https://github.com/vita-epfl/openpifpaf">
    GitHub
   </a>
  </li>
@@ -253,7 +253,7 @@
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
-  This is the dev version of the Guide. Here is the <a href="https://openpifpaf.github.io">stable version</a>.
+  This is the dev version of the Guide. Here is the <a href="https://vita-epfl.github.io/openpifpaf">stable version</a>.
 </div>
 
 </div>
@@ -304,11 +304,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/openpifpaf/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/vita-epfl/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/openpifpaf/openpifpaf/issues/new?title=Issue%20on%20page%20%2Fcli_help.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/vita-epfl/openpifpaf/issues/new?title=Issue%20on%20page%20%2Fcli_help.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -324,7 +324,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/openpifpaf/openpifpaf/main?urlpath=tree/guide/cli_help.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/vita-epfl/openpifpaf/main?urlpath=tree/guide/cli_help.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -568,10 +568,6 @@ MobileNetV3:
   --mobilenetv3-no-pretrain
                         use randomly initialized models (default: True)
 
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
 shufflenetv2k:
   --shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE
                         stride of the optional 2nd input convolution (default:
@@ -587,6 +583,10 @@ shufflenetv2k:
   --shufflenetv2k-instance-norm
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
+                        use randomly initialized models (default: True)
 
 ResNet:
   --resnet-no-pretrain  use randomly initialized models (default: True)
@@ -802,20 +802,41 @@ optional arguments:
   --separate-debug-ax
   --disable-cuda        disable CUDA (default: False)
 
-SqueezeNet:
-  --squeezenet-no-pretrain
+XCiT:
+  --xcit-out-channels XCIT_OUT_CHANNELS
+                        number of output channels for optional projection
+                        layer (None for no projection layer) (default: None)
+  --xcit-out-maxpool    adds max-pooling to backbone output feature map
+                        (default: False)
+  --xcit-no-pretrain    use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
+
+SwinTransformer:
+  --swin-drop-path-rate SWIN_DROP_PATH_RATE
+                        drop path (stochastic depth) rate (default: 0.2)
+  --swin-input-upsample
+                        scales input image by a factor of 2 for higher res
+                        feature maps (default: False)
+  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
+                        feature maps (default: False)
+  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
+                        output channels of the FPN (None to use the default
+                        number of channels of the Swin network) (default:
+                        None)
+  --swin-fpn-level SWIN_FPN_LEVEL
+                        FPN pyramid level, must be between 1 (highest
+                        resolution) and 4 (lowest resolution) (default: 3)
+  --swin-no-pretrain    use randomly initialized models (default: True)
 
 MobileNetV2:
   --mobilenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
-MobileNetV3:
-  --mobilenetv3-no-pretrain
-                        use randomly initialized models (default: True)
-
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
+SqueezeNet:
+  --squeezenet-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -834,6 +855,10 @@ shufflenetv2k:
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
 
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
 ResNet:
   --resnet-no-pretrain  use randomly initialized models (default: True)
   --resnet-pool0-stride RESNET_POOL0_STRIDE
@@ -848,31 +873,6 @@ ResNet:
   --resnet-remove-last-block
                         create a network without the last block (default:
                         False)
-
-XCiT:
-  --xcit-out-channels XCIT_OUT_CHANNELS
-                        number of output channels for optional projection
-                        layer (None for no projection layer) (default: None)
-  --xcit-out-maxpool    adds max-pooling to backbone output feature map
-                        (default: False)
-  --xcit-no-pretrain    use randomly initialized models (default: True)
-
-SwinTransformer:
-  --swin-drop-path-rate SWIN_DROP_PATH_RATE
-                        drop path (stochastic depth) rate (default: 0.2)
-  --swin-input-upsample
-                        scales input image by a factor of 2 for higher res
-                        feature maps (default: False)
-  --swin-use-fpn        adds a FPN after the Swin network to obtain higher res
-                        feature maps (default: False)
-  --swin-fpn-out-channels SWIN_FPN_OUT_CHANNELS
-                        output channels of the FPN (None to use the default
-                        number of channels of the Swin network) (default:
-                        None)
-  --swin-fpn-level SWIN_FPN_LEVEL
-                        FPN pyramid level, must be between 1 (highest
-                        resolution) and 4 (lowest resolution) (default: 3)
-  --swin-no-pretrain    use randomly initialized models (default: True)
 
 CompositeField4:
   --cf4-dropout CF4_DROPOUT
@@ -927,9 +927,9 @@ network configuration:
 
 decoder configuration:
   --decoder DECODER [DECODER ...]
-                        Decoders to be considered: [&#39;cifdet&#39;,
-                        &#39;posesimilarity&#39;, &#39;trackingpose&#39;, &#39;cifcafdense&#39;,
-                        &#39;cifcaf&#39;]. (default: None)
+                        Decoders to be considered: [&#39;cifcafdense&#39;, &#39;cifcaf&#39;,
+                        &#39;cifdet&#39;, &#39;posesimilarity&#39;, &#39;trackingpose&#39;]. (default:
+                        None)
   --seed-threshold SEED_THRESHOLD
                         minimum threshold for seeds (default: 0.2)
   --instance-threshold INSTANCE_THRESHOLD
@@ -955,14 +955,6 @@ Decoder for tracking:
                         multi-pose n for tracking. (default: 3)
   --tr-minimum-threshold TR_MINIMUM_THRESHOLD
                         minimum-pose threshold for tracking. (default: 0.1)
-
-PoseSimilarity:
-  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
-  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
-
-trackingpose decoder:
-  --trackingpose-track-recovery
-  --trackingpose-single-seed
 
 CifCafDense decoder:
   --dense-connections [DENSE_CONNECTIONS]
@@ -991,6 +983,14 @@ CifCaf decoder:
   --ablation-cifseeds-no-rescore
   --ablation-caf-no-rescore
   --ablation-independent-kp
+
+PoseSimilarity:
+  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
+  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
+
+trackingpose decoder:
+  --trackingpose-track-recovery
+  --trackingpose-single-seed
 
 logger:
   -q, --quiet           only show warning messages or above (default: False)
@@ -1120,53 +1120,6 @@ logger:
   --debug               print debug messages (default: False)
   --log-stats           enable stats logging (default: False)
 
-SqueezeNet:
-  --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
-
-shufflenetv2k:
-  --shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE
-                        stride of the optional 2nd input convolution (default:
-                        0)
-  --shufflenetv2k-input-conv2-outchannels SHUFFLENETV2K_INPUT_CONV2_OUTCHANNELS
-                        out channels of the optional 2nd input convolution
-                        (default: None)
-  --shufflenetv2k-stage4-dilation SHUFFLENETV2K_STAGE4_DILATION
-                        dilation factor of stage 4 (default: 1)
-  --shufflenetv2k-kernel SHUFFLENETV2K_KERNEL
-                        kernel width (default: 5)
-  --shufflenetv2k-conv5-as-stage
-  --shufflenetv2k-instance-norm
-  --shufflenetv2k-group-norm
-  --shufflenetv2k-leaky-relu
-
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
-MobileNetV2:
-  --mobilenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
-MobileNetV3:
-  --mobilenetv3-no-pretrain
-                        use randomly initialized models (default: True)
-
-ResNet:
-  --resnet-no-pretrain  use randomly initialized models (default: True)
-  --resnet-pool0-stride RESNET_POOL0_STRIDE
-                        stride of zero removes the pooling op (default: 0)
-  --resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE
-                        stride of the input convolution (default: 2)
-  --resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE
-                        stride of the optional 2nd input convolution (default:
-                        0)
-  --resnet-block5-dilation RESNET_BLOCK5_DILATION
-                        use dilated convs in block5 (default: 1)
-  --resnet-remove-last-block
-                        create a network without the last block (default:
-                        False)
-
 XCiT:
   --xcit-out-channels XCIT_OUT_CHANNELS
                         number of output channels for optional projection
@@ -1191,6 +1144,53 @@ SwinTransformer:
                         FPN pyramid level, must be between 1 (highest
                         resolution) and 4 (lowest resolution) (default: 3)
   --swin-no-pretrain    use randomly initialized models (default: True)
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+SqueezeNet:
+  --squeezenet-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV2:
+  --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
+
+shufflenetv2k:
+  --shufflenetv2k-input-conv2-stride SHUFFLENETV2K_INPUT_CONV2_STRIDE
+                        stride of the optional 2nd input convolution (default:
+                        0)
+  --shufflenetv2k-input-conv2-outchannels SHUFFLENETV2K_INPUT_CONV2_OUTCHANNELS
+                        out channels of the optional 2nd input convolution
+                        (default: None)
+  --shufflenetv2k-stage4-dilation SHUFFLENETV2K_STAGE4_DILATION
+                        dilation factor of stage 4 (default: 1)
+  --shufflenetv2k-kernel SHUFFLENETV2K_KERNEL
+                        kernel width (default: 5)
+  --shufflenetv2k-conv5-as-stage
+  --shufflenetv2k-instance-norm
+  --shufflenetv2k-group-norm
+  --shufflenetv2k-leaky-relu
+
+ResNet:
+  --resnet-no-pretrain  use randomly initialized models (default: True)
+  --resnet-pool0-stride RESNET_POOL0_STRIDE
+                        stride of zero removes the pooling op (default: 0)
+  --resnet-input-conv-stride RESNET_INPUT_CONV_STRIDE
+                        stride of the input convolution (default: 2)
+  --resnet-input-conv2-stride RESNET_INPUT_CONV2_STRIDE
+                        stride of the optional 2nd input convolution (default:
+                        0)
+  --resnet-block5-dilation RESNET_BLOCK5_DILATION
+                        use dilated convs in block5 (default: 1)
+  --resnet-remove-last-block
+                        create a network without the last block (default:
+                        False)
 
 CompositeField4:
   --cf4-dropout CF4_DROPOUT
@@ -1256,10 +1256,6 @@ losses:
   --task-sparsity-weight TASK_SPARSITY_WEIGHT
                         [experimental] (default: 0.0)
 
-Composite Loss:
-  --soft-clamp SOFT_CLAMP
-                        soft clamp (default: 5.0)
-
 Composite Loss by Components:
   --loss-prescale LOSS_PRESCALE
   --regression-loss {smoothl1,l1,laplace}
@@ -1267,6 +1263,19 @@ Composite Loss by Components:
   --bce-total-soft-clamp BCE_TOTAL_SOFT_CLAMP
                         per feature clamp value applied to the total (default:
                         None)
+
+Composite Loss:
+  --soft-clamp SOFT_CLAMP
+                        soft clamp (default: 5.0)
+
+Bce Loss:
+  --r-smooth R_SMOOTH   r_{smooth} for SmoothL1 regressions (default: 0.0)
+
+Scale Loss:
+  --b-scale B_SCALE     Laplace width b for scale loss (default: 1.0)
+  --scale-log
+  --scale-soft-clamp SCALE_SOFT_CLAMP
+                        soft clamp for scale (default: 5.0)
 
 Bce Loss:
   --background-weight BACKGROUND_WEIGHT
@@ -1287,15 +1296,6 @@ Bce Loss:
 Laplace Loss:
   --laplace-soft-clamp LAPLACE_SOFT_CLAMP
                         soft clamp for Laplace (default: 5.0)
-
-Bce Loss:
-  --r-smooth R_SMOOTH   r_{smooth} for SmoothL1 regressions (default: 0.0)
-
-Scale Loss:
-  --b-scale B_SCALE     Laplace width b for scale loss (default: 1.0)
-  --scale-log
-  --scale-soft-clamp SCALE_SOFT_CLAMP
-                        soft clamp for scale (default: 5.0)
 
 trainer:
   --epochs EPOCHS       number of epochs to train (default: None)
@@ -2031,9 +2031,9 @@ data module wholebody:
 
 decoder configuration:
   --decoder DECODER [DECODER ...]
-                        Decoders to be considered: [&#39;cifdet&#39;,
-                        &#39;posesimilarity&#39;, &#39;trackingpose&#39;, &#39;cifcafdense&#39;,
-                        &#39;cifcaf&#39;]. (default: None)
+                        Decoders to be considered: [&#39;cifcaf&#39;,
+                        &#39;posesimilarity&#39;, &#39;trackingpose&#39;, &#39;cifdet&#39;,
+                        &#39;cifcafdense&#39;]. (default: None)
   --seed-threshold SEED_THRESHOLD
                         minimum threshold for seeds (default: 0.2)
   --instance-threshold INSTANCE_THRESHOLD
@@ -2060,17 +2060,6 @@ Decoder for tracking:
   --tr-minimum-threshold TR_MINIMUM_THRESHOLD
                         minimum-pose threshold for tracking. (default: 0.1)
 
-PoseSimilarity:
-  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
-  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
-
-trackingpose decoder:
-  --trackingpose-track-recovery
-  --trackingpose-single-seed
-
-CifCafDense decoder:
-  --dense-connections [DENSE_CONNECTIONS]
-
 CifCaf decoder:
   --force-complete-pose
   --force-complete-caf-th FORCE_COMPLETE_CAF_TH
@@ -2096,6 +2085,17 @@ CifCaf decoder:
   --ablation-caf-no-rescore
   --ablation-independent-kp
 
+PoseSimilarity:
+  --posesimilarity-distance {crafted,euclidean,euclidean4,oks}
+  --posesimilarity-oks-inflate POSESIMILARITY_OKS_INFLATE
+
+trackingpose decoder:
+  --trackingpose-track-recovery
+  --trackingpose-single-seed
+
+CifCafDense decoder:
+  --dense-connections [DENSE_CONNECTIONS]
+
 logger:
   -q, --quiet           only show warning messages or above (default: False)
   --debug               print debug messages (default: False)
@@ -2103,18 +2103,6 @@ logger:
 
 SqueezeNet:
   --squeezenet-no-pretrain
-                        use randomly initialized models (default: True)
-
-MobileNetV2:
-  --mobilenetv2-no-pretrain
-                        use randomly initialized models (default: True)
-
-MobileNetV3:
-  --mobilenetv3-no-pretrain
-                        use randomly initialized models (default: True)
-
-ShuffleNetv2:
-  --shufflenetv2-no-pretrain
                         use randomly initialized models (default: True)
 
 shufflenetv2k:
@@ -2132,6 +2120,18 @@ shufflenetv2k:
   --shufflenetv2k-instance-norm
   --shufflenetv2k-group-norm
   --shufflenetv2k-leaky-relu
+
+ShuffleNetv2:
+  --shufflenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV2:
+  --mobilenetv2-no-pretrain
+                        use randomly initialized models (default: True)
+
+MobileNetV3:
+  --mobilenetv3-no-pretrain
+                        use randomly initialized models (default: True)
 
 ResNet:
   --resnet-no-pretrain  use randomly initialized models (default: True)
@@ -2854,9 +2854,9 @@ show:
     <footer class="footer">
   <p>
     
-      By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/openpifpaf/openpifpaf/graphs/contributors">contributors</a>.<br/>
+      By <a href="https://www.epfl.ch/labs/vita/">EPFL VITA</a> and <a href="https://github.com/vita-epfl/openpifpaf/graphs/contributors">contributors</a>.<br/>
     
-        &copy; Copyright 2020-2021.<br/>
+        &copy; Copyright 2020-2022.<br/>
       <div class="extra_footer">
         <p>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</p>
 
