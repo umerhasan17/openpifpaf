@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Training &#8212; OpenPifPaf Guide</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -35,39 +32,45 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Command Line" href="cli_help.html" />
     <link rel="prev" title="Datasets" href="datasets.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="en">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -76,32 +79,36 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  <img src="_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">OpenPifPaf Guide</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">OpenPifPaf Guide</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
    Introduction
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting Started
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_cli.html">
    Prediction
@@ -113,15 +120,20 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Chapters
  </span>
 </p>
-<ul class="current nav sidenav_l1">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="predict_api.html">
    Prediction API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="compute.html">
+   Compute
   </a>
  </li>
  <li class="toctree-l1">
@@ -155,15 +167,40 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Tutorials
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_custom.html">
+   Custom Dataset
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_animalpose.html">
+   Animal Keypoints
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_wholebody.html">
+   WholeBody
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_apollocar3d.html">
+   Car Keypoints
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="plugins_crowdpose.html">
    CrowdPose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plugins_nuscenes.html">
+   NuScenes 2D detection
   </a>
  </li>
  <li class="toctree-l1">
@@ -177,12 +214,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Reference
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="moduledocs.html">
    Modules
@@ -194,12 +231,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Development
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="dev.html">
    Contribute
@@ -213,12 +250,11 @@
  <li class="toctree-l1">
   <a class="reference external" href="https://github.com/vita-epfl/openpifpaf">
    GitHub
-   <i class="fas fa-external-link-alt">
-   </i>
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 </div>
@@ -258,7 +294,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -272,17 +308,15 @@
             href="https://github.com/vita-epfl/openpifpaf"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        
+        <a class="issues-button"
+            href="https://github.com/vita-epfl/openpifpaf/issues/new?title=Issue%20on%20page%20%2Ftrain.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -306,13 +340,18 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> On this page
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> On this page
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-loss-function">
+   Composite Loss Function
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#training-crop-size">
    Training Crop Size
@@ -375,17 +414,99 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Training</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> On this page </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-loss-function">
+   Composite Loss Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-crop-size">
+   Training Crop Size
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reproducibility">
+   Reproducibility
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-datasets">
+   Multiple Datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overfitting">
+   Overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shufflenet">
+   ShuffleNet
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resnet">
+   ResNet
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#debug-plots">
+   Debug Plots
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logs">
+   Logs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#testset-submission">
+   Testset Submission
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detection-experimental">
+   Detection (experimental)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cloud-and-hpc">
+   Cloud and HPC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distributeddataparallel">
+   DistributedDataParallel
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="training">
+  <div class="tex2jax_ignore mathjax_ignore section" id="training">
 <h1>Training<a class="headerlink" href="#training" title="Permalink to this headline">¶</a></h1>
 <p>This section introduces training to create your own models. You don’t need to do this step
 if you use pre-trained models for <a class="reference internal" href="predict_cli.html"><span class="doc">Prediction</span></a> on your own images.
@@ -395,6 +516,97 @@ For training, you will need a dataset. See <a class="reference internal" href="d
 A quick way to get started is with the training commands of the pre-trained models.
 The exact training command that was used for a model is in the first
 line of the training log file. Below are a few examples for various backbones.</p>
+<div class="section" id="composite-loss-function">
+<h2>Composite Loss Function<a class="headerlink" href="#composite-loss-function" title="Permalink to this headline">¶</a></h2>
+<p>OpenPifPaf uses an off-the-shelf backbone like a ResNet and then adds the smallest
+possible (approx) head networks on top: a single 1x1 convolution.
+The outputs of the head networks are the composite fields. At each location,
+the composite head produces a confidence together with some location and attribute
+information.</p>
+<p>In our first paper <span id="id1">[<a class="reference internal" href="bibliography.html#id2">KBA19</a>]</span>, we show how to learn these composite
+fields with a binary cross entropy for the confidence, a Laplace loss for regression
+and a plain L1 regression loss for scale. The Laplace loss has been valuable
+for OpenPifPaf as it proved to be better than any other of the regression losses
+for us. One interpretation is from its original motivation as a better objective
+for a probabilistic problem of location prediction:</p>
+<div class="math notranslate nohighlight">
+\[
+    L_\textrm{Laplace} = \frac{1}{\hat{b}}|\hat{x} - x|^1_2 + \log \hat{b}
+\]</div>
+<p>That is the main motivation
+why I used this loss and defended its continued use. Over time, I also came to
+appreciate an empirical interpretation: an adversarial trade-off between
+the two terms in the sum that evolves as the network learns. During the initial
+phase of training, predictions <span class="math notranslate nohighlight">\(\hat{x}\)</span> are poor and the network better predicts
+large <span class="math notranslate nohighlight">\(\hat{b}\)</span> to reduce the first term at the cost of a logarithmic penalty
+from the second term. As the network learns to predict better, it starts to predict
+smaller values of <span class="math notranslate nohighlight">\(\hat{b}\)</span> to reduce the logarithmic penalty while not incuring
+too large costs anymore because its predictions for <span class="math notranslate nohighlight">\(\hat{x}\)</span> are good.
+This mechanism also has consequences as the network continues to train and starts
+overfitting. Other regression losses just overfit gently more and more. The
+Laplace loss, however, will really try to profit from its overfitted knowledge
+and become very agressive and reduce <span class="math notranslate nohighlight">\(\hat{b}\)</span>. As explained in our paper,
+we add an extra constant <span class="math notranslate nohighlight">\(b_\textrm{min}\)</span> that prevents aggressive regression
+losses below fractions of pixels.</p>
+<p><strong>Aside on negative losses</strong>: A loss function is something that is minimized.
+A valid loss is, for example, the L1 loss <span class="math notranslate nohighlight">\(|\hat{x} - x|\)</span> but equally valid is
+the loss <span class="math notranslate nohighlight">\(|\hat{x} - x| - 5000\)</span>. These losses would lead to the exact same
+trained networks as they produce exactly the same gradients. Most loss functions
+are not negative because their final operation is a square or an absolute value
+as in the case
+of L1 or L2 loss but it is not a generic property of loss functions. The Laplace
+loss above can become negative infinity when <span class="math notranslate nohighlight">\(\hat{b} \to 0\)</span> and is still a
+valid objective to minimize.</p>
+<p><strong>New in v0.13</strong>: To produce truely composite objects, I would like the
+adversarial trade-off to be shared across confidence and regression: the
+predicted <span class="math notranslate nohighlight">\(\hat{b}\)</span> should only become smaller as both confidence and regression
+become better. We don’t have to learn a fantastic regression when the confidence
+predictions are poor. We saw signs of the problem when we started to train
+composite fields for detection: confidence predictions were almost random
+while regressions started to manifest. The solution is to implement the
+adversarial mechanism discussed above for the Laplace regression to both
+confidence and regression tasks and to share the predicted <span class="math notranslate nohighlight">\(\hat{b}\)</span>.</p>
+<p>While the exact form of the Laplace loss came from a probabilistic interpretation
+that lead naturally to the adversarial mechanism, this step is not as obvious
+for confidence predictions and there are multiple options (including one
+suggested in the paper by Kendall et al on the Laplace loss). Here, I chose to
+to map the Focal loss to a Gaussian loss by gradient matching and then applying
+the probabilistic interpretation in that mapped space leading to the adversarial
+terms. The gradient of the Focal loss FL w.r.t. <span class="math notranslate nohighlight">\(\hat{x}\)</span> for positive samples
+<span class="math notranslate nohighlight">\(x=1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \frac{\partial}{\partial \hat{x}}\textrm{FL}(\hat{x}, x=1)
+    &amp;= - \frac{\partial}{\partial \hat{x}} (1 - p(\hat{x}))^\gamma \ln p(\hat{x}) \\
+    &amp;= - \overline{p}(\hat{x}) \left[ 
+        \overline{p}(\hat{x})^\gamma - \gamma \overline{p}(\hat{x})^{\gamma - 1} p(\hat{x}) \ln p(\hat{x})
+    \right]
+\end{split}\]</div>
+<p>where the part in square brackets is due to the Focal loss modification of BCE.
+I have used the standard <span class="math notranslate nohighlight">\(p(\hat{x}) \equiv 1 / (1+e^{-\hat{x}})\)</span> and
+<span class="math notranslate nohighlight">\(\overline{p}(\hat{x}) \equiv 1 / (1+e^{\hat{x}})\)</span>
+which gives the helpful identities <span class="math notranslate nohighlight">\(1-p(\hat{x}) = \overline{p}(\hat{x})\)</span> and
+<span class="math notranslate nohighlight">\(\partial \ln p(\hat{x}) / \partial \hat{x} = \overline{p}(\hat{x})\)</span>.
+The second step is to match this gradient to the gradient of an L2 loss. This
+matching provides the fictituous target point <span class="math notranslate nohighlight">\(t_2\)</span> for the L2 regression:</p>
+<div class="math notranslate nohighlight">
+\[
+    t_2 = \hat{x} + \overline{p}(\hat{x}) \left[ 
+        \overline{p}(\hat{x})^\gamma - \gamma \overline{p}(\hat{x})^{\gamma - 1} p(\hat{x}) \ln p(\hat{x})
+    \right]
+\]</div>
+<p>This target point depends on the prediction <span class="math notranslate nohighlight">\(\hat{x}\)</span> but it is still a target as
+far as the L2 loss is concerned, i.e. the gradients on <span class="math notranslate nohighlight">\(\hat{x}\)</span> are detached and,
+therefore, there are no gradients back-propagating through <span class="math notranslate nohighlight">\(t_2\)</span>.</p>
+<p>Finally, as we have cast classification to an exactly matched regression
+problem, we are in a position to apply Gaussian uncertainties on this
+L2 regression loss. There is, of course, no good interpretation for what
+this uncertainty represents in the space before the mapping.
+We use a single predicted <span class="math notranslate nohighlight">\(\hat{b}\)</span> for both the confidence and regression
+uncertainties and in that way achieved our goal: only when we have both
+good confidence and good regression predictions will our network reduce its
+predictions of <span class="math notranslate nohighlight">\(\hat{b}\)</span>.</p>
+</div>
 <div class="section" id="training-crop-size">
 <h2>Training Crop Size<a class="headerlink" href="#training-crop-size" title="Permalink to this headline">¶</a></h2>
 <p>Training and evaluation image sizes are <em>unrelated</em> in fully convolutional architectures like OpenPifPaf. <em>Instance size distribution</em> between training and evaluation needs to be preserved. The size of the image that surrounds the instance to detect has little impact: for humans of height 100px, it does not matter whether that is inside a <span class="math notranslate nohighlight">\(640\times480\)</span> image or inside a 4k or 8k image. Therefore, you can keep the size of your training crops (selected with <code class="docutils literal notranslate"><span class="pre">--square-edge</span></code>) quite small even when evaluating on large images. The default is <code class="docutils literal notranslate"><span class="pre">--square-edge=385</span></code> for <code class="docutils literal notranslate"><span class="pre">cocokp</span></code> and that is reasonable when most of the humans are not larger than 300px during evaluation.
@@ -450,8 +662,8 @@ Here is the corresponding predict command for the <a class="reference external" 
 We found that for stable training, the learning rate <span class="math notranslate nohighlight">\(\lambda\)</span>,
 the <code class="docutils literal notranslate"><span class="pre">clip-grad-value</span></code> <span class="math notranslate nohighlight">\(c\)</span> and the <span class="math notranslate nohighlight">\(\epsilon\)</span> from the denominator of the
 BatchNorm should obey:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-17504b55-6905-40bd-b67f-e746a8d60da3">
-<span class="eqno">(1)<a class="headerlink" href="#equation-17504b55-6905-40bd-b67f-e746a8d60da3" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a3f4da17-09d3-4364-bc65-6e9773b3e1be">
+<span class="eqno">(1)<a class="headerlink" href="#equation-a3f4da17-09d3-4364-bc65-6e9773b3e1be" title="Permalink to this equation">¶</a></span>\[\begin{align}
     \lambda \cdot c &amp;\leq \sqrt{\epsilon}
 \end{align}\]</div>
 <p>where the default <span class="math notranslate nohighlight">\(\epsilon\)</span> is <span class="math notranslate nohighlight">\(10^{-4}\)</span> (different from the PyTorch default).
@@ -470,7 +682,7 @@ That makes their training characteristics different from ShuffleNet (i.e. they l
 </div>
 <div class="section" id="logs">
 <h2>Logs<a class="headerlink" href="#logs" title="Permalink to this headline">¶</a></h2>
-<p>For reference, check out the log files of the pretrained models. Models with their log files are shared as release “Assets” in the separate <a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub">openpifpaf-torchhub</a> repository: click on “releases” and expand “Assets” on the latest release.</p>
+<p>For reference, check out the log files of the pretrained models. Models with their log files are shared as release “Assets” in the separate <a class="reference external" href="https://github.com/vita-epfl/openpifpaf-torchhub">vita-epfl/openpifpaf-torchhub</a> and <a class="reference external" href="https://github.com/openpifpaf/torchhub">openpifpaf/torchhub</a> repositories: click on “releases” and expand “Assets” on the latest release.</p>
 <p>To visualize log files with <a class="reference internal" href="cli_help.html#cli-help-logs"><span class="std std-ref">openpifpaf.logs</span></a>:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 -m openpifpaf.logs <span class="se">\</span>
   outputs/resnet50block5-pif-paf-edge401-190424-122009.pkl.log <span class="se">\</span>
@@ -630,40 +842,46 @@ srun --gpu-bind<span class="o">=</span>closest singularity <span class="nb">exec
 
               </div>
               
-        
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="datasets.html" title="previous page">Datasets</a>
-    <a class='right-next' id="next-link" href="cli_help.html" title="next page">Command Line</a>
-
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="datasets.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Datasets</p>
         </div>
-        
+    </a>
+    <a class='right-next' id="next-link" href="cli_help.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Command Line</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By <a href="https://www.svenkreiss.com">Sven Kreiss</a> and <a href="https://github.com/vita-epfl/openpifpaf/graphs/contributors">contributors</a>.<br/>
-        
-            &copy; Copyright 2020-2021.<br/>
-          <div class="extra_footer">
-            <div>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</div>
+    <footer class="footer">
+  <p>
+    
+      By <a href="https://www.epfl.ch/labs/vita/">EPFL VITA</a> and <a href="https://github.com/vita-epfl/openpifpaf/graphs/contributors">contributors</a>.<br/>
+    
+        &copy; Copyright 2020-2022.<br/>
+      <div class="extra_footer">
+        <p>Powered by <a href="https://jupyterbook.org/">Jupyter Book</a>.</p>
 
-          </div>
-      </p>
-    </div>
-  </footer>
+      </div>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>
