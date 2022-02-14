@@ -38,9 +38,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -445,6 +448,7 @@ E-mail a signed copy of the
 as PDF file to <a class="reference external" href="mailto:epfl&#46;vita&#37;&#52;&#48;gmail&#46;com">epfl<span>&#46;</span>vita<span>&#64;</span>gmail<span>&#46;</span>com</a>.</p>
 <div class="section" id="modify-code">
 <span id="id1"></span><h2>Modify Code<a class="headerlink" href="#modify-code" title="Permalink to this headline">¶</a></h2>
+<p>This version of OpenPifPaf (<code class="docutils literal notranslate"><span class="pre">openpifpaf-vita</span></code>) cannot co-exist with <a class="reference external" href="https://github.com/openpifpaf/openpifpaf"><code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code></a> in the same environment. If you have previously installed <code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code>, remove it before installation to avoid conflicts.</p>
 <p>For development of the openpifpaf source code itself, you need to clone this repository and then:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install --editable <span class="s1">&#39;.[dev,train,test]&#39;</span>
 </pre></div>
@@ -490,7 +494,7 @@ Sometimes, you just want to install all possible dependencies. Those are provide
 Use the following <code class="docutils literal notranslate"><span class="pre">pip3</span></code> command to install all extras.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pip3 install &quot;openpifpaf[backbones,coreml,dev,onnx,test,train]&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pip3 install &quot;openpifpaf-vita[backbones,coreml,dev,onnx,test,train]&quot;
 </pre></div>
 </div>
 </div>
@@ -546,7 +550,7 @@ bleach==4.1.0
 boto==2.49.0
 certifi==2021.10.8
 cffi==1.15.0
-charset-normalizer==2.0.11
+charset-normalizer==2.0.12
 click==7.1.2
 colorama==0.4.4
 coverage==6.3.1
@@ -566,7 +570,7 @@ GitPython==3.1.26
 greenlet==1.1.2
 idna==3.3
 imagesize==1.3.0
-importlib-metadata==4.10.1
+importlib-metadata==4.11.0
 importlib-resources==5.4.0
 iniconfig==1.1.1
 ipykernel==6.9.0
@@ -598,10 +602,10 @@ matplotlib-inline==0.1.3
 mccabe==0.6.1
 mdit-py-plugins==0.2.8
 mistune==0.8.4
-myst-nb==0.13.1
+myst-nb==0.13.2
 myst-parser==0.15.2
 nbclient==0.5.10
-nbconvert==6.4.1
+nbconvert==6.4.2
 nbdime==3.1.1
 nbformat==5.1.3
 nbstripout==0.5.0
@@ -614,7 +618,7 @@ onnx-simplifier==0.3.6
 onnxoptimizer==0.2.6
 onnxruntime==1.10.0
 opencv-python==4.5.5.62
-openpifpaf @ file:///home/runner/work/openpifpaf/openpifpaf
+openpifpaf-vita @ file:///home/runner/work/openpifpaf/openpifpaf
 packaging==21.3
 pandocfilters==1.5.0
 parso==0.8.3
@@ -623,7 +627,7 @@ pickleshare==0.7.5
 Pillow==9.0.1
 pluggy==1.0.0
 prometheus-client==0.13.1
-prompt-toolkit==3.0.27
+prompt-toolkit==3.0.28
 protobuf==3.19.4
 ptyprocess==0.7.0
 py==1.11.0
@@ -637,7 +641,7 @@ pylint==2.9.3
 pyparsing==3.0.7
 pyrsistent==0.18.1
 pysparkling==0.6.1
-pytest==7.0.0
+pytest==7.0.1
 python-dateutil==2.8.2
 python-json-logger==2.0.2
 pytz==2021.3
@@ -655,12 +659,12 @@ Sphinx==4.4.0
 sphinx-book-theme==0.1.10
 sphinx-comments==0.0.3
 sphinx-copybutton==0.5.0
-sphinx-external-toc==0.2.3
+sphinx-external-toc==0.2.4
 sphinx-jupyterbook-latex==0.4.6
 sphinx-multitoc-numbering==0.1.3
 sphinx-panels==0.6.0
 sphinx-thebe==0.0.10
-sphinx-togglebutton==0.2.3
+sphinx-togglebutton==0.3.0
 sphinxcontrib-applehelp==1.0.2
 sphinxcontrib-bibtex==2.2.1
 sphinxcontrib-devhelp==1.0.2
@@ -678,7 +682,7 @@ torch==1.9.0+cpu
 torchvision==0.10.0+cpu
 tornado==6.1
 traitlets==5.1.1
-typing_extensions==4.0.1
+typing_extensions==4.1.1
 uc-micro-py==1.0.1
 urllib3==1.26.8
 wcwidth==0.2.5
@@ -699,7 +703,7 @@ python -m openpifpaf.predict --version
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OpenPifPaf 0.12.13+140.g2f97626
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OpenPifPaf 0.12.13+143.g6c74639
 </pre></div>
 </div>
 </div>
@@ -814,9 +818,7 @@ Codecs:
  DEV.L. h263                 H.263 / H.263-1996, H.263+ / H.263-1998 / H.263 version 2 (decoders: h263 h263_v4l2m2m ) (encoders: h263 h263_v4l2m2m )
  D.V.L. h263i                Intel H.263
  DEV.L. h263p                H.263+ / H.263-1998 / H.263 version 2
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (decoders: h264 h264_v4l2m2m ) (encoders: libx264 libx264rgb h264_v4l2m2m )
+ DEV.LS h264                 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (decoders: h264 h264_v4l2m2m ) (encoders: libx264 libx264rgb h264_v4l2m2m )
  D.VIL. hap                  Vidvox Hap
  DEV.L. hevc                 H.265 / HEVC (High Efficiency Video Coding) (decoders: hevc hevc_v4l2m2m ) (encoders: libx265 hevc_v4l2m2m )
  D.V.L. hnm4video            HNM 4 video
@@ -996,7 +998,9 @@ Codecs:
  DEV..S zmbv                 Zip Motion Blocks Video
  ..AIL. 4gv                  4GV (Fourth Generation Vocoder)
  D.AIL. 8svx_exp             8SVX exponential
- D.AIL. 8svx_fib             8SVX fibonacci
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> D.AIL. 8svx_fib             8SVX fibonacci
  DEAIL. aac                  AAC (Advanced Audio Coding) (decoders: aac aac_fixed )
  D.AIL. aac_latm             AAC LATM (Advanced Audio Coding LATM syntax)
  DEAIL. ac3                  ATSC A/52A (AC-3) (decoders: ac3 ac3_fixed ) (encoders: ac3 ac3_fixed )

@@ -38,9 +38,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -432,7 +435,7 @@
 <p>Continuously tested on Linux, MacOS and Windows:
 <a class="reference external" href="https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3ATests"><img alt="Tests" src="https://github.com/vita-epfl/openpifpaf/workflows/Tests/badge.svg?branch=main" /></a>
 <a class="reference external" href="https://github.com/vita-epfl/openpifpaf/actions?query=workflow%3Adeploy-guide"><img alt="deploy-guide" src="https://github.com/vita-epfl/openpifpaf/workflows/deploy-guide/badge.svg" /></a>
-<a class="reference external" href="https://pepy.tech/project/openpifpaf"><img alt="Downloads" src="https://pepy.tech/badge/openpifpaf" /></a>
+<a class="reference external" href="https://pepy.tech/project/openpifpaf-vita"><img alt="Downloads" src="https://pepy.tech/badge/openpifpaf-vita" /></a>
 <br />
 <a class="reference external" href="https://arxiv.org/abs/2103.02440"><strong>New</strong> 2021 paper</a>:</p>
 <blockquote>
@@ -456,6 +459,7 @@ animal parts to provide a holistic perception framework that is well suited for
 urban mobility such as self-driving cars and delivery robots.</p>
 </div></blockquote>
 <p>Previous <a class="reference external" href="http://openaccess.thecvf.com/content_CVPR_2019/html/Kreiss_PifPaf_Composite_Fields_for_Human_Pose_Estimation_CVPR_2019_paper.html">CVPR 2019 paper</a>.</p>
+<p>This project was forked from <a class="reference external" href="https://github.com/openpifpaf/openpifpaf/releases/tag/v0.13.1">OpenPifPaf v0.13.1</a> and developed separately from version v0.14.0 on.</p>
 <div class="section" id="demo">
 <h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
 <p><img alt="example image with overlaid pose predictions" src="_images/000000081988.jpg.predictions.jpeg" /></p>
@@ -477,9 +481,11 @@ Created with
 </div>
 <div class="section" id="install">
 <h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<p>This version of OpenPifPaf (<code class="docutils literal notranslate"><span class="pre">openpifpaf-vita</span></code>) cannot co-exist with <a class="reference external" href="https://github.com/openpifpaf/openpifpaf"><code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code></a> in the same environment.
+If you have previously installed <code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code>, remove it before installation to avoid conflicts.</p>
 <p>Do not clone this repository.
-Make sure there is no folder named <code class="docutils literal notranslate"><span class="pre">openpifpaf</span></code> in your current directory.</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install openpifpaf
+Make sure there is no folder named <code class="docutils literal notranslate"><span class="pre">openpifpaf-vita</span></code> in your current directory.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install openpifpaf-vita
 </pre></div>
 </div>
 <p>You need to install <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to produce visual outputs.

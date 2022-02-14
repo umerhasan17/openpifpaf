@@ -38,9 +38,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -432,7 +435,7 @@ python -m openpifpaf.predict nuscenes/n013-2018-08-28-10-41-15+0800__CAM_FRONT__
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:__main__:neural network device: cpu (CUDA available: False, count: 0)
 INFO:openpifpaf.predictor:neural network device: cpu (CUDA available: False, count: 0)
-INFO:openpifpaf.decoder.cifdet:annotations 3, decoder = 18.6ms
+INFO:openpifpaf.decoder.cifdet:annotations 3, decoder = 18.9ms
 INFO:openpifpaf.predictor:batch 0: nuscenes/n013-2018-08-28-10-41-15+0800__CAM_FRONT__1535424448912407.jpg
 /home/runner/work/openpifpaf/openpifpaf/src/openpifpaf/csrc/src/cif_hr.cpp:102: UserInfo: resizing cifhr buffer
 /home/runner/work/openpifpaf/openpifpaf/src/openpifpaf/csrc/src/occupancy.cpp:53: UserInfo: resizing occupancy buffer
