@@ -1,0 +1,621 @@
+INFO:__main__:neural network device: cpu (CUDA available: False, count: 0)
+INFO:openpifpaf.network.basenetworks:resnet18: stride = 16, output features = 512
+INFO:openpifpaf.network.losses.multi_head:multihead loss: ['cocokp.cif.c', 'cocokp.cif.vec', 'cocokp.cif.scales', 'cocokp.caf.c', 'cocokp.caf.vec', 'cocokp.caf.scales'], [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+INFO:openpifpaf.logger:{'type': 'process', 'argv': ['/home/hasan/.local/lib/python3.7/site-packages/openpifpaf/train.py', '--dataset=cocokp', '--lr=1e-3', '--momentum=0.9', '--epochs=100', '--batch-size=1', '--basenet=resnet18', '--resnet-no-pretrain', '--cocokp-upsample=2', '--cocokp-square-edge=97', '--cocokp-train-annotations', 'tests/coco/train1.json', '--cocokp-train-image-dir', 'tests/coco/images/', '--cocokp-val-annotations', 'tests/coco/train1.json', '--cocokp-val-image-dir', 'tests/coco/images/'], 'args': {'output': 'outputs/resnet18-220314-152407-cocokp-edge97.pkl', 'disable_cuda': False, 'ddp': False, 'local_rank': None, 'sync_batchnorm': True, 'quiet': False, 'debug': False, 'log_stats': False, 'mobilenetv2_pretrained': True, 'mobilenetv3_pretrained': True, 'shufflenetv2k_input_conv2_stride': 0, 'shufflenetv2k_input_conv2_outchannels': None, 'shufflenetv2k_stage4_dilation': 1, 'shufflenetv2k_kernel': 5, 'shufflenetv2k_conv5_as_stage': False, 'shufflenetv2k_instance_norm': False, 'shufflenetv2k_group_norm': False, 'shufflenetv2k_leaky_relu': False, 'shufflenetv2_pretrained': True, 'resnet_pretrained': False, 'resnet_pool0_stride': 0, 'resnet_input_conv_stride': 2, 'resnet_input_conv2_stride': 0, 'resnet_block5_dilation': 1, 'resnet_remove_last_block': False, 'xcit_out_channels': None, 'xcit_out_maxpool': False, 'xcit_pretrained': True, 'swin_drop_path_rate': 0.2, 'swin_input_upsample': False, 'swin_use_fpn': False, 'swin_fpn_out_channels': None, 'swin_fpn_level': 3, 'swin_pretrained': True, 'squeezenet_pretrained': True, 'cf4_dropout': 0.0, 'cf4_inplace_ops': True, 'checkpoint': None, 'basenet': 'resnet18', 'cross_talk': 0.0, 'download_progress': True, 'head_consolidation': 'filter_and_extend', 'lambdas': None, 'component_lambdas': None, 'auto_tune_mtl': False, 'auto_tune_mtl_variance': False, 'task_sparsity_weight': 0.0, 'loss_prescale': 1.0, 'regression_loss': 'laplace', 'bce_total_soft_clamp': None, 'soft_clamp': 5.0, 'background_weight': 1.0, 'focal_alpha': 0.5, 'focal_gamma': 1.0, 'focal_detach': False, 'focal_clamp': True, 'bce_min': 0.0, 'bce_soft_clamp': 5.0, 'bce_background_clamp': -15.0, 'laplace_soft_clamp': 5.0, 'r_smooth': 0.0, 'b_scale': 1.0, 'scale_log': False, 'scale_soft_clamp': 5.0, 'epochs': 100, 'train_batches': None, 'val_batches': None, 'clip_grad_norm': 0.0, 'clip_grad_value': 0.0, 'log_interval': 11, 'val_interval': 1, 'stride_apply': 1, 'fix_batch_norm': False, 'ema': 0.01, 'profile': None, 'cif_side_length': 4, 'caf_min_size': 3, 'caf_fixed_size': False, 'caf_aspect_ratio': 0.0, 'encoder_suppress_selfhidden': True, 'encoder_suppress_invisible': False, 'encoder_suppress_collision': False, 'momentum': 0.9, 'beta2': 0.999, 'adam_eps': 1e-06, 'nesterov': True, 'weight_decay': 0.0, 'adam': False, 'amsgrad': False, 'lr': 0.001, 'lr_decay': [], 'lr_decay_factor': 0.1, 'lr_decay_epochs': 1.0, 'lr_warm_up_start_epoch': 0, 'lr_warm_up_epochs': 1, 'lr_warm_up_factor': 0.001, 'lr_warm_restarts': [], 'lr_warm_restart_duration': 0.5, 'dataset': 'cocokp', 'loader_workers': None, 'batch_size': 1, 'dataset_weights': None, 'animal_train_annotations': 'data-animalpose/annotations/animal_keypoints_20_train.json', 'animal_val_annotations': 'data-animalpose/annotations/animal_keypoints_20_val.json', 'animal_train_image_dir': 'data-animalpose/images/train/', 'animal_val_image_dir': 'data-animalpose/images/val/', 'animal_square_edge': 513, 'animal_extended_scale': False, 'animal_orientation_invariant': 0.0, 'animal_blur': 0.0, 'animal_augmentation': True, 'animal_rescale_images': 1.0, 'animal_upsample': 1, 'animal_min_kp_anns': 1, 'animal_bmin': 1, 'animal_eval_test2017': False, 'animal_eval_testdev2017': False, 'animal_eval_annotation_filter': True, 'animal_eval_long_edge': 0, 'animal_eval_extended_scale': False, 'animal_eval_orientation_invariant': 0.0, 'apollo_train_annotations': 'data-apollocar3d/annotations/apollo_keypoints_66_train.json', 'apollo_val_annotations': 'data-apollocar3d/annotations/apollo_keypoints_66_val.json', 'apollo_train_image_dir': 'data-apollocar3d/images/train/', 'apollo_val_image_dir': 'data-apollocar3d/images/val/', 'apollo_square_edge': 513, 'apollo_extended_scale': False, 'apollo_orientation_invariant': 0.0, 'apollo_blur': 0.0, 'apollo_augmentation': True, 'apollo_rescale_images': 1.0, 'apollo_upsample': 1, 'apollo_min_kp_anns': 1, 'apollo_bmin': 1, 'apollo_apply_local_centrality': False, 'apollo_eval_annotation_filter': True, 'apollo_eval_long_edge': 0, 'apollo_eval_extended_scale': False, 'apollo_eval_orientation_invariant': 0.0, 'apollo_use_24_kps': False, 'cifar10_root_dir': 'data-cifar10/', 'cifar10_download': False, 'cocodet_train_annotations': 'data-mscoco/annotations/instances_train2017.json', 'cocodet_val_annotations': 'data-mscoco/annotations/instances_val2017.json', 'cocodet_train_image_dir': 'data-mscoco/images/train2017/', 'cocodet_val_image_dir': 'data-mscoco/images/val2017/', 'cocodet_square_edge': 513, 'cocodet_extended_scale': False, 'cocodet_orientation_invariant': 0.0, 'cocodet_blur': 0.0, 'cocodet_augmentation': True, 'cocodet_rescale_images': 1.0, 'cocodet_upsample': 1, 'cocokp_train_annotations': 'tests/coco/train1.json', 'cocokp_val_annotations': 'tests/coco/train1.json', 'cocokp_train_image_dir': 'tests/coco/images/', 'cocokp_val_image_dir': 'tests/coco/images/', 'cocokp_square_edge': 97, 'cocokp_with_dense': False, 'cocokp_extended_scale': False, 'cocokp_orientation_invariant': 0.0, 'cocokp_blur': 0.0, 'cocokp_augmentation': True, 'cocokp_rescale_images': 1.0, 'cocokp_upsample': 2, 'cocokp_min_kp_anns': 1, 'cocokp_bmin': 0.1, 'cocokp_eval_test2017': False, 'cocokp_eval_testdev2017': False, 'coco_eval_annotation_filter': True, 'coco_eval_long_edge': 641, 'coco_eval_extended_scale': False, 'coco_eval_orientation_invariant': 0.0, 'crowdpose_train_annotations': 'data-crowdpose/json/crowdpose_train.json', 'crowdpose_val_annotations': 'data-crowdpose/json/crowdpose_val.json', 'crowdpose_image_dir': 'data-crowdpose/images/', 'crowdpose_square_edge': 385, 'crowdpose_extended_scale': False, 'crowdpose_orientation_invariant': 0.0, 'crowdpose_augmentation': True, 'crowdpose_rescale_images': 1.0, 'crowdpose_upsample': 1, 'crowdpose_min_kp_anns': 1, 'crowdpose_eval_test': False, 'crowdpose_eval_long_edge': 641, 'crowdpose_eval_extended_scale': False, 'crowdpose_eval_orientation_invariant': 0.0, 'crowdpose_index': None, 'nuscenes_train_annotations': '../../../NuScenes/mscoco_style_annotations/nuimages_v1.0-train.json', 'nuscenes_val_annotations': '../../../NuScenes/mscoco_style_annotations/nuimages_v1.0-val.json', 'nuscenes_train_image_dir': '../../../NuScenes/nuimages-v1.0-all-samples', 'nuscenes_val_image_dir': '../../../NuScenes/nuimages-v1.0-all-samples', 'nuscenes_square_edge': 513, 'nuscenes_extended_scale': False, 'nuscenes_orientation_invariant': 0.0, 'nuscenes_blur': 0.0, 'nuscenes_augmentation': True, 'nuscenes_rescale_images': 1.0, 'nuscenes_upsample': 1, 'posetrack2018_train_annotations': 'data-posetrack2018/annotations/train/*.json', 'posetrack2018_val_annotations': 'data-posetrack2018/annotations/val/*.json', 'posetrack2018_eval_annotations': 'data-posetrack2018/annotations/val/*.json', 'posetrack2018_data_root': 'data-posetrack2018', 'posetrack_square_edge': 385, 'posetrack_with_dense': False, 'posetrack_augmentation': True, 'posetrack_rescale_images': 1.0, 'posetrack_upsample': 1, 'posetrack_min_kp_anns': 1, 'posetrack_bmin': 0.1, 'posetrack_sample_pairing': 0.0, 'posetrack_image_augmentations': 0.0, 'posetrack_max_shift': 30.0, 'posetrack_eval_long_edge': 801, 'posetrack_eval_extended_scale': False, 'posetrack_eval_orientation_invariant': 0.0, 'posetrack_ablation_without_tcaf': False, 'posetrack2017_eval_annotations': 'data-posetrack2017/annotations/val/*.json', 'posetrack2017_data_root': 'data-posetrack2017', 'cocokpst_max_shift': 30.0, 'wholebody_train_annotations': 'data-mscoco/annotations/person_keypoints_train2017_wholebody_pifpaf_style.json', 'wholebody_val_annotations': 'data-mscoco/annotations/coco_wholebody_val_v1.0.json', 'wholebody_train_image_dir': 'data-mscoco/images/train2017/', 'wholebody_val_image_dir': 'data-mscoco/images/val2017', 'wholebody_square_edge': 385, 'wholebody_extended_scale': False, 'wholebody_orientation_invariant': 0.0, 'wholebody_blur': 0.0, 'wholebody_augmentation': True, 'wholebody_rescale_images': 1.0, 'wholebody_upsample': 1, 'wholebody_min_kp_anns': 1, 'wholebody_bmin': 1.0, 'wholebody_apply_local_centrality': False, 'wholebody_eval_test2017': False, 'wholebody_eval_testdev2017': False, 'wholebody_eval_annotation_filter': True, 'wholebody_eval_long_edge': 641, 'wholebody_eval_extended_scale': False, 'wholebody_eval_orientation_invariant': 0.0, 'save_all': None, 'show': False, 'image_width': None, 'image_height': None, 'image_dpi_factor': 2.0, 'image_min_dpi': 50.0, 'show_file_extension': 'jpeg', 'textbox_alpha': 0.5, 'text_color': 'white', 'font_size': 8, 'monocolor_connections': False, 'line_width': None, 'skeleton_solid_threshold': 0.5, 'show_box': False, 'white_overlay': False, 'show_joint_scales': False, 'show_joint_confidences': False, 'show_decoding_order': False, 'show_frontier_order': False, 'show_only_decoded_connections': False, 'video_fps': 10, 'video_dpi': 100, 'debug_indices': [], 'device': device(type='cpu'), 'pin_memory': False}, 'version': '0.13.1', 'plugin_versions': {}, 'hostname': 'izar'}
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+INFO:openpifpaf.plugins.coco.dataset:filter for annotations (min kp=1) ...
+INFO:openpifpaf.plugins.coco.dataset:... done.
+INFO:openpifpaf.plugins.coco.dataset:Images: 1
+loading annotations into memory...
+Done (t=0.00s)
+creating index...
+index created!
+INFO:openpifpaf.plugins.coco.dataset:filter for annotations (min kp=1) ...
+INFO:openpifpaf.plugins.coco.dataset:... done.
+INFO:openpifpaf.plugins.coco.dataset:Images: 1
+INFO:openpifpaf.optimize:SGD optimizer
+INFO:openpifpaf.optimize:training batches per epoch = 1
+INFO:openpifpaf.network.trainer:{'type': 'config', 'field_names': ['cocokp.cif.c', 'cocokp.cif.vec', 'cocokp.cif.scales', 'cocokp.caf.c', 'cocokp.caf.vec', 'cocokp.caf.scales']}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch000
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 0, 'batch': 0, 'n_batches': 1, 'time': 99.91, 'data_time': 0.359, 'lr': 1e-06, 'loss': 1709.65, 'head_losses': [81.609, 579.037, 0.0, 79.021, 969.983, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 1, 'loss': 1709.6499, 'head_losses': [81.60931, 579.03662, 0.0, 79.02087, 969.98309, 0.0], 'time': 105.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch001
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 1, 'loss': 2137.16846, 'head_losses': [78.46599, 896.51917, 0.0, 80.63971, 1081.54346, 0.0], 'time': 34.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 1, 'batch': 0, 'n_batches': 1, 'time': 109.699, 'data_time': 6.0, 'lr': 0.001, 'loss': 2060.726, 'head_losses': [85.291, 851.891, 0.0, 79.372, 1044.172, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 2, 'loss': 2060.72559, 'head_losses': [85.29061, 851.89081, 0.0, 79.37189, 1044.17224, 0.0], 'time': 119.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch002
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 2, 'loss': 1825.28577, 'head_losses': [84.40932, 782.35089, 0.0, 85.75084, 872.77472, 0.0], 'time': 38.2}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 2, 'batch': 0, 'n_batches': 1, 'time': 118.349, 'data_time': 5.345, 'lr': 0.001, 'loss': 1879.406, 'head_losses': [83.826, 826.064, 0.0, 94.033, 875.482, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 3, 'loss': 1879.40552, 'head_losses': [83.82644, 826.06378, 0.0, 94.03283, 875.48248, 0.0], 'time': 129.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch003
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 3, 'loss': 1636.60144, 'head_losses': [51.52383, 732.97461, 0.0, 48.14667, 803.95636, 0.0], 'time': 33.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 3, 'batch': 0, 'n_batches': 1, 'time': 107.559, 'data_time': 5.335, 'lr': 0.001, 'loss': 1842.311, 'head_losses': [97.776, 758.668, 0.0, 121.473, 864.394, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 4, 'loss': 1842.31104, 'head_losses': [97.77591, 758.6684, 0.0, 121.4729, 864.3938, 0.0], 'time': 118.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch004
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 4, 'loss': 1587.94165, 'head_losses': [55.56537, 708.25226, 0.0, 45.11742, 779.00665, 0.0], 'time': 27.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 4, 'batch': 0, 'n_batches': 1, 'time': 121.658, 'data_time': 5.639, 'lr': 0.001, 'loss': 1590.163, 'head_losses': [55.807, 715.836, 0.0, 49.711, 768.809, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 5, 'loss': 1590.16333, 'head_losses': [55.80729, 715.83636, 0.0, 49.71103, 768.80859, 0.0], 'time': 134.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch005
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 5, 'loss': 1562.50854, 'head_losses': [27.13774, 743.54034, 0.0, 34.08417, 757.74634, 0.0], 'time': 35.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 5, 'batch': 0, 'n_batches': 1, 'time': 106.591, 'data_time': 4.305, 'lr': 0.001, 'loss': 1556.246, 'head_losses': [18.764, 751.746, 0.0, 19.814, 765.923, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 6, 'loss': 1556.24646, 'head_losses': [18.76379, 751.74628, 0.0, 19.8138, 765.92261, 0.0], 'time': 119.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch006
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 6, 'loss': 1563.99011, 'head_losses': [13.08349, 754.61542, 0.0, 12.71171, 783.57947, 0.0], 'time': 35.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 6, 'batch': 0, 'n_batches': 1, 'time': 113.551, 'data_time': 3.346, 'lr': 0.001, 'loss': 1609.633, 'head_losses': [25.386, 742.794, 0.0, 21.188, 820.264, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 7, 'loss': 1609.63257, 'head_losses': [25.38641, 742.79401, 0.0, 21.18805, 820.26416, 0.0], 'time': 121.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch007
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 7, 'loss': 1529.24805, 'head_losses': [70.14617, 678.0791, 0.0, 23.23941, 757.78333, 0.0], 'time': 34.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 7, 'batch': 0, 'n_batches': 1, 'time': 111.066, 'data_time': 5.433, 'lr': 0.001, 'loss': 1797.693, 'head_losses': [112.399, 762.833, 0.0, 98.227, 824.234, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 8, 'loss': 1797.69324, 'head_losses': [112.39859, 762.83301, 0.0, 98.22743, 824.23425, 0.0], 'time': 123.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch008
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 8, 'loss': 1529.93921, 'head_losses': [19.36873, 749.62622, 0.0, 18.4627, 742.48157, 0.0], 'time': 37.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 8, 'batch': 0, 'n_batches': 1, 'time': 113.982, 'data_time': 5.918, 'lr': 0.001, 'loss': 1595.429, 'head_losses': [23.449, 742.832, 0.0, 18.747, 810.402, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 9, 'loss': 1595.42932, 'head_losses': [23.44907, 742.8316, 0.0, 18.74652, 810.4021, 0.0], 'time': 127.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch009
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 9, 'loss': 1562.31299, 'head_losses': [28.69095, 732.50049, 0.0, 32.02898, 769.09259, 0.0], 'time': 42.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 9, 'batch': 0, 'n_batches': 1, 'time': 141.256, 'data_time': 5.643, 'lr': 0.001, 'loss': 1534.744, 'head_losses': [25.917, 722.777, 0.0, 13.927, 772.123, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 10, 'loss': 1534.74402, 'head_losses': [25.91678, 722.77728, 0.0, 13.92728, 772.12262, 0.0], 'time': 158.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch010
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 10, 'loss': 1570.99341, 'head_losses': [52.58777, 711.96356, 0.0, 39.94066, 766.5014, 0.0], 'time': 39.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 10, 'batch': 0, 'n_batches': 1, 'time': 132.36, 'data_time': 6.24, 'lr': 0.001, 'loss': 1718.636, 'head_losses': [65.933, 746.602, 0.0, 89.204, 816.897, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 11, 'loss': 1718.63599, 'head_losses': [65.93336, 746.60217, 0.0, 89.20367, 816.89673, 0.0], 'time': 149.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch011
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 11, 'loss': 1184.198, 'head_losses': [61.44938, 552.14587, 0.0, 65.44487, 505.15784, 0.0], 'time': 37.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 11, 'batch': 0, 'n_batches': 1, 'time': 124.677, 'data_time': 6.021, 'lr': 0.001, 'loss': 1388.45, 'head_losses': [57.786, 501.451, 0.0, 69.875, 759.338, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 12, 'loss': 1388.44971, 'head_losses': [57.78561, 501.45084, 0.0, 69.8749, 759.33838, 0.0], 'time': 138.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch012
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 12, 'loss': 1535.401, 'head_losses': [53.61693, 689.89264, 0.0, 38.702, 753.18945, 0.0], 'time': 34.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 12, 'batch': 0, 'n_batches': 1, 'time': 114.205, 'data_time': 5.592, 'lr': 0.001, 'loss': 1578.226, 'head_losses': [30.237, 745.306, 0.0, 31.375, 771.309, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 13, 'loss': 1578.22644, 'head_losses': [30.2369, 745.30579, 0.0, 31.37468, 771.30908, 0.0], 'time': 129.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch013
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 13, 'loss': 1574.68665, 'head_losses': [21.1189, 746.95618, 0.0, 12.42237, 794.18921, 0.0], 'time': 36.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 13, 'batch': 0, 'n_batches': 1, 'time': 117.635, 'data_time': 4.663, 'lr': 0.001, 'loss': 1565.972, 'head_losses': [21.364, 754.197, 0.0, 16.712, 773.7, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 14, 'loss': 1565.97241, 'head_losses': [21.36356, 754.19672, 0.0, 16.71249, 773.69971, 0.0], 'time': 132.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch014
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 14, 'loss': 1607.62134, 'head_losses': [51.44898, 724.1723, 0.0, 35.06464, 796.93542, 0.0], 'time': 29.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 14, 'batch': 0, 'n_batches': 1, 'time': 116.327, 'data_time': 5.675, 'lr': 0.001, 'loss': 1557.216, 'head_losses': [22.318, 745.455, 0.0, 16.857, 772.586, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 15, 'loss': 1557.21582, 'head_losses': [22.31779, 745.45471, 0.0, 16.85676, 772.58649, 0.0], 'time': 131.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch015
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 15, 'loss': 1544.91284, 'head_losses': [28.76755, 720.46899, 0.0, 25.0929, 770.58337, 0.0], 'time': 35.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 15, 'batch': 0, 'n_batches': 1, 'time': 119.188, 'data_time': 6.009, 'lr': 0.001, 'loss': 1644.143, 'head_losses': [77.004, 735.111, 0.0, 63.136, 768.892, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 16, 'loss': 1644.14282, 'head_losses': [77.00407, 735.1106, 0.0, 63.13575, 768.89233, 0.0], 'time': 135.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch016
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 16, 'loss': 1511.42578, 'head_losses': [28.18964, 724.06873, 0.0, 26.62837, 732.53912, 0.0], 'time': 36.2}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 16, 'batch': 0, 'n_batches': 1, 'time': 117.955, 'data_time': 5.645, 'lr': 0.001, 'loss': 1526.356, 'head_losses': [32.505, 713.831, 0.0, 27.416, 752.604, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 17, 'loss': 1526.35608, 'head_losses': [32.50466, 713.83112, 0.0, 27.41626, 752.60406, 0.0], 'time': 128.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch017
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 17, 'loss': 1717.85571, 'head_losses': [74.73486, 728.51111, 0.0, 81.35745, 833.25238, 0.0], 'time': 34.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 17, 'batch': 0, 'n_batches': 1, 'time': 70.442, 'data_time': 4.655, 'lr': 0.001, 'loss': 1555.735, 'head_losses': [27.878, 728.044, 0.0, 19.685, 780.128, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 18, 'loss': 1555.73511, 'head_losses': [27.87771, 728.04443, 0.0, 19.68483, 780.12811, 0.0], 'time': 80.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch018
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 18, 'loss': 1486.41882, 'head_losses': [36.03286, 683.07764, 0.0, 42.15999, 725.14838, 0.0], 'time': 4.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 18, 'batch': 0, 'n_batches': 1, 'time': 22.648, 'data_time': 1.05, 'lr': 0.001, 'loss': 1498.742, 'head_losses': [31.024, 705.439, 0.0, 22.307, 739.973, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 19, 'loss': 1498.74243, 'head_losses': [31.02365, 705.43933, 0.0, 22.30678, 739.97266, 0.0], 'time': 24.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch019
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 19, 'loss': 1528.51929, 'head_losses': [40.22231, 695.71704, 0.0, 41.9245, 750.6554, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 19, 'batch': 0, 'n_batches': 1, 'time': 26.697, 'data_time': 1.199, 'lr': 0.001, 'loss': 1480.778, 'head_losses': [40.451, 704.465, 0.0, 34.877, 700.985, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 20, 'loss': 1480.77808, 'head_losses': [40.45094, 704.46515, 0.0, 34.8772, 700.9848, 0.0], 'time': 28.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch020
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 20, 'loss': 1536.58655, 'head_losses': [28.22455, 731.66016, 0.0, 22.30232, 754.39954, 0.0], 'time': 5.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 20, 'batch': 0, 'n_batches': 1, 'time': 22.763, 'data_time': 0.835, 'lr': 0.001, 'loss': 1522.105, 'head_losses': [21.392, 712.845, 0.0, 18.404, 769.464, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 21, 'loss': 1522.10522, 'head_losses': [21.39203, 712.84503, 0.0, 18.404, 769.46423, 0.0], 'time': 24.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch021
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 21, 'loss': 1477.70166, 'head_losses': [35.34094, 682.81348, 0.0, 38.08541, 721.46179, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 21, 'batch': 0, 'n_batches': 1, 'time': 31.055, 'data_time': 1.545, 'lr': 0.001, 'loss': 1688.524, 'head_losses': [116.126, 702.172, 0.0, 71.613, 798.614, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 22, 'loss': 1688.52393, 'head_losses': [116.12608, 702.17151, 0.0, 71.61263, 798.61377, 0.0], 'time': 34.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch022
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 22, 'loss': 1422.03052, 'head_losses': [28.93377, 670.67896, 0.0, 26.76004, 695.65778, 0.0], 'time': 4.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 22, 'batch': 0, 'n_batches': 1, 'time': 23.636, 'data_time': 0.864, 'lr': 0.001, 'loss': 1451.348, 'head_losses': [34.99, 668.339, 0.0, 43.019, 705.001, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 23, 'loss': 1451.34814, 'head_losses': [34.9895, 668.33917, 0.0, 43.0186, 705.00079, 0.0], 'time': 25.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch023
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 23, 'loss': 1496.16528, 'head_losses': [27.71756, 686.4566, 0.0, 18.74463, 763.24652, 0.0], 'time': 5.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 23, 'batch': 0, 'n_batches': 1, 'time': 26.274, 'data_time': 0.725, 'lr': 0.001, 'loss': 1571.264, 'head_losses': [29.01, 705.281, 0.0, 21.717, 815.257, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 24, 'loss': 1571.26428, 'head_losses': [29.01018, 705.28058, 0.0, 21.7168, 815.25671, 0.0], 'time': 28.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch024
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 24, 'loss': 2501.68213, 'head_losses': [242.83951, 1001.18848, 0.0, 231.61334, 1026.04065, 0.0], 'time': 5.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 24, 'batch': 0, 'n_batches': 1, 'time': 29.455, 'data_time': 1.144, 'lr': 0.001, 'loss': 1540.689, 'head_losses': [20.028, 716.42, 0.0, 11.679, 792.561, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 25, 'loss': 1540.68872, 'head_losses': [20.02833, 716.42041, 0.0, 11.67936, 792.56055, 0.0], 'time': 31.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch025
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 25, 'loss': 1579.02637, 'head_losses': [40.23861, 745.58405, 0.0, 52.26546, 740.93835, 0.0], 'time': 6.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 25, 'batch': 0, 'n_batches': 1, 'time': 26.644, 'data_time': 0.855, 'lr': 0.001, 'loss': 1570.025, 'head_losses': [31.989, 703.553, 0.0, 18.961, 815.522, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 26, 'loss': 1570.02515, 'head_losses': [31.98863, 703.55347, 0.0, 18.96058, 815.5224, 0.0], 'time': 28.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch026
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 26, 'loss': 1613.65137, 'head_losses': [29.87749, 745.91071, 0.0, 27.21704, 810.64612, 0.0], 'time': 5.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 26, 'batch': 0, 'n_batches': 1, 'time': 27.556, 'data_time': 1.042, 'lr': 0.001, 'loss': 1504.703, 'head_losses': [13.639, 724.15, 0.0, 9.997, 756.917, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 27, 'loss': 1504.70312, 'head_losses': [13.63875, 724.15021, 0.0, 9.99688, 756.91736, 0.0], 'time': 29.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch027
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 27, 'loss': 1533.26758, 'head_losses': [24.69216, 710.56317, 0.0, 9.19608, 788.8161, 0.0], 'time': 5.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 27, 'batch': 0, 'n_batches': 1, 'time': 25.999, 'data_time': 1.096, 'lr': 0.001, 'loss': 1473.995, 'head_losses': [39.064, 677.052, 0.0, 20.619, 737.259, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 28, 'loss': 1473.99487, 'head_losses': [39.06419, 677.05225, 0.0, 20.61913, 737.25928, 0.0], 'time': 28.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch028
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 28, 'loss': 1474.97632, 'head_losses': [21.5601, 669.21948, 0.0, 15.75056, 768.44611, 0.0], 'time': 5.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 28, 'batch': 0, 'n_batches': 1, 'time': 23.804, 'data_time': 0.893, 'lr': 0.001, 'loss': 1504.094, 'head_losses': [15.5, 709.9, 0.0, 18.848, 759.847, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 29, 'loss': 1504.09448, 'head_losses': [15.50001, 709.89972, 0.0, 18.84815, 759.84668, 0.0], 'time': 25.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch029
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 29, 'loss': 1484.19507, 'head_losses': [27.53105, 683.58691, 0.0, 20.32734, 752.74969, 0.0], 'time': 6.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 29, 'batch': 0, 'n_batches': 1, 'time': 25.649, 'data_time': 1.248, 'lr': 0.001, 'loss': 1402.211, 'head_losses': [14.61, 675.028, 0.0, 26.462, 686.111, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 30, 'loss': 1402.21069, 'head_losses': [14.61033, 675.02759, 0.0, 26.46172, 686.11108, 0.0], 'time': 27.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch030
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 30, 'loss': 1316.21704, 'head_losses': [22.40673, 531.74951, 0.0, 24.51896, 737.54187, 0.0], 'time': 4.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 30, 'batch': 0, 'n_batches': 1, 'time': 24.073, 'data_time': 0.826, 'lr': 0.001, 'loss': 1419.419, 'head_losses': [16.781, 674.245, 0.0, 16.975, 711.419, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 31, 'loss': 1419.41931, 'head_losses': [16.78075, 674.24451, 0.0, 16.97525, 711.41882, 0.0], 'time': 25.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch031
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 31, 'loss': 1465.26514, 'head_losses': [15.38055, 683.75269, 0.0, 15.90186, 750.2301, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 31, 'batch': 0, 'n_batches': 1, 'time': 26.432, 'data_time': 1.066, 'lr': 0.001, 'loss': 1558.449, 'head_losses': [14.933, 764.169, 0.0, 22.102, 757.245, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 32, 'loss': 1558.44873, 'head_losses': [14.9333, 764.1687, 0.0, 22.10201, 757.24481, 0.0], 'time': 28.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch032
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 32, 'loss': 1416.82031, 'head_losses': [11.26709, 661.74915, 0.0, 20.18008, 723.62408, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 32, 'batch': 0, 'n_batches': 1, 'time': 26.158, 'data_time': 0.939, 'lr': 0.001, 'loss': 1365.858, 'head_losses': [18.854, 591.025, 0.0, 15.465, 740.514, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 33, 'loss': 1365.85803, 'head_losses': [18.85414, 591.02509, 0.0, 15.46478, 740.51404, 0.0], 'time': 28.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch033
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 33, 'loss': 894.41772, 'head_losses': [7.7211, 382.48389, 0.0, 14.69002, 489.52271, 0.0], 'time': 4.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 33, 'batch': 0, 'n_batches': 1, 'time': 25.974, 'data_time': 0.924, 'lr': 0.001, 'loss': 1467.582, 'head_losses': [11.597, 681.509, 0.0, 16.662, 757.813, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 34, 'loss': 1467.58215, 'head_losses': [11.59747, 681.50891, 0.0, 16.66245, 757.81329, 0.0], 'time': 27.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch034
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 34, 'loss': 1402.26636, 'head_losses': [8.35448, 684.60632, 0.0, 19.6791, 689.62653, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 34, 'batch': 0, 'n_batches': 1, 'time': 25.371, 'data_time': 0.925, 'lr': 0.001, 'loss': 1663.193, 'head_losses': [27.884, 778.88, 0.0, 52.458, 803.971, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 35, 'loss': 1663.19312, 'head_losses': [27.88393, 778.88049, 0.0, 52.45758, 803.97119, 0.0], 'time': 27.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch035
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 35, 'loss': 1488.65454, 'head_losses': [6.4337, 730.03589, 0.0, 19.70432, 732.48053, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 35, 'batch': 0, 'n_batches': 1, 'time': 22.972, 'data_time': 0.823, 'lr': 0.001, 'loss': 1458.818, 'head_losses': [25.947, 660.697, 0.0, 22.353, 749.82, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 36, 'loss': 1458.81763, 'head_losses': [25.94729, 660.69739, 0.0, 22.35303, 749.81989, 0.0], 'time': 25.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch036
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 36, 'loss': 1443.58191, 'head_losses': [5.61831, 672.39868, 0.0, 18.34254, 747.22241, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 36, 'batch': 0, 'n_batches': 1, 'time': 24.055, 'data_time': 0.84, 'lr': 0.001, 'loss': 1317.388, 'head_losses': [2.589, 651.022, 0.0, 21.136, 642.64, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 37, 'loss': 1317.3877, 'head_losses': [2.58946, 651.02197, 0.0, 21.1362, 642.64008, 0.0], 'time': 26.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch037
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 37, 'loss': 1434.73755, 'head_losses': [2.24005, 667.37561, 0.0, 13.60227, 751.51965, 0.0], 'time': 5.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 37, 'batch': 0, 'n_batches': 1, 'time': 25.653, 'data_time': 0.844, 'lr': 0.001, 'loss': 1331.61, 'head_losses': [-0.756, 602.366, 0.0, 15.379, 714.621, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 38, 'loss': 1331.61035, 'head_losses': [-0.7557, 602.36627, 0.0, 15.37859, 714.62122, 0.0], 'time': 27.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch038
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 38, 'loss': 1487.74353, 'head_losses': [-0.94209, 685.12567, 0.0, 15.22731, 788.33264, 0.0], 'time': 4.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 38, 'batch': 0, 'n_batches': 1, 'time': 22.514, 'data_time': 0.981, 'lr': 0.001, 'loss': 1245.415, 'head_losses': [-6.233, 550.441, 0.0, 12.642, 688.565, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 39, 'loss': 1245.41528, 'head_losses': [-6.23313, 550.44116, 0.0, 12.64218, 688.565, 0.0], 'time': 24.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch039
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 39, 'loss': 1385.20679, 'head_losses': [-1.68823, 653.39038, 0.0, 14.36412, 719.1405, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 39, 'batch': 0, 'n_batches': 1, 'time': 25.357, 'data_time': 0.841, 'lr': 0.001, 'loss': 1685.925, 'head_losses': [5.035, 798.759, 0.0, 24.157, 857.975, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 40, 'loss': 1685.92517, 'head_losses': [5.03456, 798.75885, 0.0, 24.15714, 857.97461, 0.0], 'time': 27.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch040
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 40, 'loss': 1415.84692, 'head_losses': [1.98854, 678.46704, 0.0, 7.44684, 727.94452, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 40, 'batch': 0, 'n_batches': 1, 'time': 26.135, 'data_time': 0.762, 'lr': 0.001, 'loss': 1471.474, 'head_losses': [1.336, 727.913, 0.0, 13.541, 728.684, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 41, 'loss': 1471.47388, 'head_losses': [1.33606, 727.91254, 0.0, 13.54104, 728.68433, 0.0], 'time': 28.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch041
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 41, 'loss': 1527.82739, 'head_losses': [0.10032, 708.34924, 0.0, 14.43611, 804.94165, 0.0], 'time': 4.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 41, 'batch': 0, 'n_batches': 1, 'time': 25.338, 'data_time': 1.058, 'lr': 0.001, 'loss': 1398.822, 'head_losses': [0.245, 677.214, 0.0, 8.559, 712.805, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 42, 'loss': 1398.82227, 'head_losses': [0.24458, 677.2135, 0.0, 8.55907, 712.80505, 0.0], 'time': 27.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch042
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 42, 'loss': 1661.03906, 'head_losses': [23.12737, 756.65851, 0.0, 18.86414, 862.3891, 0.0], 'time': 4.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 42, 'batch': 0, 'n_batches': 1, 'time': 27.821, 'data_time': 0.774, 'lr': 0.001, 'loss': 1181.021, 'head_losses': [-14.762, 558.4, 0.0, 7.82, 629.563, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 43, 'loss': 1181.02075, 'head_losses': [-14.76165, 558.40015, 0.0, 7.8196, 629.56274, 0.0], 'time': 29.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch043
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 43, 'loss': 1320.22168, 'head_losses': [-11.19166, 651.42877, 0.0, 9.98201, 670.0025, 0.0], 'time': 5.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 43, 'batch': 0, 'n_batches': 1, 'time': 24.132, 'data_time': 0.866, 'lr': 0.001, 'loss': 1439.922, 'head_losses': [-0.941, 725.655, 0.0, 19.559, 695.648, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 44, 'loss': 1439.92163, 'head_losses': [-0.94057, 725.65521, 0.0, 19.55944, 695.64758, 0.0], 'time': 26.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch044
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 44, 'loss': 1526.46191, 'head_losses': [-22.66619, 777.90192, 0.0, 1.42865, 769.79749, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 44, 'batch': 0, 'n_batches': 1, 'time': 27.262, 'data_time': 0.836, 'lr': 0.001, 'loss': 1246.15, 'head_losses': [-31.848, 673.506, 0.0, -0.767, 605.259, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 45, 'loss': 1246.1499, 'head_losses': [-31.84846, 673.50574, 0.0, -0.76683, 605.25946, 0.0], 'time': 30.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch045
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 45, 'loss': 1394.64795, 'head_losses': [-24.40906, 616.05115, 0.0, 4.78318, 798.22272, 0.0], 'time': 5.2}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 45, 'batch': 0, 'n_batches': 1, 'time': 25.322, 'data_time': 0.678, 'lr': 0.001, 'loss': 1304.933, 'head_losses': [-23.956, 641.311, 0.0, 0.658, 686.921, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 46, 'loss': 1304.93347, 'head_losses': [-23.9563, 641.3111, 0.0, 0.65757, 686.92108, 0.0], 'time': 28.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch046
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 46, 'loss': 1383.0769, 'head_losses': [-8.67942, 705.20782, 0.0, 18.84798, 667.70056, 0.0], 'time': 5.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 46, 'batch': 0, 'n_batches': 1, 'time': 28.454, 'data_time': 1.244, 'lr': 0.001, 'loss': 1295.094, 'head_losses': [-30.036, 553.031, 0.0, 1.87, 770.23, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 47, 'loss': 1295.09448, 'head_losses': [-30.03566, 553.03064, 0.0, 1.86954, 770.22998, 0.0], 'time': 31.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch047
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 47, 'loss': 1297.04248, 'head_losses': [-21.10395, 667.32349, 0.0, 7.33263, 643.49023, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 47, 'batch': 0, 'n_batches': 1, 'time': 27.748, 'data_time': 1.352, 'lr': 0.001, 'loss': 1632.794, 'head_losses': [-5.374, 794.462, 0.0, 11.71, 831.997, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 48, 'loss': 1632.79419, 'head_losses': [-5.37409, 794.46167, 0.0, 11.70971, 831.99683, 0.0], 'time': 30.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch048
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 48, 'loss': 1659.71716, 'head_losses': [-20.37638, 744.5163, 0.0, 18.51058, 917.06671, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 48, 'batch': 0, 'n_batches': 1, 'time': 29.383, 'data_time': 0.913, 'lr': 0.001, 'loss': 1430.757, 'head_losses': [-8.606, 718.702, 0.0, 6.707, 713.955, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 49, 'loss': 1430.75684, 'head_losses': [-8.60618, 718.70154, 0.0, 6.70686, 713.95465, 0.0], 'time': 31.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch049
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 49, 'loss': 1252.26208, 'head_losses': [-7.28428, 696.90277, 0.0, 4.12896, 558.51465, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 49, 'batch': 0, 'n_batches': 1, 'time': 21.168, 'data_time': 0.531, 'lr': 0.001, 'loss': 1227.417, 'head_losses': [-33.098, 645.998, 0.0, -7.697, 622.215, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 50, 'loss': 1227.41748, 'head_losses': [-33.09778, 645.99774, 0.0, -7.69742, 622.21497, 0.0], 'time': 23.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch050
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 50, 'loss': 2563.48877, 'head_losses': [224.43347, 974.12842, 0.0, 219.53294, 1145.39392, 0.0], 'time': 6.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 50, 'batch': 0, 'n_batches': 1, 'time': 34.352, 'data_time': 0.946, 'lr': 0.001, 'loss': 1298.78, 'head_losses': [-7.976, 598.586, 0.0, 2.674, 705.496, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 51, 'loss': 1298.78003, 'head_losses': [-7.97583, 598.58569, 0.0, 2.67417, 705.49597, 0.0], 'time': 36.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch051
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 51, 'loss': 1273.82031, 'head_losses': [-29.02233, 635.8092, 0.0, -4.93256, 671.966, 0.0], 'time': 5.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 51, 'batch': 0, 'n_batches': 1, 'time': 27.332, 'data_time': 0.767, 'lr': 0.001, 'loss': 1366.786, 'head_losses': [-21.931, 664.234, 0.0, -5.984, 730.468, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 52, 'loss': 1366.78638, 'head_losses': [-21.9314, 664.23352, 0.0, -5.98355, 730.4679, 0.0], 'time': 29.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch052
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 52, 'loss': 1208.22827, 'head_losses': [-21.08906, 579.06458, 0.0, -1.52193, 651.77472, 0.0], 'time': 4.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 52, 'batch': 0, 'n_batches': 1, 'time': 25.331, 'data_time': 1.165, 'lr': 0.001, 'loss': 281.15, 'head_losses': [-1.551, 282.293, 0.0, 0.408, 0.0, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 53, 'loss': 281.14996, 'head_losses': [-1.55103, 282.29312, 0.0, 0.40787, 0.0, 0.0], 'time': 27.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch053
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 53, 'loss': 1244.51367, 'head_losses': [-28.05337, 609.1424, 0.0, -2.29575, 665.72034, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 53, 'batch': 0, 'n_batches': 1, 'time': 25.671, 'data_time': 0.825, 'lr': 0.001, 'loss': 1329.416, 'head_losses': [-25.11, 701.433, 0.0, 1.554, 651.539, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 54, 'loss': 1329.41577, 'head_losses': [-25.10984, 701.43329, 0.0, 1.55354, 651.53876, 0.0], 'time': 27.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch054
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 54, 'loss': 1247.45142, 'head_losses': [-44.01288, 636.47198, 0.0, -8.81015, 663.80237, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 54, 'batch': 0, 'n_batches': 1, 'time': 24.015, 'data_time': 0.783, 'lr': 0.001, 'loss': 1186.207, 'head_losses': [-4.133, 477.441, 0.0, 18.554, 694.344, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 55, 'loss': 1186.2074, 'head_losses': [-4.13251, 477.44144, 0.0, 18.55395, 694.34448, 0.0], 'time': 25.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch055
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 55, 'loss': 1669.06128, 'head_losses': [-39.80738, 789.35889, 0.0, 3.99383, 915.51587, 0.0], 'time': 5.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 55, 'batch': 0, 'n_batches': 1, 'time': 24.955, 'data_time': 1.043, 'lr': 0.001, 'loss': 1963.1, 'head_losses': [-26.769, 1007.232, 0.0, 4.495, 978.142, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 56, 'loss': 1963.10034, 'head_losses': [-26.76925, 1007.23224, 0.0, 4.49532, 978.14209, 0.0], 'time': 27.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch056
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 56, 'loss': 1243.44629, 'head_losses': [-20.8222, 590.3504, 0.0, -5.03819, 678.95624, 0.0], 'time': 4.2}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 56, 'batch': 0, 'n_batches': 1, 'time': 35.052, 'data_time': 0.846, 'lr': 0.001, 'loss': 1501.748, 'head_losses': [-42.145, 815.333, 0.0, -7.314, 735.873, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 57, 'loss': 1501.74756, 'head_losses': [-42.14495, 815.3335, 0.0, -7.31385, 735.8728, 0.0], 'time': 36.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch057
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 57, 'loss': 842.83746, 'head_losses': [3.12135, 357.26636, 0.0, 7.56898, 474.8808, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 57, 'batch': 0, 'n_batches': 1, 'time': 36.779, 'data_time': 0.719, 'lr': 0.001, 'loss': 1367.193, 'head_losses': [12.043, 640.613, 0.0, -2.815, 717.351, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 58, 'loss': 1367.19287, 'head_losses': [12.04314, 640.61328, 0.0, -2.8149, 717.35126, 0.0], 'time': 38.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch058
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 58, 'loss': 177.70366, 'head_losses': [6.89188, 167.89336, 0.0, 2.91842, 0.0, 0.0], 'time': 3.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 58, 'batch': 0, 'n_batches': 1, 'time': 27.661, 'data_time': 1.234, 'lr': 0.001, 'loss': 1419.203, 'head_losses': [-9.368, 654.648, 0.0, 4.417, 769.506, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 59, 'loss': 1419.20337, 'head_losses': [-9.3678, 654.64819, 0.0, 4.41692, 769.50604, 0.0], 'time': 30.1, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch059
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 59, 'loss': 1442.40552, 'head_losses': [1.19413, 707.83356, 0.0, 5.13935, 728.23846, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 59, 'batch': 0, 'n_batches': 1, 'time': 28.654, 'data_time': 0.846, 'lr': 0.001, 'loss': 1548.196, 'head_losses': [59.623, 679.492, 0.0, 8.851, 800.231, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 60, 'loss': 1548.19617, 'head_losses': [59.62252, 679.49164, 0.0, 8.85071, 800.23132, 0.0], 'time': 30.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch060
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 60, 'loss': 1478.9397, 'head_losses': [9.727, 678.75592, 0.0, 12.03941, 778.4173, 0.0], 'time': 3.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 60, 'batch': 0, 'n_batches': 1, 'time': 33.478, 'data_time': 0.719, 'lr': 0.001, 'loss': 1389.481, 'head_losses': [8.481, 672.764, 0.0, 11.583, 696.653, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 61, 'loss': 1389.48132, 'head_losses': [8.481, 672.76404, 0.0, 11.58281, 696.65344, 0.0], 'time': 35.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch061
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 61, 'loss': 1417.34607, 'head_losses': [4.10156, 657.0802, 0.0, 3.92891, 752.23541, 0.0], 'time': 5.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 61, 'batch': 0, 'n_batches': 1, 'time': 22.651, 'data_time': 0.744, 'lr': 0.001, 'loss': 1412.071, 'head_losses': [-5.063, 691.8, 0.0, 5.99, 719.344, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 62, 'loss': 1412.07056, 'head_losses': [-5.06332, 691.79993, 0.0, 5.98997, 719.34406, 0.0], 'time': 24.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch062
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 62, 'loss': 1408.83459, 'head_losses': [9.58531, 662.27039, 0.0, 6.96267, 730.01624, 0.0], 'time': 6.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 62, 'batch': 0, 'n_batches': 1, 'time': 46.693, 'data_time': 5.508, 'lr': 0.001, 'loss': 1455.306, 'head_losses': [15.981, 684.227, 0.0, 14.453, 740.646, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 63, 'loss': 1455.30566, 'head_losses': [15.98053, 684.22668, 0.0, 14.45259, 740.64587, 0.0], 'time': 60.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch063
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 63, 'loss': 1532.70801, 'head_losses': [16.98572, 747.07031, 0.0, 18.98491, 749.66711, 0.0], 'time': 13.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 63, 'batch': 0, 'n_batches': 1, 'time': 26.329, 'data_time': 1.17, 'lr': 0.001, 'loss': 1346.739, 'head_losses': [6.402, 621.548, 0.0, 6.222, 712.566, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 64, 'loss': 1346.73853, 'head_losses': [6.4019, 621.54828, 0.0, 6.22241, 712.56598, 0.0], 'time': 28.5, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch064
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 64, 'loss': 1594.06079, 'head_losses': [16.99982, 752.10284, 0.0, 17.65883, 807.29932, 0.0], 'time': 3.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 64, 'batch': 0, 'n_batches': 1, 'time': 24.243, 'data_time': 0.751, 'lr': 0.001, 'loss': 1592.915, 'head_losses': [16.878, 723.877, 0.0, 13.518, 838.642, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 65, 'loss': 1592.91516, 'head_losses': [16.87808, 723.8772, 0.0, 13.51759, 838.64233, 0.0], 'time': 25.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch065
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 65, 'loss': 1346.09668, 'head_losses': [7.18509, 639.7713, 0.0, 4.75205, 694.38818, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 65, 'batch': 0, 'n_batches': 1, 'time': 23.94, 'data_time': 1.056, 'lr': 0.001, 'loss': 1349.232, 'head_losses': [4.314, 653.066, 0.0, 8.478, 683.374, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 66, 'loss': 1349.23206, 'head_losses': [4.31373, 653.06616, 0.0, 8.47827, 683.3739, 0.0], 'time': 25.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch066
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 66, 'loss': 1388.58545, 'head_losses': [0.44663, 648.16919, 0.0, 14.59237, 725.37732, 0.0], 'time': 6.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 66, 'batch': 0, 'n_batches': 1, 'time': 23.85, 'data_time': 0.849, 'lr': 0.001, 'loss': 1346.07, 'head_losses': [-9.501, 664.619, 0.0, 1.12, 689.831, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 67, 'loss': 1346.06958, 'head_losses': [-9.50122, 664.61926, 0.0, 1.12015, 689.83136, 0.0], 'time': 25.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch067
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 67, 'loss': 1459.76392, 'head_losses': [8.19537, 667.62415, 0.0, 10.27423, 773.67023, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 67, 'batch': 0, 'n_batches': 1, 'time': 27.983, 'data_time': 0.915, 'lr': 0.001, 'loss': 1364.139, 'head_losses': [10.589, 650.505, 0.0, 25.307, 677.739, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 68, 'loss': 1364.13928, 'head_losses': [10.5891, 650.50476, 0.0, 25.30668, 677.73871, 0.0], 'time': 29.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch068
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 68, 'loss': 1325.55957, 'head_losses': [1.88711, 647.96295, 0.0, 12.54863, 663.16089, 0.0], 'time': 4.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 68, 'batch': 0, 'n_batches': 1, 'time': 24.748, 'data_time': 0.751, 'lr': 0.001, 'loss': 1145.137, 'head_losses': [-3.581, 571.866, 0.0, -10.911, 587.764, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 69, 'loss': 1145.13696, 'head_losses': [-3.58143, 571.86591, 0.0, -10.91113, 587.76355, 0.0], 'time': 26.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch069
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 69, 'loss': 1287.4541, 'head_losses': [3.28833, 505.00653, 0.0, 22.75127, 756.40802, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 69, 'batch': 0, 'n_batches': 1, 'time': 24.133, 'data_time': 0.966, 'lr': 0.001, 'loss': 1264.576, 'head_losses': [2.379, 484.855, 0.0, 6.304, 771.037, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 70, 'loss': 1264.57568, 'head_losses': [2.37865, 484.8551, 0.0, 6.30445, 771.03748, 0.0], 'time': 26.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch070
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 70, 'loss': 1433.54712, 'head_losses': [-1.45036, 671.56525, 0.0, 4.34382, 759.08838, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 70, 'batch': 0, 'n_batches': 1, 'time': 25.338, 'data_time': 0.759, 'lr': 0.001, 'loss': 1321.226, 'head_losses': [-6.925, 618.969, 0.0, 12.424, 696.758, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 71, 'loss': 1321.22632, 'head_losses': [-6.92473, 618.96875, 0.0, 12.42446, 696.75781, 0.0], 'time': 27.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch071
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 71, 'loss': 1222.64954, 'head_losses': [-0.64295, 682.25519, 0.0, 13.93006, 527.10724, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 71, 'batch': 0, 'n_batches': 1, 'time': 25.877, 'data_time': 0.922, 'lr': 0.001, 'loss': 1580.791, 'head_losses': [-3.48, 816.076, 0.0, 17.88, 750.315, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 72, 'loss': 1580.79077, 'head_losses': [-3.47981, 816.07556, 0.0, 17.88022, 750.3147, 0.0], 'time': 27.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch072
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 72, 'loss': 1329.51501, 'head_losses': [-1.06018, 634.08154, 0.0, 12.46198, 684.03168, 0.0], 'time': 4.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 72, 'batch': 0, 'n_batches': 1, 'time': 24.048, 'data_time': 0.949, 'lr': 0.001, 'loss': 1215.704, 'head_losses': [-6.705, 593.581, 0.0, -1.246, 630.073, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 73, 'loss': 1215.7041, 'head_losses': [-6.7048, 593.5813, 0.0, -1.24586, 630.07349, 0.0], 'time': 26.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch073
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 73, 'loss': 1564.68018, 'head_losses': [-1.73874, 722.78833, 0.0, 17.83781, 825.79266, 0.0], 'time': 5.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 73, 'batch': 0, 'n_batches': 1, 'time': 23.876, 'data_time': 0.821, 'lr': 0.001, 'loss': 1405.849, 'head_losses': [-2.516, 622.414, 0.0, 0.848, 785.103, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 74, 'loss': 1405.849, 'head_losses': [-2.5156, 622.41412, 0.0, 0.84789, 785.1026, 0.0], 'time': 25.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch074
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 74, 'loss': 1425.31787, 'head_losses': [-1.08525, 727.35016, 0.0, 9.95097, 689.10199, 0.0], 'time': 5.2}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 74, 'batch': 0, 'n_batches': 1, 'time': 23.438, 'data_time': 2.462, 'lr': 0.001, 'loss': 1443.562, 'head_losses': [-5.103, 670.253, 0.0, 8.412, 769.999, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 75, 'loss': 1443.56177, 'head_losses': [-5.10268, 670.2533, 0.0, 8.41201, 769.99908, 0.0], 'time': 28.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch075
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 75, 'loss': 1170.8783, 'head_losses': [-4.96808, 567.5686, 0.0, -7.34598, 615.62378, 0.0], 'time': 4.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 75, 'batch': 0, 'n_batches': 1, 'time': 23.542, 'data_time': 0.952, 'lr': 0.001, 'loss': 1166.126, 'head_losses': [2.686, 456.105, 0.0, 23.804, 683.532, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 76, 'loss': 1166.12622, 'head_losses': [2.68551, 456.10489, 0.0, 23.80362, 683.53223, 0.0], 'time': 25.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch076
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 76, 'loss': 1333.70996, 'head_losses': [2.00624, 623.77393, 0.0, 14.57265, 693.35724, 0.0], 'time': 4.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 76, 'batch': 0, 'n_batches': 1, 'time': 24.546, 'data_time': 0.953, 'lr': 0.001, 'loss': 1285.655, 'head_losses': [-0.701, 607.366, 0.0, 6.497, 672.493, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 77, 'loss': 1285.65479, 'head_losses': [-0.70137, 607.36591, 0.0, 6.49703, 672.49316, 0.0], 'time': 26.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch077
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 77, 'loss': 1164.18811, 'head_losses': [-10.57005, 558.01221, 0.0, 0.46438, 616.28162, 0.0], 'time': 5.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 77, 'batch': 0, 'n_batches': 1, 'time': 24.563, 'data_time': 0.733, 'lr': 0.001, 'loss': 1278.523, 'head_losses': [-13.915, 680.855, 0.0, 7.318, 604.266, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 78, 'loss': 1278.52344, 'head_losses': [-13.91478, 680.85468, 0.0, 7.31786, 604.26575, 0.0], 'time': 26.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch078
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 78, 'loss': 1359.79688, 'head_losses': [-22.82903, 628.17426, 0.0, -3.88158, 758.33325, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 78, 'batch': 0, 'n_batches': 1, 'time': 25.377, 'data_time': 0.819, 'lr': 0.001, 'loss': 1345.191, 'head_losses': [-1.273, 695.771, 0.0, 19.053, 631.641, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 79, 'loss': 1345.19116, 'head_losses': [-1.27336, 695.77057, 0.0, 19.05325, 631.64081, 0.0], 'time': 27.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch079
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 79, 'loss': 1199.10522, 'head_losses': [-16.72713, 622.10614, 0.0, -1.76594, 595.49207, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 79, 'batch': 0, 'n_batches': 1, 'time': 21.525, 'data_time': 1.17, 'lr': 0.001, 'loss': 1266.309, 'head_losses': [-9.655, 618.289, 0.0, 3.104, 654.571, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 80, 'loss': 1266.30933, 'head_losses': [-9.65466, 618.28949, 0.0, 3.10364, 654.5708, 0.0], 'time': 23.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch080
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 80, 'loss': 1559.8147, 'head_losses': [-11.25034, 740.93811, 0.0, -1.71067, 831.83765, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 80, 'batch': 0, 'n_batches': 1, 'time': 24.644, 'data_time': 0.753, 'lr': 0.001, 'loss': 1305.268, 'head_losses': [-4.274, 671.126, 0.0, -2.939, 641.356, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 81, 'loss': 1305.26807, 'head_losses': [-4.27447, 671.12567, 0.0, -2.93948, 641.35632, 0.0], 'time': 26.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch081
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 81, 'loss': 1127.25439, 'head_losses': [-22.53222, 568.08826, 0.0, -7.51444, 589.21277, 0.0], 'time': 4.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 81, 'batch': 0, 'n_batches': 1, 'time': 29.548, 'data_time': 1.049, 'lr': 0.001, 'loss': 152.83, 'head_losses': [12.179, 137.332, 0.0, 3.319, 0.0, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 82, 'loss': 152.82996, 'head_losses': [12.17862, 137.33215, 0.0, 3.31919, 0.0, 0.0], 'time': 33.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch082
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 82, 'loss': 1701.15442, 'head_losses': [65.60672, 743.51746, 0.0, 44.24155, 847.7887, 0.0], 'time': 6.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 82, 'batch': 0, 'n_batches': 1, 'time': 34.548, 'data_time': 1.05, 'lr': 0.001, 'loss': 1119.181, 'head_losses': [-24.195, 549.811, 0.0, -10.236, 603.801, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 83, 'loss': 1119.18127, 'head_losses': [-24.19452, 549.81067, 0.0, -10.23596, 603.80109, 0.0], 'time': 36.8, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch083
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 83, 'loss': 999.64923, 'head_losses': [-37.59904, 567.12286, 0.0, -18.34278, 488.4682, 0.0], 'time': 4.8}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 83, 'batch': 0, 'n_batches': 1, 'time': 23.056, 'data_time': 1.243, 'lr': 0.001, 'loss': 1163.913, 'head_losses': [-33.384, 669.286, 0.0, -16.142, 544.153, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 84, 'loss': 1163.91309, 'head_losses': [-33.38393, 669.28601, 0.0, -16.14194, 544.15302, 0.0], 'time': 25.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch084
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 84, 'loss': 1394.43872, 'head_losses': [-29.37245, 730.76166, 0.0, -7.92334, 700.97278, 0.0], 'time': 6.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 84, 'batch': 0, 'n_batches': 1, 'time': 31.75, 'data_time': 0.75, 'lr': 0.001, 'loss': 1254.181, 'head_losses': [-29.307, 626.682, 0.0, -15.397, 672.202, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 85, 'loss': 1254.18066, 'head_losses': [-29.30676, 626.68164, 0.0, -15.39671, 672.20245, 0.0], 'time': 33.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch085
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 85, 'loss': 1396.72607, 'head_losses': [-40.46806, 756.69879, 0.0, -32.91075, 713.40613, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 85, 'batch': 0, 'n_batches': 1, 'time': 39.246, 'data_time': 1.453, 'lr': 0.001, 'loss': 1614.62, 'head_losses': [-24.575, 769.369, 0.0, -17.233, 887.058, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 86, 'loss': 1614.61951, 'head_losses': [-24.57511, 769.3692, 0.0, -17.23299, 887.05841, 0.0], 'time': 41.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch086
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 86, 'loss': 1251.63452, 'head_losses': [-39.09776, 592.69434, 0.0, -19.42921, 717.46716, 0.0], 'time': 5.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 86, 'batch': 0, 'n_batches': 1, 'time': 25.096, 'data_time': 0.903, 'lr': 0.001, 'loss': 1433.645, 'head_losses': [-16.95, 722.681, 0.0, -12.119, 740.034, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 87, 'loss': 1433.64539, 'head_losses': [-16.95047, 722.6806, 0.0, -12.11924, 740.03448, 0.0], 'time': 26.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch087
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 87, 'loss': 1455.76343, 'head_losses': [-31.4081, 669.08453, 0.0, -6.07716, 824.16412, 0.0], 'time': 15.1}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 87, 'batch': 0, 'n_batches': 1, 'time': 105.187, 'data_time': 4.514, 'lr': 0.001, 'loss': 1163.496, 'head_losses': [-20.271, 600.39, 0.0, -15.71, 599.086, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 88, 'loss': 1163.49573, 'head_losses': [-20.27109, 600.39008, 0.0, -15.70962, 599.0863, 0.0], 'time': 116.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch088
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 88, 'loss': 1412.2832, 'head_losses': [-20.87037, 651.85999, 0.0, -1.79019, 783.08374, 0.0], 'time': 20.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 88, 'batch': 0, 'n_batches': 1, 'time': 59.071, 'data_time': 2.528, 'lr': 0.001, 'loss': 1320.417, 'head_losses': [-38.59, 652.336, 0.0, -7.41, 714.082, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 89, 'loss': 1320.41724, 'head_losses': [-38.58974, 652.33557, 0.0, -7.4103, 714.08167, 0.0], 'time': 64.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch089
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 89, 'loss': 1192.28491, 'head_losses': [-30.71821, 610.73987, 0.0, -9.87022, 622.13354, 0.0], 'time': 13.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 89, 'batch': 0, 'n_batches': 1, 'time': 26.497, 'data_time': 0.901, 'lr': 0.001, 'loss': 1377.937, 'head_losses': [-40.404, 670.852, 0.0, -9.347, 756.836, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 90, 'loss': 1377.93738, 'head_losses': [-40.40419, 670.85242, 0.0, -9.34737, 756.83649, 0.0], 'time': 29.2, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch090
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 90, 'loss': 1287.17847, 'head_losses': [-35.27122, 688.24951, 0.0, -3.90762, 638.10785, 0.0], 'time': 4.4}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 90, 'batch': 0, 'n_batches': 1, 'time': 25.677, 'data_time': 0.822, 'lr': 0.001, 'loss': 1072.02, 'head_losses': [-26.472, 459.816, 0.0, -3.524, 642.201, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 91, 'loss': 1072.02026, 'head_losses': [-26.47232, 459.81567, 0.0, -3.52414, 642.20099, 0.0], 'time': 27.7, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch091
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 91, 'loss': 1542.07666, 'head_losses': [-31.45105, 742.414, 0.0, -13.63292, 844.74658, 0.0], 'time': 4.6}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 91, 'batch': 0, 'n_batches': 1, 'time': 26.031, 'data_time': 0.669, 'lr': 0.001, 'loss': 1611.572, 'head_losses': [-26.606, 767.227, 0.0, -11.657, 882.609, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 92, 'loss': 1611.57202, 'head_losses': [-26.60603, 767.2265, 0.0, -11.65698, 882.60852, 0.0], 'time': 27.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch092
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 92, 'loss': 1480.53125, 'head_losses': [-26.72971, 768.0014, 0.0, -0.14642, 739.40607, 0.0], 'time': 4.0}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 92, 'batch': 0, 'n_batches': 1, 'time': 21.766, 'data_time': 0.833, 'lr': 0.001, 'loss': 1425.564, 'head_losses': [-31.363, 754.518, 0.0, -12.08, 714.488, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 93, 'loss': 1425.56372, 'head_losses': [-31.36261, 754.51782, 0.0, -12.07958, 714.48804, 0.0], 'time': 23.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch093
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 93, 'loss': 1542.41699, 'head_losses': [-2.74187, 734.94214, 0.0, 22.81187, 787.40485, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 93, 'batch': 0, 'n_batches': 1, 'time': 23.863, 'data_time': 0.736, 'lr': 0.001, 'loss': 1529.979, 'head_losses': [-27.028, 730.369, 0.0, -1.746, 828.383, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 94, 'loss': 1529.97852, 'head_losses': [-27.02781, 730.36938, 0.0, -1.74607, 828.38312, 0.0], 'time': 25.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch094
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 94, 'loss': 1374.91577, 'head_losses': [-13.27337, 715.6972, 0.0, 4.29585, 668.19604, 0.0], 'time': 6.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 94, 'batch': 0, 'n_batches': 1, 'time': 57.867, 'data_time': 0.83, 'lr': 0.001, 'loss': 1374.398, 'head_losses': [-5.969, 662.917, 0.0, 5.215, 712.235, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 95, 'loss': 1374.39795, 'head_losses': [-5.96948, 662.91724, 0.0, 5.21507, 712.23517, 0.0], 'time': 60.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch095
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 95, 'loss': 1328.61206, 'head_losses': [-9.67926, 610.72363, 0.0, 4.60217, 722.96558, 0.0], 'time': 15.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 95, 'batch': 0, 'n_batches': 1, 'time': 29.968, 'data_time': 2.331, 'lr': 0.001, 'loss': 1212.535, 'head_losses': [-15.126, 551.385, 0.0, 6.194, 670.082, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 96, 'loss': 1212.53467, 'head_losses': [-15.1262, 551.38483, 0.0, 6.19385, 670.08228, 0.0], 'time': 34.6, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch096
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 96, 'loss': 1504.8833, 'head_losses': [-2.50096, 754.16211, 0.0, 25.96552, 727.25659, 0.0], 'time': 5.5}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 96, 'batch': 0, 'n_batches': 1, 'time': 25.134, 'data_time': 0.761, 'lr': 0.001, 'loss': 1361.589, 'head_losses': [-2.987, 634.15, 0.0, 6.096, 724.331, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 97, 'loss': 1361.58911, 'head_losses': [-2.98748, 634.14972, 0.0, 6.09597, 724.33099, 0.0], 'time': 27.0, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch097
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 97, 'loss': 1519.17944, 'head_losses': [9.65215, 697.03418, 0.0, 22.60665, 789.88647, 0.0], 'time': 4.9}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 97, 'batch': 0, 'n_batches': 1, 'time': 23.862, 'data_time': 0.732, 'lr': 0.001, 'loss': 1242.839, 'head_losses': [-3.447, 595.365, 0.0, 4.392, 646.529, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 98, 'loss': 1242.83911, 'head_losses': [-3.44684, 595.36505, 0.0, 4.39206, 646.52887, 0.0], 'time': 25.9, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch098
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 98, 'loss': 1273.33752, 'head_losses': [-9.88052, 589.45844, 0.0, 9.99984, 683.75977, 0.0], 'time': 5.3}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 98, 'batch': 0, 'n_batches': 1, 'time': 22.732, 'data_time': 0.865, 'lr': 0.001, 'loss': 1177.064, 'head_losses': [-24.667, 616.511, 0.0, 8.583, 576.636, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 99, 'loss': 1177.06396, 'head_losses': [-24.66656, 616.51123, 0.0, 8.58313, 576.63617, 0.0], 'time': 24.4, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch099
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 99, 'loss': 1213.40283, 'head_losses': [-30.12015, 597.24872, 0.0, -8.31271, 654.58704, 0.0], 'time': 4.7}
+INFO:openpifpaf.network.trainer:restoring params from before ema
+INFO:openpifpaf.network.trainer:{'type': 'train', 'epoch': 99, 'batch': 0, 'n_batches': 1, 'time': 22.539, 'data_time': 0.859, 'lr': 0.001, 'loss': 1290.703, 'head_losses': [5.927, 607.912, 0.0, 15.24, 661.624, 0.0]}
+INFO:openpifpaf.network.trainer:applying ema
+INFO:openpifpaf.network.trainer:{'type': 'train-epoch', 'epoch': 100, 'loss': 1290.70264, 'head_losses': [5.92732, 607.91156, 0.0, 15.2402, 661.6236, 0.0], 'time': 24.3, 'n_clipped_grad': 0, 'max_norm': 0.0}
+INFO:openpifpaf.network.trainer:model written: outputs/resnet18-220314-152407-cocokp-edge97.pkl.epoch100
+INFO:openpifpaf.network.trainer:{'type': 'val-epoch', 'epoch': 100, 'loss': 1812.3457, 'head_losses': [-30.63216, 893.81006, 0.0, 2.30042, 946.86731, 0.0], 'time': 4.1}
