@@ -256,7 +256,7 @@ class CopyPaste(A.DualTransform):
             "max_paste_objects"
         )
 
-
+# TODO remove this decorator
 def copy_paste_class(dataset_class):
     def _split_transforms(self):
         split_index = None
@@ -301,23 +301,18 @@ def copy_paste_class(dataset_class):
             self.post_transforms = None
 
     def __getitem__(self, idx):
-        # split transforms if it hasn't been done already
-        if not hasattr(self, 'post_transforms'):
-            self._split_transforms()
-
-        img_data = self.load_example(idx)
-        if self.copy_paste is not None:
-            paste_idx = random.randint(0, self.__len__() - 1)
-            paste_img_data = self.load_example(paste_idx)
-            for k in list(paste_img_data.keys()):
-                paste_img_data['paste_' + k] = paste_img_data[k]
-                del paste_img_data[k]
-
-            img_data = self.copy_paste(**img_data, **paste_img_data)
-            img_data = self.post_transforms(**img_data)
-            img_data['paste_index'] = paste_idx
-
-        return img_data
+        return None
+        # paste_idx = random.randint(0, self.__len__() - 1)
+        # paste_img_data = self.load_example(paste_idx)
+        # for k in list(paste_img_data.keys()):
+        #     paste_img_data['paste_' + k] = paste_img_data[k]
+        #     del paste_img_data[k]
+        #
+        # img_data = self.copy_paste(**img_data, **paste_img_data)
+        # img_data = self.post_transforms(**img_data)
+        # img_data['paste_index'] = paste_idx
+        #
+        # return img_data
 
     setattr(dataset_class, '_split_transforms', _split_transforms)
     setattr(dataset_class, '__getitem__', __getitem__)

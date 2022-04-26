@@ -31,8 +31,8 @@ class NormalizeAnnotations(Preprocess):
             ann['bbox'] = np.asarray(ann['bbox'], dtype=np.float32)
             if 'bbox_original' not in ann:
                 ann['bbox_original'] = np.copy(ann['bbox'])
-            if 'segmentation' in ann:
-                del ann['segmentation']
+            # if 'segmentation' in ann: # TODO remove this
+            #     del ann['segmentation']
 
         return anns
 

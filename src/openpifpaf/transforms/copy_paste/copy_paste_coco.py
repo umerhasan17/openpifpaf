@@ -1,7 +1,9 @@
 import os
+
 import cv2
 from torchvision.datasets import CocoDetection
-from copy_paste_utils import copy_paste_class
+
+from .copy_paste_utils import copy_paste_class
 
 min_keypoints_per_image = 10
 
@@ -78,4 +80,9 @@ class CocoDetectionCP(CocoDetection):
             'bboxes': bboxes
         }
 
-        return self.transforms(**output)
+        transformed_output = self.transforms(**output)
+
+        return transformed_output
+
+
+
