@@ -21,6 +21,8 @@ from .rotate import RotateBy90, RotateUniform
 from .scale import RescaleAbsolute, RescaleRelative, ScaleMix
 from .toannotations import ToAnnotations, ToCrowdAnnotations, ToDetAnnotations, ToKpAnnotations
 from .unclipped import UnclippedArea, UnclippedSides
+from .copy_paste.preprocess_albumentations import AlbumentationsComposeWrapper
+from .copy_paste.copy_paste_utils import CopyPaste
 
 
 EVAL_TRANSFORM = Compose([
