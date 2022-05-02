@@ -195,10 +195,8 @@ def main():
             'hostname': socket.gethostname(),
         },
     )
-    # for i in range(3):
-    a, b, c = next(iter(train_loader))
-    a, b, c = next(iter(train_loader))
-    # trainer.loop(train_loader, val_loader, start_epoch=start_epoch)
+
+    trainer.loop(train_loader, val_loader, start_epoch=start_epoch)
 
 
 if __name__ == '__main__':

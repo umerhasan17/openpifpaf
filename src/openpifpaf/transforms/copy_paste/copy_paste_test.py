@@ -41,20 +41,20 @@ if __name__ == '__main__':
         # A.RandomScale(scale_limit=(-0.9, 1), p=1),  # LargeScaleJitter from scale of 0.1 to 2
         A.PadIfNeeded(256, 256, border_mode=0),  # pads with image in the center, not the top left like the paper
         A.RandomCrop(256, 256),
-        CopyPaste(blend=True, sigma=1, pct_objects_paste=0.8, p=1.)  # pct_objects_paste is a guess
+        CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)  # pct_objects_paste is a guess
     ], bbox_params=A.BboxParams(format="coco", min_visibility=0.05)
     )
 
     data = CocoDetectionCP(
-        '../../data-mscoco/images/train2017/',
-        '../../data-mscoco/annotations/instances_train2017.json',
+        '../../../data-mscoco/images/train2017/',
+        '../../../data-mscoco/annotations/instances_train2017.json',
         transform
     )
 
-    x = data[0]
-
-    for i in range(10, 15):
-        visualise_example(data[i])
-    visualise_example(data[200])
+    x = data[6]
+    visualise_example(x)
+    # for i in range(10, 15):
+    #     visualise_example(data[i])
+    # visualise_example(data[200])
 
     print('done')

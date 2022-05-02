@@ -117,6 +117,7 @@ class CocoDataset(torch.utils.data.Dataset):
             'image_id': image_id,
             'file_name': image_info['file_name'],
             'local_file_path': local_file_path,
+            'coco_instance': self.coco,
             'ann_to_mask': self.coco.annToMask,
         }
 

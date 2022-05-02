@@ -41,7 +41,6 @@ def extract_bboxes(masks):
     if len(masks) == 0:
         return bboxes
 
-    h, w = masks[0].shape
     for mask in masks:
         yindices = np.where(np.any(mask, axis=0))[0]
         xindices = np.where(np.any(mask, axis=1))[0]
@@ -50,14 +49,11 @@ def extract_bboxes(masks):
             x1, x2 = xindices[[0, -1]]
             y2 += 1
             x2 += 1
-            y1 /= w
-            y2 /= w
-            x1 /= h
-            x2 /= h
+            x, y, w, h = x1, y1, abs(x1-x2), abs(y1-y2)
         else:
-            y1, x1, y2, x2 = 0, 0, 0, 0
+            x, y, w, h = 0, 0, 0, 0
 
-        bboxes.append((y1, x1, y2, x2))
+        bboxes.append([x, y, w, h])
 
     return bboxes
 
@@ -82,7 +78,7 @@ def bboxes_copy_paste(bboxes, paste_bboxes, masks, paste_masks, alpha, key):
             max_mask_index = 0
 
         paste_mask_indices = [max_mask_index + ix for ix in range(len(paste_bboxes))]
-        paste_bboxes = [pbox[:-1] + (pmi,) for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
+        paste_bboxes = [pbox[:-1] + [pmi] for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
         adjusted_paste_bboxes = extract_bboxes(paste_masks)
         adjusted_paste_bboxes = [apbox + tail[4:] for apbox, tail in zip(adjusted_paste_bboxes, paste_bboxes)]
 
@@ -113,8 +109,8 @@ class CopyPaste(A.DualTransform):
             sigma=3,
             pct_objects_paste=0.1,
             max_paste_objects=None,
-            p=0.5,
-            always_apply=False
+            p=1,
+            always_apply=True
     ):
         super(CopyPaste, self).__init__(always_apply, p)
         self.blend = blend
@@ -307,7 +303,8 @@ def copy_paste_class(dataset_class):
 
         img_data = self.load_example(idx)
         if self.copy_paste is not None:
-            paste_idx = random.randint(0, self.__len__() - 1)
+            paste_idx = 1
+            # paste_idx = random.randint(0, self.__len__() - 1)
             paste_img_data = self.load_example(paste_idx)
             for k in list(paste_img_data.keys()):
                 paste_img_data['paste_' + k] = paste_img_data[k]
