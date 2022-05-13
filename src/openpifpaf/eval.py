@@ -248,6 +248,8 @@ def watch(args):
 
 
 def main():
+    os.chdir('/home/albion/code/epfl/pdm/openpifpaf/src/openpifpaf')
+
     args = cli()
 
     if args.watch:
