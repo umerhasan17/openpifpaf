@@ -22,11 +22,16 @@ except ImportError:
 
 class CocoDet(openpifpaf.datasets.DataModule):
     # cli configurable
-    train_annotations = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/annotations/instances_train2017.json'
-    val_annotations = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/annotations/instances_val2017.json'
+    # train_annotations = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/annotations/instances_train2017.json'
+    # val_annotations = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/annotations/instances_val2017.json'
+    # eval_annotations = val_annotations
+    # train_image_dir = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/images/train2017/'
+    # val_image_dir = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/images/val2017/'
+    train_annotations = 'data-mscoco/annotations/instances_train2017.json'
+    val_annotations = 'data-mscoco/annotations/instances_val2017.json'
     eval_annotations = val_annotations
-    train_image_dir = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/images/train2017/'
-    val_image_dir = 'C:/Users/sumer/Documents/openpifpaf/src/data-mscoco/images/val2017/'
+    train_image_dir = 'data-mscoco/images/train2017/'
+    val_image_dir = 'data-mscoco/images/val2017/'
     eval_image_dir = val_image_dir
 
     square_edge = 513
@@ -131,16 +136,16 @@ class CocoDet(openpifpaf.datasets.DataModule):
 
         return openpifpaf.transforms.Compose([
             openpifpaf.transforms.NormalizeAnnotations(),
-            # openpifpaf.transforms.RandomApply(
-            #     openpifpaf.transforms.HFlip(COCO_KEYPOINTS, HFLIP), 0.5),
-            # rescale_t,
-            # openpifpaf.transforms.RandomApply(
-            #     openpifpaf.transforms.Blur(), self.blur),
-            # openpifpaf.transforms.RandomChoice(
-            #     [openpifpaf.transforms.RotateBy90(),
-            #      openpifpaf.transforms.RotateUniform(10.0)],
-            #     [self.orientation_invariant, 0.2],
-            # ),
+            openpifpaf.transforms.RandomApply(
+                openpifpaf.transforms.HFlip(COCO_KEYPOINTS, HFLIP), 0.5),
+            rescale_t,
+            openpifpaf.transforms.RandomApply(
+                openpifpaf.transforms.Blur(), self.blur),
+            openpifpaf.transforms.RandomChoice(
+                [openpifpaf.transforms.RotateBy90(),
+                 openpifpaf.transforms.RotateUniform(10.0)],
+                [self.orientation_invariant, 0.2],
+            ),
             openpifpaf.transforms.Crop(self.square_edge, use_area_of_interest=True),
             openpifpaf.transforms.CenterPad(self.square_edge),
             openpifpaf.transforms.AlbumentationsComposeWrapper([
