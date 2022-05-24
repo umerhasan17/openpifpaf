@@ -41,6 +41,7 @@ def extract_bboxes(masks):
     if len(masks) == 0:
         return bboxes
 
+    h, w = masks[0].shape
     for mask in masks:
         yindices = np.where(np.any(mask, axis=0))[0]
         xindices = np.where(np.any(mask, axis=1))[0]
@@ -49,11 +50,14 @@ def extract_bboxes(masks):
             x1, x2 = xindices[[0, -1]]
             y2 += 1
             x2 += 1
-            x, y, w, h = x1, y1, abs(x1-x2), abs(y1-y2)
+            y1 /= w
+            y2 /= w
+            x1 /= h
+            x2 /= h
         else:
-            x, y, w, h = 0, 0, 0, 0
+            y1, x1, y2, x2 = 0, 0, 0, 0
 
-        bboxes.append([x, y, w, h])
+        bboxes.append((y1, x1, y2, x2))
 
     return bboxes
 
@@ -78,7 +82,7 @@ def bboxes_copy_paste(bboxes, paste_bboxes, masks, paste_masks, alpha, key):
             max_mask_index = 0
 
         paste_mask_indices = [max_mask_index + ix for ix in range(len(paste_bboxes))]
-        paste_bboxes = [pbox[:-1] + [pmi] for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
+        paste_bboxes = [tuple(pbox[:-1]) + (pmi,) for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
         adjusted_paste_bboxes = extract_bboxes(paste_masks)
         adjusted_paste_bboxes = [apbox + tail[4:] for apbox, tail in zip(adjusted_paste_bboxes, paste_bboxes)]
 
