@@ -24,6 +24,36 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
     Paste in annotations from previous image into current image
     """
 
+    def __init__(self, *args, apply_copy_paste=True, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_copy_paste = apply_copy_paste
+        self.previous_image_data = None
+
+    def update_previous_image(self, image, masks, bboxes, anns):
+        """
+            Masks and bboxes have been edited with cropping and padding.
+            Annotations are the original annotations coming into the transformation function.
+        """
+        self.previous_image_data = dict(
+            previous_image=image,
+            previous_masks=masks,
+            previous_bboxes=bboxes,
+            previous_anns=anns,
+        )
+
+    def convert_copy_paste_to_anns(self, unedited_image_data, original_annotations):
+        """ Convert masks and bboxes back to annotations """
+        annotations = []
+        # add annotations for current image to new annotations list
+        annotations.extend(self.reformat_annotations(original_annotations, unedited_image_data['bboxes']))
+        # add annotations for previous image to new annotations list
+        assert self.previous_image_data is not None
+        annotations.extend(self.reformat_annotations(
+            self.previous_image_data['previous_anns'],
+            self.previous_image_data['previous_bboxes']
+        ))
+        return annotations
+
     @staticmethod
     def reformat_annotations(annotations, bboxes):
         """ Update annotations with new bboxes. Note the reformat function removes segmentation details. """
@@ -52,122 +82,84 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
 
     def __call__(self, image, anns, meta):
         LOG.debug('Applying albumentations transforms')
+
+        self.adjust_meta_img_dimensions(image, anns, meta)  # may be unnecessary if not applied with other transforms
+
         # convert target segmentations to masks
         # bboxes are expected to be (y1, x1, y2, x2, category_id)
         # TODO keep original bboxes as bbox original, done by normalise annotations as well,
         #  need to add in convert back to annotations
-        masks = []
-        bboxes = []
-        self.adjust_meta_img_dimensions(image, anns, meta)
+        all_masks, all_bboxes = [], []
+        crowd_annotation_indices = []  # stores indices of crowd annotations to avoid running copy paste augmentation
         for ix, ann in enumerate(anns):
-            masks.append(meta['ann_to_mask'](ann))
-            bboxes.append(ann['bbox'].tolist() + [ann['category_id']] + [ix])
+            mask = meta['ann_to_mask'](ann)
+            bbox = ann['bbox'].tolist() + [ann['category_id']] + [ix]
+            all_masks.append(mask)
+            all_bboxes.append(bbox)
+            if type(ann['segmentation']) != list:
+                crowd_annotation_indices.append(ix)
 
         # pack outputs into a dict
         data = {
             'image': np.asarray(image),
-            'masks': masks,
-            'bboxes': bboxes,
+            'masks': all_masks,
+            'bboxes': all_bboxes,
         }
 
+        # apply usual transforms
         data = A.Compose.__call__(self, **data)
-
         updated_annotations = self.reformat_annotations(anns, data['bboxes'])
+        cp_output_data = None
+
+        if self.apply_copy_paste:
+            LOG.debug('Applying albumentations copy paste transform')
+
+            # apply copy paste augmentation on non crowd annotations only
+            # TODO careful if some data gets lost and bboxes are removed during transformations
+            cp_masks = [data['masks'][i] for i in range(len(all_masks)) if i not in crowd_annotation_indices]
+            cp_bboxes = [list(data['bboxes'][i]) for i in range(len(all_bboxes)) if i not in crowd_annotation_indices]
+            assert len(cp_bboxes) == len(cp_masks)
+
+            if self.previous_image_data is not None:
+                cp_data = dict(
+                    image=data['image'],
+                    bboxes=deepcopy(cp_bboxes),
+                    masks=deepcopy(cp_masks),
+                    paste_image=self.previous_image_data['previous_image'],
+                    paste_masks=self.previous_image_data['previous_masks'],
+                    paste_bboxes=self.previous_image_data['previous_bboxes'],
+                )
+                cp_transform = A.Compose(
+                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)],
+                    bbox_params=A.BboxParams(format="coco")
+                )
+                cp_output_data = cp_transform(**cp_data)
+                updated_annotations = []
+                # add annotations from current image
+                updated_annotations.extend(self.reformat_annotations(anns, data['bboxes']))
+                # add annotations from previous image
+                updated_annotations.extend(self.reformat_annotations(
+                    self.previous_image_data['previous_anns'], self.previous_image_data['previous_bboxes']
+                ))
+
+                # useful debug statement
+                from openpifpaf.transforms.copy_paste.visualize import display_instances
+                import matplotlib.pyplot as plt
+                f, ax = plt.subplots(1, 2, figsize=(16, 16))
+                empty = np.array([])
+                display_instances(cp_output_data['image'], empty, empty, empty, empty, show_mask=False, show_bbox=False, ax=ax[0])
+                plt.show()
+
+            # save current image details for next copy paste augmentation
+            self.update_previous_image(
+                data['image'],
+                cp_masks,
+                cp_bboxes,
+                anns
+            )
+
+        if cp_output_data is not None:
+            data = cp_output_data
 
         return Image.fromarray(data['image']), updated_annotations, meta
 
-
-class AlbumentationsComposeCopyPasteWrapper(AlbumentationsComposeWrapper):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.previous_image_data = None
-
-    def update_previous_image(self, image, masks, bboxes, anns):
-        """
-            Masks and bboxes have been edited with cropping and padding.
-            Annotations are the original annotations coming into the transformation function.
-        """
-        self.previous_image_data = dict(
-            previous_image=image,
-            previous_masks=masks,
-            previous_bboxes=bboxes,
-            previous_anns=anns,
-        )
-
-    def convert_copy_paste_to_anns(self, unedited_image_data, original_annotations):
-        """ Convert masks and bboxes back to annotations """
-        annotations = []
-        # add annotations for current image to new annotations list
-        annotations.extend(self.reformat_annotations(original_annotations, unedited_image_data['bboxes']))
-        # add annotations for previous image to new annotations list
-        assert self.previous_image_data is not None
-        annotations.extend(self.reformat_annotations(
-            self.previous_image_data['previous_anns'],
-            self.previous_image_data['previous_bboxes']
-        ))
-
-        return annotations
-
-    def __call__(self, image, anns, meta):
-        LOG.debug('Applying albumentations copy paste transform')
-
-        crowd_annotations = []
-        masks = []
-        bboxes = []
-
-        self.adjust_meta_img_dimensions(image, anns, meta)
-
-        for ix, ann in enumerate(anns):
-            if type(ann['segmentation']) == list:
-                masks.append(meta['ann_to_mask'](ann))
-                bboxes.append(ann['bbox'].tolist() + [ann['category_id']] + [ix])
-            else:
-                # avoid processing crowd annotations with copy paste augmentation
-                crowd_annotations.append(ann)
-
-        # pack outputs into a dict
-        data = {
-            'image': np.asarray(image),
-            'masks': masks,
-            'bboxes': bboxes,
-        }
-
-        t = self.transforms[0]
-        assert isinstance(t, openpifpaf.transforms.CopyPaste)
-
-        unedited_image_data = deepcopy(data)  # save unedited image as previous image
-        if self.previous_image_data is not None:
-            LOG.debug(
-                f'Previous image exists, applying copy paste, copy paste arguments: '
-                f'{data["image"].shape}, {len(data["masks"])}, '
-                f'{data["masks"][0].shape}, {data["bboxes"]}'
-            )
-            data['bboxes'] = [list(x) for x in data['bboxes']]
-            self.previous_image_data['previous_bboxes'] = [list(x) for x in self.previous_image_data['previous_bboxes']]
-            data = t(**dict(paste_image=self.previous_image_data['previous_image'],
-                            paste_masks=self.previous_image_data['previous_masks'],
-                            paste_bboxes=self.previous_image_data['previous_bboxes'],
-                            **data))
-            transformed_anns = self.convert_output_to_anns(
-                data, unedited_image_data, anns, copy_paste_applied=True
-            )
-
-            # useful debug statement
-            from openpifpaf.transforms.copy_paste.visualize import display_instances
-            import matplotlib.pyplot as plt
-            f, ax = plt.subplots(1, 2, figsize=(16, 16))
-            empty = np.array([])
-            display_instances(data['image'], empty, empty, empty, empty, show_mask=False, show_bbox=False, ax=ax[0])
-            plt.show()
-        else:
-            transformed_anns = self.convert_output_to_anns(data, unedited_image_data, anns, copy_paste_applied=False)
-
-        self.update_previous_image(
-            unedited_image_data['image'],
-            unedited_image_data['masks'],
-            unedited_image_data['bboxes'],
-            anns
-        )
-
-        return Image.fromarray(data['image']), transformed_anns + crowd_annotations, meta
