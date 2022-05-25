@@ -136,29 +136,29 @@ class CocoDet(openpifpaf.datasets.DataModule):
 
         return openpifpaf.transforms.Compose([
             openpifpaf.transforms.NormalizeAnnotations(),
-            openpifpaf.transforms.RandomApply(
-                openpifpaf.transforms.HFlip(COCO_KEYPOINTS, HFLIP), 0.5),
-            rescale_t,
-            openpifpaf.transforms.RandomApply(
-                openpifpaf.transforms.Blur(), self.blur),
-            openpifpaf.transforms.RandomChoice(
-                [openpifpaf.transforms.RotateBy90(),
-                 openpifpaf.transforms.RotateUniform(10.0)],
-                [self.orientation_invariant, 0.2],
-            ),
-            openpifpaf.transforms.Crop(self.square_edge, use_area_of_interest=True),
+            # openpifpaf.transforms.RandomApply(
+            #     openpifpaf.transforms.HFlip(COCO_KEYPOINTS, HFLIP), 0.5),
+            # rescale_t,
+            # openpifpaf.transforms.RandomApply(
+            #     openpifpaf.transforms.Blur(), self.blur),
+            # openpifpaf.transforms.RandomChoice(
+            #     [openpifpaf.transforms.RotateBy90(),
+            #      openpifpaf.transforms.RotateUniform(10.0)],
+            #     [self.orientation_invariant, 0.2],
+            # ),
+            # openpifpaf.transforms.Crop(self.square_edge, use_area_of_interest=True),
             openpifpaf.transforms.CenterPad(self.square_edge),
-            openpifpaf.transforms.AlbumentationsComposeWrapper([
-                # A.RandomScale(scale_limit=(-0.9, 1), p=1),  # LargeScaleJitter from scale of 0.1 to 2
-                # A.PadIfNeeded(min_height=self.square_edge, min_width=self.square_edge, border_mode=0, p=1),
-                # A.RandomCrop(self.square_edge, self.square_edge, always_apply=True),  # TODO area of interest
-                # pads with image in the center, not the top left like the paper
-                openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)
-                # pct_objects_paste is a guess
-            ], bbox_params=A.BboxParams(format="coco", min_visibility=0.05)
-            ),
-            openpifpaf.transforms.MinSize(min_side=4.0),
-            openpifpaf.transforms.UnclippedArea(threshold=0.75),
+            # openpifpaf.transforms.AlbumentationsComposeWrapper([
+            #     # A.RandomScale(scale_limit=(-0.9, 1), p=1),  # LargeScaleJitter from scale of 0.1 to 2
+            #     # A.PadIfNeeded(min_height=self.square_edge, min_width=self.square_edge, border_mode=0, p=1),
+            #     # A.RandomCrop(self.square_edge, self.square_edge, always_apply=True),  # TODO area of interest
+            #     # pads with image in the center, not the top left like the paper
+            #     openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)
+            #     # pct_objects_paste is a guess
+            # ], bbox_params=A.BboxParams(format="coco", min_visibility=0.05)
+            # ),
+            # openpifpaf.transforms.MinSize(min_side=4.0),
+            # openpifpaf.transforms.UnclippedArea(threshold=0.75),
             openpifpaf.transforms.TRAIN_TRANSFORM,
             openpifpaf.transforms.Encoders([enc]),
         ])

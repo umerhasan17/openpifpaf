@@ -26,7 +26,7 @@ from .copy_paste.copy_paste_utils import CopyPaste
 
 
 EVAL_TRANSFORM = Compose([
-    NormalizeAnnotations(),
+    # NormalizeAnnotations(),
     ImageTransform(torchvision.transforms.ToTensor()),
     ImageTransform(
         torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406],
@@ -36,12 +36,12 @@ EVAL_TRANSFORM = Compose([
 
 
 TRAIN_TRANSFORM = Compose([
-    NormalizeAnnotations(),
-    ImageTransform(torchvision.transforms.ColorJitter(
-        brightness=0.4, contrast=0.1, saturation=0.4, hue=0.1)),
-    RandomApply(JpegCompression(), 0.1),  # maybe irrelevant for COCO, but good for others
-    # RandomApply(Blur(), 0.01),  # maybe irrelevant for COCO, but good for others
-    ImageTransform(torchvision.transforms.RandomGrayscale(p=0.01)),
+    # NormalizeAnnotations(),
+    # ImageTransform(torchvision.transforms.ColorJitter(
+    #     brightness=0.4, contrast=0.1, saturation=0.4, hue=0.1)),
+    # RandomApply(JpegCompression(), 0.1),  # maybe irrelevant for COCO, but good for others
+    # # RandomApply(Blur(), 0.01),  # maybe irrelevant for COCO, but good for others
+    # ImageTransform(torchvision.transforms.RandomGrayscale(p=0.01)),
     EVAL_TRANSFORM,
 ])
 
