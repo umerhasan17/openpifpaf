@@ -286,69 +286,71 @@ class Trainer():
         head_epoch_counts = None
         last_batch_end = time.time()
         self.optimizer.zero_grad()
-        for batch_idx, (data, target, _) in enumerate(scenes):
-            preprocess_time = time.time() - last_batch_end
+        for i in range(8):
+            for batch_idx, (data, target, _) in enumerate(scenes):
+                LOG.debug(f'Current Iteration: {i} Current time: {time.time()}')
+            # preprocess_time = time.time() - last_batch_end
+            #
+            # batch_start = time.time()
+            # apply_gradients = batch_idx % self.stride_apply == 0
+            # loss, head_losses = self.train_batch(data, target, apply_gradients)
+            #
+            # # update epoch accumulates
+            # if loss is not None:
+            #     epoch_loss += loss
+            # if head_epoch_losses is None:
+            #     head_epoch_losses = [0.0 for _ in head_losses]
+            #     head_epoch_counts = [0 for _ in head_losses]
+            # for i, head_loss in enumerate(head_losses):
+            #     if head_loss is None:
+            #         continue
+            #     head_epoch_losses[i] += head_loss
+            #     head_epoch_counts[i] += 1
+            #
+            # batch_time = time.time() - batch_start
+            #
+            # # write training loss
+            # if batch_idx % self.log_interval == 0:
+            #     batch_info = {
+            #         'type': 'train',
+            #         'epoch': epoch, 'batch': batch_idx, 'n_batches': len(scenes),
+            #         'time': round(batch_time, 3),
+            #         'data_time': round(preprocess_time, 3),
+            #         'lr': round(self.lr(), 8),
+            #         'loss': round(loss, 3) if loss is not None else None,
+            #         'head_losses': [round(l, 3) if l is not None else None
+            #                         for l in head_losses],
+            #     }
+            #     if hasattr(self.loss, 'batch_meta'):
+            #         batch_info.update(self.loss.batch_meta())
+            #     LOG.info(batch_info)
+            #
+            # # initialize ema
+            # if self.ema is None and self.ema_decay:
+            #     self.ema = copy.deepcopy([p.data for p in self.model.parameters()])
+            #
+            # # update learning rate
+            # if self.lr_scheduler is not None:
+            #     self.lr_scheduler.step()
+            #
+            # if self.n_train_batches and batch_idx + 1 >= self.n_train_batches:
+            #     break
+            #
+            # last_batch_end = time.time()
 
-            batch_start = time.time()
-            apply_gradients = batch_idx % self.stride_apply == 0
-            loss, head_losses = self.train_batch(data, target, apply_gradients)
-
-            # update epoch accumulates
-            if loss is not None:
-                epoch_loss += loss
-            if head_epoch_losses is None:
-                head_epoch_losses = [0.0 for _ in head_losses]
-                head_epoch_counts = [0 for _ in head_losses]
-            for i, head_loss in enumerate(head_losses):
-                if head_loss is None:
-                    continue
-                head_epoch_losses[i] += head_loss
-                head_epoch_counts[i] += 1
-
-            batch_time = time.time() - batch_start
-
-            # write training loss
-            if batch_idx % self.log_interval == 0:
-                batch_info = {
-                    'type': 'train',
-                    'epoch': epoch, 'batch': batch_idx, 'n_batches': len(scenes),
-                    'time': round(batch_time, 3),
-                    'data_time': round(preprocess_time, 3),
-                    'lr': round(self.lr(), 8),
-                    'loss': round(loss, 3) if loss is not None else None,
-                    'head_losses': [round(l, 3) if l is not None else None
-                                    for l in head_losses],
-                }
-                if hasattr(self.loss, 'batch_meta'):
-                    batch_info.update(self.loss.batch_meta())
-                LOG.info(batch_info)
-
-            # initialize ema
-            if self.ema is None and self.ema_decay:
-                self.ema = copy.deepcopy([p.data for p in self.model.parameters()])
-
-            # update learning rate
-            if self.lr_scheduler is not None:
-                self.lr_scheduler.step()
-
-            if self.n_train_batches and batch_idx + 1 >= self.n_train_batches:
-                break
-
-            last_batch_end = time.time()
-
-        self.apply_ema()
-        LOG.info({
-            'type': 'train-epoch',
-            'epoch': epoch + 1,
-            'loss': round(epoch_loss / len(scenes), 5),
-            'head_losses': [round(l / max(1, c), 5)
-                            for l, c in zip(head_epoch_losses, head_epoch_counts)],
-            'time': round(time.time() - start_time, 1),
-            'n_clipped_grad': self.n_clipped_grad,
-            'max_norm': self.max_norm,
-        })
-        self.n_clipped_grad = 0
-        self.max_norm = 0.0
+        # self.apply_ema()
+        # LOG.info({
+        #     'type': 'train-epoch',
+        #     'epoch': epoch + 1,
+        #     'loss': round(epoch_loss / len(scenes), 5),
+        #     'head_losses': [round(l / max(1, c), 5)
+        #                     for l, c in zip(head_epoch_losses, head_epoch_counts)],
+        #     'time': round(time.time() - start_time, 1),
+        #     'n_clipped_grad': self.n_clipped_grad,
+        #     'max_norm': self.max_norm,
+        # })
+        # self.n_clipped_grad = 0
+        # self.max_norm = 0.0
 
     def val(self, scenes, epoch):
         start_time = time.time()

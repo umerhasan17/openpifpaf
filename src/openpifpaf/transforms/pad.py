@@ -3,6 +3,8 @@ import math
 import logging
 
 import torch
+import uuid
+import pickle
 import torchvision
 
 from .preprocess import Preprocess
@@ -21,6 +23,14 @@ class CenterPad(Preprocess):
     def __call__(self, image, anns, meta):
         meta = copy.deepcopy(meta)
         anns = copy.deepcopy(anns)
+
+        root_dir = 'code/epfl/pdm/openpifpaf/src/'
+        uid = str(uuid.uuid1())
+        image.save(f'{root_dir}cp_test_img_{uid}.jpg')
+        with open(f'{root_dir}cp_test_anns{uid}.pkl', 'wb') as f:
+            pickle.dump(anns, f)
+        with open(f'{root_dir}cp_test_meta{uid}.pkl', 'wb') as f:
+            pickle.dump(meta, f)
 
         LOG.debug('valid area before pad: %s, image size = %s, target size = %s',
                   meta['valid_area'], image.size, self.target_size)
