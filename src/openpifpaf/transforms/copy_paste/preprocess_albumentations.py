@@ -59,8 +59,9 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         """ Update annotations with new bboxes. Note the reformat function removes segmentation details. """
         new_annotations = []
         for ix, bbox in enumerate(bboxes):
-            [x, y, w, h, category_id, _] = bbox
-            assert category_id == annotations[ix]['category_id']  # check bounding box and ann for same object
+            [x, y, w, h, category_id, mask_idx] = bbox
+            # TODO careful if some data gets lost and bboxes are removed during transformations
+            assert category_id == annotations[mask_idx]['category_id']  # check bounding box and ann for same object
             new_annotations.append(dict(
                 bbox=np.array([x, y, w, h]),
                 category_id=category_id,
@@ -115,9 +116,17 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
             LOG.debug('Applying albumentations copy paste transform')
 
             # apply copy paste augmentation on non crowd annotations only
-            # TODO careful if some data gets lost and bboxes are removed during transformations
-            cp_masks = [data['masks'][i] for i in range(len(all_masks)) if i not in crowd_annotation_indices]
-            cp_bboxes = [list(data['bboxes'][i]) for i in range(len(all_bboxes)) if i not in crowd_annotation_indices]
+            # TODO 3/4 masks are empty but there are 2 bbox existing?
+            cp_masks, cp_bboxes = [], []
+            bbox_ix = 0
+            for ix, mask in enumerate(data['masks']):
+                # mask is empty and no bbox exists OR mask is associated with crowd annotation (SKIP in both cases)
+                if len(np.unique(mask)) == 1 or ix in crowd_annotation_indices:
+                    pass
+                else:
+                    cp_masks.append(mask)
+                    cp_bboxes.append(data['bboxes'][bbox_ix])  # get equivalent bbox for mask
+                    bbox_ix += 1
             assert len(cp_bboxes) == len(cp_masks)
 
             if self.previous_image_data is not None:
@@ -136,7 +145,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 cp_output_data = cp_transform(**cp_data)
                 updated_annotations = []
                 # add annotations from current image
-                updated_annotations.extend(self.reformat_annotations(anns, data['bboxes']))
+                updated_annotations.extend(self.reformat_annotations(anns, cp_bboxes))
                 # add annotations from previous image
                 updated_annotations.extend(self.reformat_annotations(
                     self.previous_image_data['previous_anns'], self.previous_image_data['previous_bboxes']
