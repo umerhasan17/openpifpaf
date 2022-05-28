@@ -59,9 +59,13 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         """ Update annotations with new bboxes. Note the reformat function removes segmentation details. """
         new_annotations = []
         for ix, bbox in enumerate(bboxes):
-            [x, y, w, h, category_id, mask_idx] = bbox
-            # TODO careful if some data gets lost and bboxes are removed during transformations
-            assert category_id == annotations[mask_idx]['category_id']  # check bounding box and ann for same object
+            if len(bbox) == 6:
+                [x, y, w, h, category_id, ann_idx] = bbox
+            elif len(bbox) == 7:
+                [x, y, w, h, category_id, _, ann_idx] = bbox
+            else:
+                raise ValueError('Incorrect bounding box format')
+            assert category_id == annotations[ann_idx]['category_id']  # check bounding box and ann for same object
             new_annotations.append(dict(
                 bbox=np.array([x, y, w, h]),
                 category_id=category_id,
@@ -70,7 +74,6 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 image_id=annotations[ix]['image_id'],
                 id=annotations[ix]['id'],
             ))
-
         return new_annotations
 
     @staticmethod
@@ -91,14 +94,14 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         # TODO keep original bboxes as bbox original, done by normalise annotations as well,
         #  need to add in convert back to annotations
         all_masks, all_bboxes = [], []
-        crowd_annotation_indices = []  # stores indices of crowd annotations to avoid running copy paste augmentation
+        # crowd_annotation_indices = []  # stores indices of crowd annotations to avoid running copy paste augmentation
         for ix, ann in enumerate(anns):
             mask = meta['ann_to_mask'](ann)
             bbox = ann['bbox'].tolist() + [ann['category_id']] + [ix]
             all_masks.append(mask)
             all_bboxes.append(bbox)
-            if type(ann['segmentation']) != list:
-                crowd_annotation_indices.append(ix)
+            # if type(ann['segmentation']) != list:
+            #     crowd_annotation_indices.append(ix)
 
         # pack outputs into a dict
         data = {
@@ -119,51 +122,60 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
             # TODO 3/4 masks are empty but there are 2 bbox existing?
             cp_masks, cp_bboxes = [], []
             bbox_ix = 0
-            for ix, mask in enumerate(data['masks']):
-                # mask is empty and no bbox exists OR mask is associated with crowd annotation (SKIP in both cases)
-                if len(np.unique(mask)) == 1 or ix in crowd_annotation_indices:
-                    pass
-                else:
-                    cp_masks.append(mask)
-                    cp_bboxes.append(data['bboxes'][bbox_ix])  # get equivalent bbox for mask
-                    bbox_ix += 1
-            assert len(cp_bboxes) == len(cp_masks)
+            # for ix, mask in enumerate(data['masks']):
+            #     # mask is empty and no bbox exists OR mask is associated with crowd annotation (SKIP in both cases)
+            #     if len(np.unique(mask)) == 1 or ix in crowd_annotation_indices:
+            #         pass
+            #     else:
+            #         cp_masks.append(mask)
+            #         cp_bboxes.append(data['bboxes'][bbox_ix])  # get equivalent bbox for mask
+            #         bbox_ix += 1
+            # assert len(cp_bboxes) == len(cp_masks)
 
             if self.previous_image_data is not None:
                 cp_data = dict(
                     image=data['image'],
-                    bboxes=deepcopy(cp_bboxes),
-                    masks=deepcopy(cp_masks),
+                    bboxes=[bbox + (bbox[-1],) for bbox in data['bboxes']],
+                    masks=deepcopy(data['masks']),
                     paste_image=self.previous_image_data['previous_image'],
                     paste_masks=self.previous_image_data['previous_masks'],
-                    paste_bboxes=self.previous_image_data['previous_bboxes'],
+                    paste_bboxes=[bbox + (len(data['masks']) + bbox[-1],) for bbox in self.previous_image_data['previous_bboxes']],
                 )
                 cp_transform = A.Compose(
-                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)],
+                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=0.5, p=1)],
                     bbox_params=A.BboxParams(format="coco")
                 )
                 cp_output_data = cp_transform(**cp_data)
                 updated_annotations = []
-                # add annotations from current image
-                updated_annotations.extend(self.reformat_annotations(anns, cp_bboxes))
-                # add annotations from previous image
+                # add annotation details back in
                 updated_annotations.extend(self.reformat_annotations(
-                    self.previous_image_data['previous_anns'], self.previous_image_data['previous_bboxes']
+                    anns + self.previous_image_data['previous_anns'],
+                    cp_output_data['bboxes']
                 ))
 
                 # useful debug statement
                 from openpifpaf.transforms.copy_paste.visualize import display_instances
                 import matplotlib.pyplot as plt
-                f, ax = plt.subplots(1, 2, figsize=(16, 16))
-                empty = np.array([])
-                display_instances(cp_output_data['image'], empty, empty, empty, empty, show_mask=False, show_bbox=False, ax=ax[0])
-                plt.show()
+                # f, ax = plt.subplots(1, 2, figsize=(16, 16))
+                # empty = np.array([])
+                if len(cp_output_data['bboxes']) == len(cp_output_data['masks']):
+
+                    display_instances(cp_output_data['image'], np.array([x[:4] for x in cp_output_data['bboxes']]),
+                                      np.moveaxis(np.array(cp_output_data['masks']), 0, -1),
+                                      np.array([i for i in range(len(cp_output_data['masks']))]),
+                                      np.array(['c1'] * len(cp_output_data['masks'])))
+                    # display_instances(cp_output_data['image'], empty, empty, empty, empty, show_mask=False, show_bbox=False, ax=ax[0])
+                    plt.show()
+                else:
+                    LOG.debug('Bboxes and masks length does not match')
 
             # save current image details for next copy paste augmentation
             self.update_previous_image(
                 data['image'],
-                cp_masks,
-                cp_bboxes,
+                # cp_masks,
+                data['masks'],
+                data['bboxes'],
+                # cp_bboxes,
                 anns
             )
 

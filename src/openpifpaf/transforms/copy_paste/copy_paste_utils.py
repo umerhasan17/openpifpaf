@@ -70,7 +70,7 @@ def bboxes_copy_paste(bboxes, paste_bboxes, masks, paste_masks, alpha, key):
         adjusted_bboxes = extract_bboxes(masks)
 
         # only keep the bounding boxes for objects listed in bboxes
-        mask_indices = [box[-1] for box in bboxes]
+        mask_indices = [box[-2] for box in bboxes]
         adjusted_bboxes = [adjusted_bboxes[idx] for idx in mask_indices]
         # append bbox tails (classes, etc.)
         adjusted_bboxes = [bbox + tail[4:] for bbox, tail in zip(adjusted_bboxes, bboxes)]
@@ -82,7 +82,7 @@ def bboxes_copy_paste(bboxes, paste_bboxes, masks, paste_masks, alpha, key):
             max_mask_index = 0
 
         paste_mask_indices = [max_mask_index + ix for ix in range(len(paste_bboxes))]
-        paste_bboxes = [tuple(pbox[:-1]) + (pmi,) for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
+        paste_bboxes = [tuple(pbox[:-2]) + (pmi, pbox[-1]) for pbox, pmi in zip(paste_bboxes, paste_mask_indices)]
         adjusted_paste_bboxes = extract_bboxes(paste_masks)
         adjusted_paste_bboxes = [apbox + tail[4:] for apbox, tail in zip(adjusted_paste_bboxes, paste_bboxes)]
 
@@ -187,7 +187,7 @@ class CopyPaste(A.DualTransform):
         if bboxes:
             bboxes = [bboxes[idx] for idx in objs_to_paste]
             # the last label in bboxes is the index of corresponding mask
-            mask_indices = [bbox[-1] for bbox in bboxes]
+            mask_indices = [bbox[-2] for bbox in bboxes]
 
         # create alpha by combining all the objects into
         # a single binary mask
@@ -204,7 +204,8 @@ class CopyPaste(A.DualTransform):
             "paste_mask": None,
             "paste_masks": masks,
             "paste_bboxes": bboxes,
-            "paste_keypoints": keypoints
+            "paste_keypoints": keypoints,
+            "paste_ann_indices": mask_indices
         }
 
     @property
