@@ -130,8 +130,8 @@ class CocoDet(openpifpaf.datasets.DataModule):
                 A.RandomScale(scale_limit=(0.5, 1.0), p=1),
                 A.Blur(),
                 A.RandomRotate90(),
-                A.PadIfNeeded(min_height=512, min_width=512, border_mode=0),
-                A.RandomCrop(512, 512, always_apply=True),  # TODO area of interest
+                A.PadIfNeeded(min_height=self.square_edge, min_width=self.square_edge, border_mode=0),
+                A.RandomCrop(self.square_edge, self.square_edge, always_apply=True),  # TODO area of interest
             ], apply_copy_paste=True, bbox_params=A.BboxParams(format="coco")),
             openpifpaf.transforms.MinSize(min_side=4.0),
             openpifpaf.transforms.UnclippedArea(threshold=0.75),
