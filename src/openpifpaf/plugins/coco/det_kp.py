@@ -7,12 +7,12 @@ from .constants import (
     COCO_CATEGORIES,
 )
 from .dataset import CocoDataset
-from .det_kp_triplets_utils import (
-    TRIPLET_SKELETON,
-    TRIPLET_KEYPOINTS,
-    DUMMY_TRIPLET_POSE,
-    DUMMY_TRIPLET_SIGMAS,
-    DUMMY_TRIPLET_SCORE_WEIGHTS, DUMMY_TRIPLET_HFLIP,
+from .det_kp_utils import (
+    DETKP_SKELETON,
+    DETKP_KEYPOINTS,
+    DUMMY_DETKP_POSE,
+    DUMMY_DETKP_SIGMAS,
+    DUMMY_DETKP_SCORE_WEIGHTS, DETKP_HFLIP,
 )
 
 try:
@@ -57,16 +57,16 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
         super().__init__(**kwargs)
 
         cif = openpifpaf.headmeta.Cif('cif', 'cocokp',
-                                      keypoints=TRIPLET_KEYPOINTS,
-                                      sigmas=DUMMY_TRIPLET_SIGMAS,
-                                      pose=DUMMY_TRIPLET_POSE,
-                                      draw_skeleton=TRIPLET_SKELETON,
-                                      score_weights=DUMMY_TRIPLET_SCORE_WEIGHTS)
+                                      keypoints=DETKP_KEYPOINTS,
+                                      sigmas=DUMMY_DETKP_SIGMAS,
+                                      pose=DUMMY_DETKP_POSE,
+                                      draw_skeleton=DETKP_SKELETON,
+                                      score_weights=DUMMY_DETKP_SCORE_WEIGHTS)
         caf = openpifpaf.headmeta.Caf('caf', 'cocokp',
-                                      keypoints=TRIPLET_KEYPOINTS,
-                                      sigmas=DUMMY_TRIPLET_SIGMAS,
-                                      pose=DUMMY_TRIPLET_POSE,
-                                      skeleton=TRIPLET_SKELETON)
+                                      keypoints=DETKP_KEYPOINTS,
+                                      sigmas=DUMMY_DETKP_SIGMAS,
+                                      pose=DUMMY_DETKP_POSE,
+                                      skeleton=DETKP_SKELETON)
 
         cif.upsample_stride = self.upsample_stride
         caf.upsample_stride = self.upsample_stride
@@ -206,7 +206,7 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
         return openpifpaf.transforms.Compose([
             openpifpaf.transforms.NormalizeAnnotations(),
             openpifpaf.transforms.RandomApply(
-                openpifpaf.transforms.HFlip(TRIPLET_KEYPOINTS, DUMMY_TRIPLET_HFLIP), 0.5),
+                openpifpaf.transforms.HFlip(DETKP_KEYPOINTS, DETKP_HFLIP), 0.5),
             rescale_t,
             openpifpaf.transforms.RandomApply(
                 openpifpaf.transforms.Blur(), self.blur),

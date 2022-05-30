@@ -2,7 +2,7 @@ import openpifpaf
 
 from .cocodet import CocoDet
 from .cocokp import CocoKp
-from .det_kp_triplets import CocoDetKpTriplets
+from .det_kp import CocoDetKpTriplets
 from .dataset import CocoDataset
 
 
