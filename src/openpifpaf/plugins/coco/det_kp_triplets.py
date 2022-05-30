@@ -289,11 +289,7 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
         return openpifpaf.transforms.Compose([
             *self.common_eval_preprocess(),
             openpifpaf.transforms.ToAnnotations([
-                openpifpaf.transforms.ToKpAnnotations(
-                    COCO_CATEGORIES,
-                    keypoints_by_category={1: self.head_metas[0].keypoints},
-                    skeleton_by_category={1: self.head_metas[1].skeleton},
-                ),
+                openpifpaf.transforms.TripKpToDetAnnotations(COCO_CATEGORIES),
                 openpifpaf.transforms.ToCrowdAnnotations(COCO_CATEGORIES),
             ]),
             openpifpaf.transforms.EVAL_TRANSFORM,
@@ -316,7 +312,7 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
     def metrics(self):
         return [openpifpaf.metric.Coco(
             pycocotools.coco.COCO(self.eval_annotations),
-            max_per_image=20,
+            max_per_image=100,
             category_ids=[],
-            iou_type='keypoints',
+            iou_type='bbox',
         )]
