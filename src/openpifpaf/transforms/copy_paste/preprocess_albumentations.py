@@ -115,7 +115,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         updated_annotations = self.reformat_annotations(anns, data['bboxes'])
         cp_output_data = None
         t3 = time.time()
-        t4 = t3
+        t4 = t5 = t6 = t3
         if self.apply_copy_paste:
             if self.previous_image_data is not None:
                 # LOG.debug('Applying albumentations copy paste transform')
@@ -138,6 +138,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                     anns + self.previous_image_data['previous_anns'],
                     cp_output_data['bboxes']
                 )
+                t5 = time.time()
 
                 # useful debug statement
                 # from openpifpaf.transforms.copy_paste.visualize import display_instances
@@ -158,12 +159,15 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 data['bboxes'],
                 anns
             )
+            t6 = time.time()
 
         if cp_output_data is not None:
             data = cp_output_data
-        t5 = time.time()
-        LOG.info(f't1->t2: {t2-t1}, t2->t3: {t3-t2}, t3->t4: {t4-t3}, t4->t5: {t5-t4}, '
-                 f'len annos: {len(updated_annotations)},'
+        t7 = time.time()
+        r_func = lambda x: round(x, 4)
+        LOG.info(f't1->t2: {r_func(t2-t1)}, t2->t3: {r_func(t3-t2)}, t3->t4: {r_func(t4-t3)}, t4->t5: {r_func(t5-t4)}, '
+                 f't5->t6: {r_func(t6-t5)}, t6->t7: {r_func(t7-t6)}, total: {r_func(t7-t1)}'
+                 f'len annos: {len(updated_annotations)}, '
                  f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
         return Image.fromarray(data['image']), updated_annotations, meta
 
