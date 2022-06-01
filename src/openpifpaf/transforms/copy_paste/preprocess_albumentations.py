@@ -8,6 +8,8 @@ from PIL import Image
 import openpifpaf.transforms
 from openpifpaf.transforms import Preprocess
 
+import time
+
 LOG = logging.getLogger(__name__)
 
 
@@ -28,6 +30,8 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         super().__init__(*args, **kwargs)
         self.apply_copy_paste = apply_copy_paste
         self.previous_image_data = None
+        self.calls = 0
+
 
     def update_previous_image(self, image, masks, bboxes, anns):
         """
@@ -85,7 +89,9 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         meta['coco_instance'].imgs[current_image_id]['width'] = current_image_width
 
     def __call__(self, image, anns, meta):
-        LOG.debug('Applying albumentations transforms')
+        self.calls += 1
+        # LOG.debug('Applying albumentations transforms')
+        t1 = time.time()
 
         self.adjust_meta_img_dimensions(image, anns, meta)  # may be unnecessary if not applied with other transforms
 
@@ -103,15 +109,16 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
             'masks': all_masks,
             'bboxes': all_bboxes,
         }
-
+        t2 = time.time()
         # apply usual transforms
         data = A.Compose.__call__(self, **data)
         updated_annotations = self.reformat_annotations(anns, data['bboxes'])
         cp_output_data = None
-
+        t3 = time.time()
+        t4 = t3
         if self.apply_copy_paste:
             if self.previous_image_data is not None:
-                LOG.debug('Applying albumentations copy paste transform')
+                # LOG.debug('Applying albumentations copy paste transform')
                 cp_data = dict(
                     image=data['image'],
                     bboxes=[bbox + (bbox[-1],) for bbox in data['bboxes']],
@@ -126,6 +133,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 )
                 cp_output_data = cp_transform(**cp_data)
                 # add annotation details back in
+                t4 = time.time()
                 updated_annotations = self.reformat_annotations(
                     anns + self.previous_image_data['previous_anns'],
                     cp_output_data['bboxes']
@@ -153,6 +161,9 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
 
         if cp_output_data is not None:
             data = cp_output_data
-
+        t5 = time.time()
+        LOG.info(f't1->t2: {t2-t1}, t2->t3: {t3-t2}, t3->t4: {t4-t3}, t4->t5: {t5-t4}, '
+                 f'len annos: {len(updated_annotations)},'
+                 f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
         return Image.fromarray(data['image']), updated_annotations, meta
 
