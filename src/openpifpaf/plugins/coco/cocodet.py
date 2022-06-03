@@ -123,6 +123,17 @@ class CocoDet(openpifpaf.datasets.DataModule):
                 openpifpaf.transforms.Encoders([enc]),
             ])
 
+        if self.extended_scale:
+            rescale_t = openpifpaf.transforms.RescaleRelative(
+                scale_range=(0.5 * self.rescale_images,
+                             2.0 * self.rescale_images),
+                power_law=True, stretch_range=(0.75, 1.33))
+        else:
+            rescale_t = openpifpaf.transforms.RescaleRelative(
+                scale_range=(0.7 * self.rescale_images,
+                             1.5 * self.rescale_images),
+                power_law=True, stretch_range=(0.75, 1.33))
+
         return openpifpaf.transforms.Compose([
             openpifpaf.transforms.NormalizeAnnotations(),
             openpifpaf.transforms.AlbumentationsComposeWrapper([
@@ -132,7 +143,22 @@ class CocoDet(openpifpaf.datasets.DataModule):
                 A.RandomRotate90(),
                 A.PadIfNeeded(min_height=self.square_edge, min_width=self.square_edge, border_mode=0),
                 A.RandomCrop(self.square_edge, self.square_edge, always_apply=True),  # TODO area of interest
-            ], apply_copy_paste=True, bbox_params=A.BboxParams(format="coco")),
+            ], apply_copy_paste=True, bbox_params=A.BboxParams(format="coco"), default_transformations=
+                openpifpaf.transforms.Compose([
+                    openpifpaf.transforms.RandomApply(
+                        openpifpaf.transforms.HFlip(COCO_KEYPOINTS, HFLIP), 0.5),
+                    rescale_t,
+                    openpifpaf.transforms.RandomApply(
+                        openpifpaf.transforms.Blur(), self.blur),
+                    openpifpaf.transforms.RandomChoice(
+                        [openpifpaf.transforms.RotateBy90(),
+                         openpifpaf.transforms.RotateUniform(10.0)],
+                        [self.orientation_invariant, 0.2],
+                    ),
+                    openpifpaf.transforms.Crop(self.square_edge, use_area_of_interest=True),
+                    openpifpaf.transforms.CenterPad(self.square_edge),
+                ])
+            ),
             openpifpaf.transforms.MinSize(min_side=4.0),
             openpifpaf.transforms.UnclippedArea(threshold=0.75),
             openpifpaf.transforms.TRAIN_TRANSFORM,
