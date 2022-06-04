@@ -34,6 +34,9 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.default_transformations = default_transformations
         if max_annos > 0 and self.apply_copy_paste:
             assert default_transformations is not None
+        self.num_images = 8
+        self.total_times = 0
+        self.calls = 0
 
     def update_previous_image(self, data, anns):
         """
@@ -71,11 +74,16 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         return new_annotations
 
     def __call__(self, image, anns, meta):
+        self.calls += 1
+        # if self.calls % self.num_images == 0:
+        #     LOG.info(f'Total time for {self.num_images}: {self.total_times}')
+        #     self.total_times = 0
+        # LOG.debug('Applying albumentations transforms')
         t1 = time.time()
-        if len(anns) > self.max_annos:
-            image, anns, meta = self.default_transformations(image, anns, meta)
-            LOG.debug(f'Default transformations took {round(time.time() - t1, 4)} seconds.')
-            return image, anns, meta
+        # if len(anns) > self.max_annos:
+            # image, anns, meta = self.default_transformations(image, anns, meta)
+            # LOG.info(f'Default transformations took {round(time.time() - t1, 4)} seconds.')
+            # return image, anns, meta
 
         # LOG.debug('Applying albumentations transforms')
 
@@ -103,7 +111,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         cp_output_data = None
         t3 = time.time()
         t4 = t5 = t6 = t3
-        if self.apply_copy_paste:
+        if self.apply_copy_paste and len(anns) <= self.max_annos:
             if self.previous_image_data is not None:
                 # LOG.debug('Applying albumentations copy paste transform')
                 cp_data = dict(
@@ -151,10 +159,13 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         if cp_output_data is not None:
             data = cp_output_data
         t7 = time.time()
+        total_time = t7-t1
+        self.total_times += total_time
         r_func = lambda x: round(x, 4)
-        print(f't1->t2: {r_func(t2-t1)}, t2->t3:  {r_func(t3-t2)}, t3->t4: {r_func(t4-t3)}, t4->t5: {r_func(t5-t4)}, '
-                 f't5->t6: {r_func(t6-t5)}, t6->t7: {r_func(t7-t6)}, total: {r_func(t7-t1)}, '
-                 f'len annos: {len(updated_annotations)}, '
-                 f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
+        # if total_time >= 0.9:
+        LOG.info(f't1->t2: {r_func(t2-t1)}, t2->t3: {r_func(t3-t2)}, t3->t4: {r_func(t4-t3)}, t4->t5: {r_func(t5-t4)}, '
+                f't5->t6: {r_func(t6-t5)}, t6->t7: {r_func(t7-t6)}, total: {r_func(total_time)}, '
+                f'len annos: {len(updated_annotations)}, '
+                f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
         return Image.fromarray(data['image']), updated_annotations, meta
 
