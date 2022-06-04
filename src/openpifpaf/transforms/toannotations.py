@@ -46,17 +46,17 @@ class ToKpAnnotations:
         ]
 
 
-class TripKpToDetAnnotations:
+class KpToDetAnnotations:
     """ Converting triplet keypoints to detection annotations """
     def __init__(self, categories):
         self.categories = categories
 
     def __call__(self, anns):
-        def create_bbox_from_kp_triplets(ann_keypoints):
-            assert len(ann_keypoints) == 3
+        def create_bbox(ann_keypoints):
+            assert len(ann_keypoints) == 5
             x, y = ann_keypoints[0][:2]
-            w = ann_keypoints[2][0] - ann_keypoints[0][0]
-            h = ann_keypoints[2][1] - ann_keypoints[0][1]
+            w = ann_keypoints[1][0] - ann_keypoints[0][0]
+            h = ann_keypoints[3][1] - ann_keypoints[0][1]
             assert w >= 0 and h >= 0
             return np.array([x, y, w, h])
 
@@ -65,7 +65,7 @@ class TripKpToDetAnnotations:
                 .set(
                 ann['category_id'],
                 None,
-                create_bbox_from_kp_triplets(ann['keypoints']),
+                create_bbox(ann['keypoints']),
             )
             for ann in anns
             if not ann['iscrowd'] and np.any(ann['bbox'])
