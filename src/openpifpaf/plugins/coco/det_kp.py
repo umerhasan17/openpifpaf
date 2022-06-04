@@ -10,9 +10,9 @@ from .dataset import CocoDataset
 from .det_kp_utils import (
     DETKP_SKELETON,
     DETKP_KEYPOINTS,
-    DUMMY_DETKP_POSE,
-    DUMMY_DETKP_SIGMAS,
-    DUMMY_DETKP_SCORE_WEIGHTS, DETKP_HFLIP,
+    DETKP_POSE,
+    DETKP_SIGMAS,
+    DETKP_SCORE_WEIGHTS, DETKP_HFLIP,
 )
 
 try:
@@ -58,14 +58,14 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
 
         cif = openpifpaf.headmeta.Cif('cif', 'cocokp',
                                       keypoints=DETKP_KEYPOINTS,
-                                      sigmas=DUMMY_DETKP_SIGMAS,
-                                      pose=DUMMY_DETKP_POSE,
+                                      sigmas=DETKP_SIGMAS,
+                                      pose=DETKP_POSE,
                                       draw_skeleton=DETKP_SKELETON,
-                                      score_weights=DUMMY_DETKP_SCORE_WEIGHTS)
+                                      score_weights=DETKP_SCORE_WEIGHTS)
         caf = openpifpaf.headmeta.Caf('caf', 'cocokp',
                                       keypoints=DETKP_KEYPOINTS,
-                                      sigmas=DUMMY_DETKP_SIGMAS,
-                                      pose=DUMMY_DETKP_POSE,
+                                      sigmas=DETKP_SIGMAS,
+                                      pose=DETKP_POSE,
                                       skeleton=DETKP_SKELETON)
 
         cif.upsample_stride = self.upsample_stride

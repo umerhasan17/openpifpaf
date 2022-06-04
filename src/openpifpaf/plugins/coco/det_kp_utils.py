@@ -19,9 +19,9 @@ DETKP_HFLIP = {
     'bottom_left': 'bottom_right',
     'bottom_right': 'bottom_left',
 }
-DUMMY_DETKP_POSE = np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0]])
-DUMMY_DETKP_SIGMAS = [0.0, 0.0, 0.0, 0.0, 0.0]
-DUMMY_DETKP_SCORE_WEIGHTS = [1.0, 1.0, 1.0, 1.0, 1.0]
+DETKP_POSE = np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0]])
+DETKP_SIGMAS = [1.0, 1.0, 1.0, 1.0, 1.0]
+DETKP_SCORE_WEIGHTS = [1.0, 1.0, 1.0, 1.0, 1.0]
 
 
 def create_detection_keypoints_annotations(detection_annos):
