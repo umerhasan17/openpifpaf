@@ -81,9 +81,7 @@ def visualise_test(ann_file):
         test_image_dict = anns['images'][i]
         test_annos = [ann for ann in anns['annotations'] if ann['image_id'] == test_image_dict['id']]
         test_image = Image.open(os.path.join(root_dir + test_image_dict['file_name']))
-        plt.imshow(np.asarray(test_image))
-        coco.showAnns(test_annos, draw_bbox=True)
-        plt.show()
+        display_img_anns(test_image, test_annos, coco)
 
 
 def create_det_keypoint_annotation_file(root_dir, detection_ann_file):

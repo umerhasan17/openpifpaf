@@ -8,6 +8,7 @@ from .preprocess import Preprocess
 
 LOG = logging.getLogger(__name__)
 
+import time
 
 class Crop(Preprocess):
     """Random cropping."""
@@ -17,6 +18,7 @@ class Crop(Preprocess):
         self.use_area_of_interest = use_area_of_interest
 
     def __call__(self, image, anns, meta):
+        start = time.time()
         meta = copy.deepcopy(meta)
         anns = copy.deepcopy(anns)
         original_valid_area = meta['valid_area'].copy()
@@ -44,6 +46,8 @@ class Crop(Preprocess):
             new_rb = np.minimum(meta['valid_area'][:2] + meta['valid_area'][2:], new_rb)
             ann['bbox'][2:] = new_rb - ann['bbox'][:2]
         anns = [ann for ann in anns if ann['bbox'][2] > 0.0 and ann['bbox'][3] > 0.0]
+
+        print(f'CROP duration: {round(time.time() - start, 3)}')
 
         return image, anns, meta
 

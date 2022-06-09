@@ -2,6 +2,7 @@ from collections import defaultdict
 import copy
 import logging
 import os
+import time
 
 import torch.utils.data
 from PIL import Image
@@ -117,6 +118,7 @@ class CocoDataset(torch.utils.data.Dataset):
             'image_id': image_id,
             'file_name': image_info['file_name'],
             'local_file_path': local_file_path,
+            'coco': self.coco,
         }
 
         if 'flickr_url' in image_info:
@@ -125,7 +127,11 @@ class CocoDataset(torch.utils.data.Dataset):
             meta['flickr_full_page'] = 'http://flickr.com/photo.gne?id={}'.format(flickr_id)
 
         # preprocess image and annotations
+        start = time.time()
+        print(f'Start preprocessing')
         image, anns, meta = self.preprocess(image, anns, meta)
+        print(f'Total preprocessing duration: {time.time() - start}')
+
 
         LOG.debug(meta)
 
