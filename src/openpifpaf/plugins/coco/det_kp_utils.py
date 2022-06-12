@@ -3,6 +3,7 @@ Util functions for object detection with triplet keypoints
 """
 
 import os
+import json
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -81,7 +82,7 @@ def visualise_test(ann_file):
         test_image_dict = anns['images'][i]
         test_annos = [ann for ann in anns['annotations'] if ann['image_id'] == test_image_dict['id']]
         test_image = Image.open(os.path.join(root_dir + test_image_dict['file_name']))
-        display_img_anns(test_image, test_annos, coco)
+        # display_img_anns(test_image, test_annos, coco)
 
 
 def create_det_keypoint_annotation_file(root_dir, detection_ann_file):
@@ -94,6 +95,30 @@ def create_det_keypoint_annotation_file(root_dir, detection_ann_file):
         json.dump(detection_tripkp_annos, outfile)
 
 
+def create_det_keypoint_test_anno_file(root_dir):
+    with open(os.path.join(root_dir, 'detection_five_kp_instances_train2017.json')) as f:
+        train_annos = json.load(f)
+
+    num_images = 5
+    images, annotations = [], []
+    for i in range(num_images):
+        cur_img = train_annos['images'][i]
+        image_id = cur_img['id']
+        cur_annos = [ann for ann in train_annos['annotations'] if ann['image_id'] == image_id]
+        images.append(cur_img)
+        annotations.extend(cur_annos)
+
+    with open(os.path.join(root_dir, 'detection_five_kp_test_overfit.json'), 'w') as outfile:
+        json.dump(dict(
+            info=dict(description='Test COCO 2017 detection dataset formatted as 5kp',
+                      version='1.0', year=2022, date_created='2022/06/01'),
+            licenses=train_annos['licenses'],
+            images=images,
+            annotations=annotations,
+            categories=train_annos['categories'],
+        ), outfile)
+
+
 if __name__ == '__main__':
     import json
 
@@ -101,11 +126,16 @@ if __name__ == '__main__':
     # create_det_keypoint_annotation_file(anno_root_dir, 'instances_val2017.json')
     # create_det_keypoint_annotation_file(anno_root_dir, 'instances_train2017.json')
 
-    visualise_test(anno_root_dir + 'instances_val2017.json')
+    # visualise_test(anno_root_dir + 'instances_val2017.json')
 
     """
     --cocokp-train-annotations=data-mscoco/annotations/detection_triplet_kp_instances_train2017.json
     --cocokp-val-annotations=data-mscoco/annotations/detection_triplet_kp_instances_val2017.json
     """
+
+    # create_det_keypoint_test_anno_file(anno_root_dir)
+
+    with open(anno_root_dir + 'detection_five_kp_test_overfit.json', 'r') as f:
+        test_annos = json.load(f)
 
     print('Done')

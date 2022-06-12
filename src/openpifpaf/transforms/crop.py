@@ -45,6 +45,11 @@ class Crop(Preprocess):
             new_rb = np.maximum(ann['bbox'][:2], new_rb)
             new_rb = np.minimum(meta['valid_area'][:2] + meta['valid_area'][2:], new_rb)
             ann['bbox'][2:] = new_rb - ann['bbox'][:2]
+            # keypoint
+            [x, y, w, h] = ann['bbox']
+            ann['keypoints'] = np.array([
+                [x, y, 2], [x+w, y, 2], [x+(w/2), y+(h/2), 2], [x, y+h, 2], [x+w, y+h, 2]
+            ])
         anns = [ann for ann in anns if ann['bbox'][2] > 0.0 and ann['bbox'][3] > 0.0]
 
         print(f'CROP duration: {round(time.time() - start, 3)}')
