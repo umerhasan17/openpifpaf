@@ -105,6 +105,7 @@ class CocoDataset(torch.utils.data.Dataset):
         ann_ids = self.coco.getAnnIds(imgIds=image_id, catIds=self.category_ids)
         anns = self.coco.loadAnns(ann_ids)
         anns = copy.deepcopy(anns)
+        masks = [self.coco.annToMask(ann) for ann in anns]
 
         image_info = self.coco.loadImgs(image_id)[0]
         LOG.debug(image_info)
@@ -117,8 +118,7 @@ class CocoDataset(torch.utils.data.Dataset):
             'image_id': image_id,
             'file_name': image_info['file_name'],
             'local_file_path': local_file_path,
-            'coco_instance': self.coco,
-            'ann_to_mask': self.coco.annToMask,
+            'masks': masks,
         }
 
         if 'flickr_url' in image_info:

@@ -34,7 +34,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.default_transformations = default_transformations
         if max_annos > 0 and self.apply_copy_paste:
             assert default_transformations is not None
-        self.copy_paste_frequency = 8
+        self.copy_paste_frequency = 2
         self.num_images = 8
         self.total_times = 0
         self.calls = 0
@@ -79,7 +79,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         # convert target segmentations to masks
         all_masks, all_bboxes = [], []
         for ix, ann in enumerate(anns):
-            mask = meta['ann_to_mask'](ann)
+            mask = meta['masks'][ix]
             bbox = ann['bbox'].tolist() + [ann['category_id']] + [ix]
             all_masks.append(mask)
             all_bboxes.append(bbox)
