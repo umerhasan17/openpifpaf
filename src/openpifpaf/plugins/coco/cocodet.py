@@ -139,8 +139,8 @@ class CocoDet(openpifpaf.datasets.DataModule):
             openpifpaf.transforms.AlbumentationsComposeWrapper([
                 A.HorizontalFlip(p=0.5),
                 A.RandomScale(scale_limit=(0.5, 1.0), p=1),
-                A.Blur(),
-                A.RandomRotate90(),
+                A.Blur(p=0.1),
+                A.RandomRotate90(p=0.4),
                 A.PadIfNeeded(min_height=self.square_edge, min_width=self.square_edge, border_mode=0),
                 A.RandomCrop(self.square_edge, self.square_edge, always_apply=True),  # TODO area of interest
             ], apply_copy_paste=True, bbox_params=A.BboxParams(format="coco"), default_transformations=
