@@ -19,8 +19,8 @@ LOG = logging.getLogger(__name__)
 
 
 def rotate(image, anns, meta, angle):
-    meta = copy.deepcopy(meta)
-    anns = copy.deepcopy(anns)
+    # meta = copy.deepcopy(meta)
+    # anns = copy.deepcopy(anns)
 
     LOG.debug('rotation angle = %f', angle)
     w, h = image.size

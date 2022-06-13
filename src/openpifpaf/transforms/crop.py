@@ -17,8 +17,8 @@ class Crop(Preprocess):
         self.use_area_of_interest = use_area_of_interest
 
     def __call__(self, image, anns, meta):
-        meta = copy.deepcopy(meta)
-        anns = copy.deepcopy(anns)
+        # meta = copy.deepcopy(meta)
+        # anns = copy.deepcopy(anns)
         original_valid_area = meta['valid_area'].copy()
 
         image, anns, ltrb = self.crop(image, anns, meta['valid_area'])

@@ -19,8 +19,8 @@ class CenterPad(Preprocess):
         self.target_size = target_size
 
     def __call__(self, image, anns, meta):
-        meta = copy.deepcopy(meta)
-        anns = copy.deepcopy(anns)
+        # meta = copy.deepcopy(meta)
+        # anns = copy.deepcopy(anns)
 
         LOG.debug('valid area before pad: %s, image size = %s, target size = %s',
                   meta['valid_area'], image.size, self.target_size)
