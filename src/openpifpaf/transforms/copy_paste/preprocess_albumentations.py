@@ -26,7 +26,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
     Paste in annotations from previous image into current image
     """
 
-    def __init__(self, *args, max_annos=5, default_transformations=None, apply_copy_paste=True, **kwargs):
+    def __init__(self, *args, max_annos=15, default_transformations=None, apply_copy_paste=True, **kwargs):
         super().__init__(*args, **kwargs)
         self.apply_copy_paste = apply_copy_paste
         self.previous_image_data = None
@@ -34,7 +34,6 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.default_transformations = default_transformations
         if max_annos > 0 and self.apply_copy_paste:
             assert default_transformations is not None
-        self.copy_paste_frequency = 2
         self.num_images = 8
         self.total_times = 0
         self.calls = 0
@@ -96,7 +95,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         cp_output_data = None
         t3 = time.time()
         t4 = t5 = t6 = t3
-        if self.apply_copy_paste and len(anns) <= self.max_annos:
+        if self.apply_copy_paste:
             if self.previous_image_data is not None:
                 # LOG.debug('Applying albumentations copy paste transform')
                 cp_data = dict(
@@ -109,7 +108,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                                   self.previous_image_data['bboxes']],
                 )
                 cp_transform = A.Compose(
-                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)],
+                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=0.5, p=1)],
                     bbox_params=A.BboxParams(format="coco")
                 )
                 cp_output_data = cp_transform(**cp_data)
@@ -162,7 +161,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         #     self.total_times = 0
         # LOG.debug('Applying albumentations transforms')
         t1 = time.time()
-        if len(anns) > self.max_annos or self.calls % self.copy_paste_frequency != 0:
+        if len(anns) > self.max_annos:
             image, anns, meta = self.default_transformations(image, anns, meta)
             LOG.debug(f'Default transformations took {round(time.time() - t1, 4)} seconds.')
             return image, anns, meta
