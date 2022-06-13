@@ -34,6 +34,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.default_transformations = default_transformations
         if max_annos > 0 and self.apply_copy_paste:
             assert default_transformations is not None
+        self.copy_paste_frequency = 8
         self.num_images = 8
         self.total_times = 0
         self.calls = 0
@@ -73,24 +74,8 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
             new_ann['bbox'] = np.array(bbox[:4])
         return new_annotations
 
-    def __call__(self, image, anns, meta):
-        self.calls += 1
-        # if self.calls % self.num_images == 0:
-        #     LOG.info(f'Total time for {self.num_images}: {self.total_times}')
-        #     self.total_times = 0
-        # LOG.debug('Applying albumentations transforms')
+    def copy_paste_augmentation(self, image, anns, meta):
         t1 = time.time()
-        # if len(anns) > self.max_annos:
-            # image, anns, meta = self.default_transformations(image, anns, meta)
-            # LOG.info(f'Default transformations took {round(time.time() - t1, 4)} seconds.')
-            # return image, anns, meta
-
-        # LOG.debug('Applying albumentations transforms')
-
-        # may be unnecessary if not applied with other transforms
-        # necessary if applying transformations which depend on metadata after this transformation
-        # self.adjust_meta_img_dimensions(image, anns, meta)
-
         # convert target segmentations to masks
         all_masks, all_bboxes = [], []
         for ix, ann in enumerate(anns):
@@ -120,7 +105,8 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                     masks=data['masks'],
                     paste_image=self.previous_image_data['image'],
                     paste_masks=self.previous_image_data['masks'],
-                    paste_bboxes=[bbox + (len(data['masks']) + bbox[-1],) for bbox in self.previous_image_data['bboxes']],
+                    paste_bboxes=[bbox + (len(data['masks']) + bbox[-1],) for bbox in
+                                  self.previous_image_data['bboxes']],
                 )
                 cp_transform = A.Compose(
                     [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=1, p=1)],
@@ -151,7 +137,6 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 updated_annotations = self.reformat_annotations(anns, data['bboxes'])
             # save current image details for next copy paste augmentation
             self.update_previous_image(data, anns)
-
             t6 = time.time()
         else:
             updated_annotations = self.reformat_annotations(anns, data['bboxes'])
@@ -159,13 +144,36 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         if cp_output_data is not None:
             data = cp_output_data
         t7 = time.time()
-        total_time = t7-t1
+        total_time = t7 - t1
         self.total_times += total_time
         r_func = lambda x: round(x, 4)
         # if total_time >= 0.9:
-        LOG.info(f't1->t2: {r_func(t2-t1)}, t2->t3: {r_func(t3-t2)}, t3->t4: {r_func(t4-t3)}, t4->t5: {r_func(t5-t4)}, '
-                f't5->t6: {r_func(t6-t5)}, t6->t7: {r_func(t7-t6)}, total: {r_func(total_time)}, '
-                f'len annos: {len(updated_annotations)}, '
-                f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
+        LOG.debug(
+            f't1->t2: {r_func(t2 - t1)}, t2->t3: {r_func(t3 - t2)}, t3->t4: {r_func(t4 - t3)}, t4->t5: {r_func(t5 - t4)}, '
+            f't5->t6: {r_func(t6 - t5)}, t6->t7: {r_func(t7 - t6)}, total: {r_func(total_time)}, '
+            f'len annos: {len(updated_annotations)}, '
+            f'image id: {updated_annotations[0]["image_id"] if len(updated_annotations) > 0 else -1}')
         return Image.fromarray(data['image']), updated_annotations, meta
 
+    def __call__(self, image, anns, meta):
+        self.calls += 1
+        # if self.calls % self.num_images == 0:
+        #     LOG.info(f'Total time for {self.num_images}: {self.total_times}')
+        #     self.total_times = 0
+        # LOG.debug('Applying albumentations transforms')
+        t1 = time.time()
+        if len(anns) > self.max_annos or self.calls % self.copy_paste_frequency != 0:
+            image, anns, meta = self.default_transformations(image, anns, meta)
+            LOG.debug(f'Default transformations took {round(time.time() - t1, 4)} seconds.')
+            return image, anns, meta
+
+        # LOG.debug('Applying albumentations transforms')
+
+        # may be unnecessary if not applied with other transforms
+        # necessary if applying transformations which depend on metadata after this transformation
+        # self.adjust_meta_img_dimensions(image, anns, meta)
+        try:
+            return self.copy_paste_augmentation(image, anns, meta)
+        except Exception as e:
+            LOG.warning(f'Exception during copy paste augmentation, using default transformations instead: {e}')
+            return self.default_transformations(image, anns, meta)
