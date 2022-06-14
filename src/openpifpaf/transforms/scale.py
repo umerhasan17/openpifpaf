@@ -28,8 +28,8 @@ def _scale(image, anns, meta, target_w, target_h, resample, *, fast=False):
     PIL.Image.BILINEAR = 2
     PIL.Image.BICUBIC = 3
     """
-    # meta = copy.deepcopy(meta)
-    # anns = copy.deepcopy(anns)
+    meta = copy.deepcopy(meta)
+    anns = copy.deepcopy(anns)
     w, h = image.size
 
     assert resample in (0, 2, 3)

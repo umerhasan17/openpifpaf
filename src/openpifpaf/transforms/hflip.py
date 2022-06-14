@@ -43,8 +43,8 @@ class HFlip(Preprocess):
         self.swap = _HorizontalSwap(keypoints, hflip)
 
     def __call__(self, image, anns, meta):
-        # meta = copy.deepcopy(meta)
-        # anns = copy.deepcopy(anns)
+        meta = copy.deepcopy(meta)
+        anns = copy.deepcopy(anns)
 
         w, _ = image.size
         image = image.transpose(PIL.Image.FLIP_LEFT_RIGHT)
