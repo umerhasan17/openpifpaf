@@ -99,16 +99,16 @@ def create_det_keypoint_test_anno_file(root_dir):
     with open(os.path.join(root_dir, 'detection_five_kp_instances_train2017.json')) as f:
         train_annos = json.load(f)
 
-    num_images = 5
+    num_images = 50
     images, annotations = [], []
     for i in range(num_images):
         cur_img = train_annos['images'][i]
         image_id = cur_img['id']
-        cur_annos = [ann for ann in train_annos['annotations'] if ann['image_id'] == image_id]
+        cur_annos = [ann for ann in train_annos['annotations'] if ann['image_id'] == image_id and ann['category_id'] == 1]
         images.append(cur_img)
         annotations.extend(cur_annos)
 
-    with open(os.path.join(root_dir, 'detection_five_kp_test_overfit.json'), 'w') as outfile:
+    with open(os.path.join(root_dir, 'detection_five_kp_test_person_only.json'), 'w') as outfile:
         json.dump(dict(
             info=dict(description='Test COCO 2017 detection dataset formatted as 5kp',
                       version='1.0', year=2022, date_created='2022/06/01'),
@@ -135,7 +135,7 @@ if __name__ == '__main__':
 
     # create_det_keypoint_test_anno_file(anno_root_dir)
 
-    with open(anno_root_dir + 'detection_five_kp_test_overfit.json', 'r') as f:
+    with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
         test_annos = json.load(f)
 
     print('Done')
