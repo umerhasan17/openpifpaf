@@ -118,7 +118,6 @@ class CocoDataset(torch.utils.data.Dataset):
             'image_id': image_id,
             'file_name': image_info['file_name'],
             'local_file_path': local_file_path,
-            'coco': self.coco,
         }
 
         if 'flickr_url' in image_info:
