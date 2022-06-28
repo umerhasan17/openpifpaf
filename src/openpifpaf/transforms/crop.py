@@ -18,7 +18,6 @@ class Crop(Preprocess):
         self.use_area_of_interest = use_area_of_interest
 
     def __call__(self, image, anns, meta):
-        start = time.time()
         meta = copy.deepcopy(meta)
         anns = copy.deepcopy(anns)
         original_valid_area = meta['valid_area'].copy()
@@ -51,8 +50,6 @@ class Crop(Preprocess):
                 [x, y, 2], [x+w, y, 2], [x+(w/2), y+(h/2), 2], [x, y+h, 2], [x+w, y+h, 2]
             ])
         anns = [ann for ann in anns if ann['bbox'][2] > 0.0 and ann['bbox'][3] > 0.0]
-
-        print(f'CROP duration: {round(time.time() - start, 3)}')
 
         return image, anns, meta
 

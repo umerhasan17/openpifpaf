@@ -105,7 +105,6 @@ class RescaleRelative(Preprocess):
         self.stretch_range = stretch_range
 
     def __call__(self, image, anns, meta):
-        start = time.time()
         if isinstance(self.scale_range, tuple):
             if self.power_law:
                 rnd_range = np.log2(self.scale_range[0]), np.log2(self.scale_range[1])
@@ -143,7 +142,6 @@ class RescaleRelative(Preprocess):
 
         target_w, target_h = int(w * scale_factor * stretch_factor), int(h * scale_factor)
         x = _scale(image, anns, meta, target_w, target_h, self.resample, fast=self.fast)
-        print(f'RESCALE RELATIVE duration: {round(time.time() - start, 3)}')
         return x
 
 

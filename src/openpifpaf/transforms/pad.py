@@ -20,7 +20,6 @@ class CenterPad(Preprocess):
         self.target_size = target_size
 
     def __call__(self, image, anns, meta):
-        start = time.time()
         meta = copy.deepcopy(meta)
         anns = copy.deepcopy(anns)
 
@@ -30,7 +29,6 @@ class CenterPad(Preprocess):
         meta['offset'] -= ltrb[:2]
         meta['valid_area'][:2] += ltrb[:2]
         LOG.debug('valid area after pad: %s, image size = %s', meta['valid_area'], image.size)
-        print(f'PAD DURATION: {round(time.time() - start, 3)}')
         return image, anns, meta
 
     def center_pad(self, image, anns):

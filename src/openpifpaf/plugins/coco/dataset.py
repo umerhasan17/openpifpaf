@@ -126,11 +126,7 @@ class CocoDataset(torch.utils.data.Dataset):
             meta['flickr_full_page'] = 'http://flickr.com/photo.gne?id={}'.format(flickr_id)
 
         # preprocess image and annotations
-        start = time.time()
-        print(f'Start preprocessing')
         image, anns, meta = self.preprocess(image, anns, meta)
-        print(f'Total preprocessing duration: {time.time() - start}')
-
 
         LOG.debug(meta)
 

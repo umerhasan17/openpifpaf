@@ -44,7 +44,6 @@ class HFlip(Preprocess):
         self.swap = _HorizontalSwap(keypoints, hflip)
 
     def __call__(self, image, anns, meta):
-        start = time.time()
         meta = copy.deepcopy(meta)
         anns = copy.deepcopy(anns)
 
@@ -61,5 +60,4 @@ class HFlip(Preprocess):
         meta['hflip'] = True
 
         meta['valid_area'][0] = -(meta['valid_area'][0] + meta['valid_area'][2]) - 1.0 + w
-        print(f'HFLIP duration: {round(time.time() - start, 3)}')
         return image, anns, meta
