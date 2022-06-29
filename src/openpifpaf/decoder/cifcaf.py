@@ -260,20 +260,34 @@ class CifCaf(Decoder):
             vis.predicted(fields, low)
 
         annotations_py = []
+
         for ann_data, ann_id in zip(annotations, annotation_ids):
+            ann = None
             # ['top_left', 'top_right', 'center', 'bottom_left', 'bottom_right']
             # find bounding box with these five points
-            corner_conf = ann_data[[0, 4], 0]
-            if torch.all(corner_conf > 0).item():
-                ann_confidence = (sum(corner_conf) / 2).item()
-                ann_x = ann_data[0, 1].item()
-                ann_y = ann_data[0, 2].item()
-                ann_w = ann_data[4, 1].item() - ann_x
-                ann_h = ann_data[4, 2].item() - ann_y
-                if ann_w > 0 and ann_h > 0:
-                    ann = AnnotationDet(['person'])
-                    ann.set(1, ann_confidence, [ann_x, ann_y, ann_w, ann_h])
-                    annotations_py.append(ann)
+            pairs = [[0, 4], [1, 3], [0, 2], [1, 2], [3, 2], [4, 2]]
+            for (p1, p2) in pairs:
+                corner_conf = ann_data[[p1, p2], 0]
+                if torch.all(corner_conf > 0).item():
+                    ann_confidence = (sum(corner_conf) / 2).item()
+                    ann_x = ann_data[p1, 1].item()
+                    ann_y = ann_data[p1, 2].item()
+                    ann_w = abs(ann_data[p2, 1].item() - ann_x)
+                    ann_h = abs(ann_data[p2, 2].item() - ann_y)
+                    # adjust bbox based on which 2 points were selected
+                    if p2 == 2:
+                        ann_w *= 2
+                        ann_h *= 2
+                    if p1 == 1 or p1 == 4:
+                        ann_x -= ann_w
+                    if p1 == 3 or p1 == 4:
+                        ann_y -= ann_h
+                    if ann_w > 0 and ann_h > 0 and (ann is None or ann_confidence > ann.score):
+                        ann = AnnotationDet(['person'])
+                        ann.set(1, ann_confidence, [ann_x, ann_y, ann_w, ann_h])
+
+            if ann is not None:
+                annotations_py.append(ann)
 
         LOG.info('annotations %d',
                  len(annotations_py))
