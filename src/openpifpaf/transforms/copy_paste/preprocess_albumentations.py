@@ -108,7 +108,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                                   self.previous_image_data['bboxes']],
                 )
                 cp_transform = A.Compose(
-                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=0.3, p=1)],
+                    [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=0.6, p=1)],
                     bbox_params=A.BboxParams(format="coco")
                 )
                 cp_output_data = cp_transform(**cp_data)
