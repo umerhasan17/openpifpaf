@@ -147,6 +147,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.total_times += total_time
         r_func = lambda x: round(x, 4)
         # if total_time >= 0.9:
+        meta['masks'] = data['masks']
         LOG.debug(
             f't1->t2: {r_func(t2 - t1)}, t2->t3: {r_func(t3 - t2)}, t3->t4: {r_func(t4 - t3)}, t4->t5: {r_func(t5 - t4)}, '
             f't5->t6: {r_func(t6 - t5)}, t6->t7: {r_func(t7 - t6)}, total: {r_func(total_time)}, '
