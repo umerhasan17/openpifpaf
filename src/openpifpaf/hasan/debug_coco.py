@@ -9,8 +9,9 @@ import torchvision.transforms as T
 
 def display_kp_markers(image, anns, coco):
     for ann in anns:
-        for kp in ann['keypoints']:
-            plt.plot(kp[0], kp[1], marker='v', color='red')
+        for i in range(0, len(ann['keypoints']), 3):
+            x, y = ann['keypoints'][i], ann['keypoints'][i+1]
+            plt.plot(x, y, marker='v', color='red')
     plt.imshow(np.asarray(image))
     coco.showAnns(anns, draw_bbox=True)
 
@@ -37,3 +38,4 @@ def display_img_anns(image, anns, meta, show=False, seperate_categories=False):
         plt.savefig(f'model-input-images/{meta["image_id"]}.jpeg')
         if show:
             plt.show()
+        plt.clf()

@@ -30,8 +30,8 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
     _test2017_image_dir = 'data-mscoco/images/test2017/'
 
     # cli configurable
-    train_annotations = 'data-mscoco/annotations/detection_five_kp_humans_instances_train2017.json'
-    val_annotations = 'data-mscoco/annotations/detection_five_kp_humans_instances_val2017.json'
+    train_annotations = 'data-mscoco/annotations/instances_person_extreme_train2017.json'
+    val_annotations = 'data-mscoco/annotations/instances_person_extreme_val2017.json'
     # train_annotations = 'data-mscoco/annotations/detection_five_kp_test_person_only.json'
     # val_annotations = train_annotations
     eval_annotations = val_annotations
