@@ -111,10 +111,24 @@ class Decoder:
         LOG.debug('nn processing time: %.1fms', (time.time() - start) * 1000.0)
         return heads
 
-    def batch(self, model, image_batch, *, device=None, gt_anns_batch=None):
+    def batch(self, model, image_batch, *, device=None, hflip=False, gt_anns_batch=None):
         """From image batch straight to annotations batch."""
         start_nn = time.perf_counter()
         fields_batch = self.fields_batch(model, image_batch, device=device)
+
+        if hflip:
+            # take horizontal flipped image and generate fields
+            # then average the fields with the original fields before decoding
+            hflip_image_batch = torch.flip(image_batch, [-1])
+            hflip_fields_batch = self.fields_batch(model, hflip_image_batch, device=device)
+            for i, fields in enumerate(fields_batch):
+                for j, field in enumerate(fields):
+                    hflip_field = hflip_fields_batch[i][j]
+                    hflip_field = torch.flip(hflip_field, [-1])  # flip on width dimension
+                    field = field.add(hflip_field)  # take an average of both fields
+                    field = torch.div(field, 2)
+                    fields_batch[i][j] = field
+
         self.last_nn_time = time.perf_counter() - start_nn
 
         if gt_anns_batch is None:
