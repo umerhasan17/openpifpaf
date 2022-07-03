@@ -1,6 +1,7 @@
 import argparse
 import logging
 import time
+import math
 from typing import List
 
 import numpy as np
@@ -262,32 +263,21 @@ class CifCaf(Decoder):
         annotations_py = []
 
         for ann_data, ann_id in zip(annotations, annotation_ids):
-            ann = None
-            # ['top_left', 'top_right', 'center', 'bottom_left', 'bottom_right']
-            # find bounding box with these five points
-            pairs = [[0, 4], [1, 3], [0, 2], [1, 2], [3, 2], [4, 2]]
-            for (p1, p2) in pairs:
-                corner_conf = ann_data[[p1, p2], 0]
-                if torch.all(corner_conf > 0).item():
-                    ann_confidence = (sum(corner_conf) / 2).item()
-                    ann_x = ann_data[p1, 1].item()
-                    ann_y = ann_data[p1, 2].item()
-                    ann_w = abs(ann_data[p2, 1].item() - ann_x)
-                    ann_h = abs(ann_data[p2, 2].item() - ann_y)
-                    # adjust bbox based on which 2 points were selected
-                    if p2 == 2:
-                        ann_w *= 2
-                        ann_h *= 2
-                    if p1 == 1 or p1 == 4:
-                        ann_x -= ann_w
-                    if p1 == 3 or p1 == 4:
-                        ann_y -= ann_h
-                    if ann_w > 0 and ann_h > 0 and (ann is None or ann_confidence > ann.score):
-                        ann = AnnotationDet(['person'])
-                        ann.set(1, ann_confidence, [ann_x, ann_y, ann_w, ann_h])
-
-            if ann is not None:
-                annotations_py.append(ann)
+            # ['top', 'left', 'bottom', 'right', 'center']
+            # find bounding box with extreme
+            confidences = ann_data[:, 0]
+            if all(confidences):
+                ann_x = ann_data[1, 1].item()
+                ann_y = ann_data[0, 2].item()
+                ann_h = abs(ann_data[2, 2].item() - ann_y)
+                ann_w = abs(ann_data[3, 1].item() - ann_x)
+                bbox_center = [ann_x + ann_w / 2, ann_y + ann_h / 2]
+                center = [ann_data[4, 1].item(), ann_data[4, 2].item()]
+                center_dist = math.dist(bbox_center, center)
+                if ann_w > 0 and ann_h > 0 and center_dist < ann_h / 2 and center < ann_w / 2:
+                    ann = AnnotationDet(['person'])
+                    ann.set(1, confidences.mean().item(), [ann_x, ann_y, ann_w, ann_h])
+                    annotations_py.append(ann)
 
         LOG.info('annotations %d',
                  len(annotations_py))
