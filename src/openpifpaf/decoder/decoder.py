@@ -124,7 +124,27 @@ class Decoder:
             for i, fields in enumerate(fields_batch):
                 for j, field in enumerate(fields):
                     hflip_field = hflip_fields_batch[i][j]
-                    hflip_field = torch.flip(hflip_field, [-1])  # flip on width dimension
+                    hflip_field = torch.flip(hflip_field, [-1])
+                    hflip_field[:, 2, :, :] = torch.neg(hflip_field[:, 2, :, :])  # negate x regression field
+                    import matplotlib.pyplot as plt
+                    def field_plot_debug(cur_field, field_num=0, axarr=None, indices=None):
+                        for i, (v1, v2) in enumerate(indices):
+                            axarr[v1, v2].imshow(cur_field[field_num, i, :, :].detach().cpu().numpy())
+                        # axarr[0, 1].imshow(cur_field[field_num, 1, :, :].detach().cpu().numpy())
+                        # axarr[1, 0].imshow(cur_field[field_num, 2, :, :].detach().cpu().numpy())
+                        # axarr[1, 1].imshow(cur_field[field_num, 3, :, :].detach().cpu().numpy())
+                        # axarr[2, 0].imshow(cur_field[field_num, 4, :, :].detach().cpu().numpy())
+                        # axarr[2, 1].imshow(cur_field[field_num, 5, :, :].detach().cpu().numpy())
+
+                    f, axarr = plt.subplots(3, 4)
+                    field_plot_debug(field, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
+                    field_plot_debug(hflip_field, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2, 4)])
+                    plt.show()
+
+                    # plt.imshow(hflip_field[0, 1, :, :].detach().cpu().numpy())
+                    # hflip_field[:, 1, :, :] = torch.flip(hflip_field[:, 1, :, :], [-1])  # flip confidence
+                    # hflip_field[:, 2, :, :] = torch.neg(hflip_field[:, 2, :, :])  # negate x regression field
+                    # hflip_field[:, 4, :, :] = torch.neg(hflip_field[:, 4, :, :])  # negate w field
                     field = field.add(hflip_field)  # take an average of both fields
                     field = torch.div(field, 2)
                     fields_batch[i][j] = field
