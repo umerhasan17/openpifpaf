@@ -227,6 +227,24 @@ def create_det_keypoint_annotation_file(root_dir, detection_ann_file, output_fil
         json.dump(detection_tripkp_annos, outfile)
 
 
+def create_det_person_only_annotation_file(root_dir, detection_ann_file, output_file_name_template='detection_person_'):
+    with open(os.path.join(root_dir, detection_ann_file)) as f:
+        detection_annos = json.load(f)
+
+    person_anns = []
+
+    for ann in detection_annos['annotations']:
+        if ann['category_id'] == 1:
+            person_anns.append(ann)
+
+    detection_annos['annotations'] = person_anns
+    image_ids = set([ann['image_id'] for ann in detection_annos['annotations']])
+    detection_annos['images'] = [img_dict for img_dict in detection_annos['images'] if img_dict['id'] in image_ids]
+
+    with open(os.path.join(root_dir, output_file_name_template + detection_ann_file), 'w') as outfile:
+        json.dump(detection_annos, outfile)
+
+
 def create_det_keypoint_test_anno_file(root_dir):
     with open(os.path.join(root_dir, 'detection_five_kp_instances_train2017.json')) as f:
         train_annos = json.load(f)
@@ -259,9 +277,11 @@ if __name__ == '__main__':
     output_file_name_template = 'detection_five_kp_humans_'
     # create_det_keypoint_annotation_file(anno_root_dir, 'instances_val2017.json', output_file_name_template=output_file_name_template)
     # create_det_keypoint_annotation_file(anno_root_dir, 'instances_train2017.json', output_file_name_template=output_file_name_template)
+    # create_det_person_only_annotation_file(anno_root_dir, 'instances_val2017.json')
     # generate_extreme_points_file('../../data-mscoco/')
 
-    visualise_test(anno_root_dir + 'instances_person_extreme_val2017.json')
+
+    # visualise_test(anno_root_dir + 'instances_person_extreme_val2017.json')
 
     """
     --cocokp-train-annotations=data-mscoco/annotations/detection_triplet_kp_instances_train2017.json
@@ -270,7 +290,7 @@ if __name__ == '__main__':
 
     # create_det_keypoint_test_anno_file(anno_root_dir)
 
-    # with open(anno_root_dir + 'detection_five_kp_humans_instances_val2017.json', 'r') as f:
-    #     test_annos = json.load(f)
+    with open(anno_root_dir + 'detection_person_instances_val2017.json', 'r') as f:
+        test_annos = json.load(f)
 
     print('Done')
