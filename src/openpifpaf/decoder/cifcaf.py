@@ -264,20 +264,49 @@ class CifCaf(Decoder):
 
         for ann_data, ann_id in zip(annotations, annotation_ids):
             # ['top', 'left', 'bottom', 'right', 'center']
+            ann = None
             # find bounding box with extreme
             confidences = ann_data[:, 0]
             if all(confidences):
+                # if all points detected
                 ann_x = ann_data[1, 1].item()
                 ann_y = ann_data[0, 2].item()
                 ann_h = abs(ann_data[2, 2].item() - ann_y)
                 ann_w = abs(ann_data[3, 1].item() - ann_x)
                 bbox_center = [ann_x + ann_w / 2, ann_y + ann_h / 2]
                 center = [ann_data[4, 1].item(), ann_data[4, 2].item()]
-                center_dist = math.dist(bbox_center, center)
-                if ann_w > 0 and ann_h > 0 and center_dist < ann_h / 2 and center < ann_w / 2:
-                    ann = AnnotationDet(['person'])
-                    ann.set(1, confidences.mean().item(), [ann_x, ann_y, ann_w, ann_h])
-                    annotations_py.append(ann)
+                center_conf = ann_data[4, 0].item()
+                offsets = [
+                    bbox_center[0] - (bbox_center[0] * (1 - center_conf) + center[0] * center_conf),
+                    bbox_center[1] - (bbox_center[1] * (1 - center_conf) + center[1] * center_conf),
+                ]
+                ann_x += offsets[0]
+                ann_y += offsets[1]
+                ann = [ann_x, ann_y, ann_h, ann_w]
+            elif ann_data[4, 0].item() > 0:
+                # if center is predicted
+                cx, cy = ann_data[4, 1].item(), ann_data[4, 2].item()
+                heights, widths = [], []
+                if ann_data[0, 0].item() > 0 and cy - ann_data[0, 2].item() > 0:
+                    heights.append(cy - ann_data[0, 2].item())
+                if ann_data[2, 0].item() > 0 and ann_data[2, 2].item() - cy > 0:
+                    heights.append(ann_data[2, 2].item() - cy)
+                if ann_data[1, 0].item() > 0 and cx - ann_data[1, 1].item() > 0:
+                    widths.append(cx - ann_data[1, 1].item())
+                if ann_data[3, 0].item() > 0 and ann_data[3, 1].item() - cx > 0:
+                    widths.append(ann_data[3, 1].item() - cx)
+
+                if len(heights) > 0 and len(widths) > 0:
+                    ann_h, ann_w = sum(heights) / len(heights), sum(widths) / len(widths)
+                    if ann_h > 0 and ann_w > 0:
+                        ann = [cx - ann_w / 2, cy - ann_h / 2, ann_h, ann_w]
+
+                # center_dist = math.sqrt((bbox_center[0] - center[0]) ** 2 + (bbox_center[1] - center[1]) ** 2)
+
+            if ann is not None and ann[2] > 0 and ann[3] > 0:
+                ann_det = AnnotationDet(['person'])
+                ann_det.set(1, confidences.mean().item(), ann)
+                annotations_py.append(ann_det)
 
         LOG.info('annotations %d',
                  len(annotations_py))
