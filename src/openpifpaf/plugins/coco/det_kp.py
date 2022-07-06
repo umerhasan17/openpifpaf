@@ -40,7 +40,7 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
     # val_image_dir = train_image_dir
     eval_image_dir = val_image_dir
 
-    square_edge = 385
+    square_edge = 513
     with_dense = False
     extended_scale = False
     orientation_invariant = 0.0
