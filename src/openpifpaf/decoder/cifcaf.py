@@ -214,6 +214,11 @@ class CifCaf(Decoder):
     def factory(cls, head_metas):
         if CifCafDense.dense_coupling:
             return []  # --dense-connections is requested, so use the other decoder
+        if len(head_metas) == 182:
+            n = len(head_metas) // 2
+            return [
+                CifCaf([head_metas[i]], [head_metas[i+n]]) for i in range(n)
+            ]
         return [
             CifCaf([meta], [meta_next])
             for meta, meta_next in zip(head_metas[:-1], head_metas[1:])

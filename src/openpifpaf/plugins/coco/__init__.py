@@ -3,6 +3,7 @@ import openpifpaf
 from .cocodet import CocoDet
 from .cocokp import CocoKp
 from .det_kp import CocoDetKpTriplets
+from .det_kp_full import CocoDetKp
 from .dataset import CocoDataset
 
 
@@ -10,6 +11,7 @@ def register():
     openpifpaf.DATAMODULES['cocodet'] = CocoDet
     openpifpaf.DATAMODULES['cocokp'] = CocoKp
     openpifpaf.DATAMODULES['cocodetkptriplets'] = CocoDetKpTriplets
+    openpifpaf.DATAMODULES['cocodetkp'] = CocoDetKp
 
     # human pose estimation
     openpifpaf.CHECKPOINT_URLS['mobilenetv2'] = (

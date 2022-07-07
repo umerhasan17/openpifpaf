@@ -8,7 +8,7 @@ from .assertion import Assert
 from .compose import Compose
 from .crop import Crop
 from .deinterlace import Deinterlace
-from .encoders import Encoders
+from .encoders import Encoders, DetKpEncoders
 from .hflip import HFlip
 from .image import Blur, HorizontalBlur, ImageTransform, JpegCompression
 from .impute import AddCrowdForIncompleteHead
@@ -51,7 +51,7 @@ __all__ = [
     'Compose',
     'Crop',
     'Deinterlace',
-    'Encoders',
+    'Encoders', 'DetKpEncoders',
     'HFlip',
     'Blur', 'HorizontalBlur', 'ImageTransform', 'JpegCompression',
     'AddCrowdForIncompleteHead',
