@@ -1,10 +1,13 @@
 import argparse
 import logging
 import math
+
 import torch
 import torchvision.models
-from . import effnetv2
+
 from . import bottleneck_transformer
+from . import effnetv2
+from .hourglass import HourglassBlock
 
 LOG = logging.getLogger(__name__)
 
@@ -760,8 +763,43 @@ class BotNet(BaseNetwork):
         group.add_argument('--botnet-input-image-size',
                            default=cls.input_image_size, type=int,
                            help='Input image size. Needs to be the same for training and'
-                           ' prediction, as BotNet only accepts fixed input sizes')
+                                ' prediction, as BotNet only accepts fixed input sizes')
 
     @classmethod
     def configure(cls, args: argparse.Namespace):
         cls.input_image_size = args.botnet_input_image_size
+
+
+class Hourglass(BaseNetwork):
+
+    def __init__(self, *args, inp_dim=256, bn=True, increase=0, **kwargs):
+        super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
+        self.hg_input_block = torch.nn.Sequential(
+            torch.nn.Conv2d(3, 128, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False),
+            torch.nn.BatchNorm2d(128, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            torch.nn.ReLU(inplace=True),
+            torch.nn.Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False),
+            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            torch.nn.ReLU(inplace=True),
+            torch.nn.Conv2d(256, 256, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1), bias=False),
+            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            torch.nn.ReLU(inplace=True),
+        )
+        self.hgs = torch.nn.Sequential(
+            HourglassBlock(4, inp_dim, bn, increase),
+            HourglassBlock(4, inp_dim, bn, increase),
+        )
+        self.hg_output_block = torch.nn.Sequential(
+            # torch.nn.Conv2d(256, 256, kernel_size=(7, 7), stride=(2, 2), padding=(1, 1), bias=False),
+            # torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            # torch.nn.ReLU(inplace=True),
+            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(4, 4), padding=(1, 1), bias=False),
+            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            torch.nn.ReLU(inplace=True),
+        )
+
+    def forward(self, x):
+        x1 = self.hg_input_block(x)
+        x2 = self.hgs(x1)
+        x3 = self.hg_output_block(x2)
+        return x3

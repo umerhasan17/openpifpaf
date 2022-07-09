@@ -187,6 +187,7 @@ BASE_FACTORIES = {
                                                      ],
                                                      stride=16),
     'botnet': lambda: basenetworks.BotNet('botnet'),
+    'hourglass104': lambda: basenetworks.Hourglass('hourglass')
 }
 # base factories that wrap other base factories:
 BASE_FACTORIES['tshufflenetv2k16'] = lambda: TrackingBase(BASE_FACTORIES['shufflenetv2k16']())
