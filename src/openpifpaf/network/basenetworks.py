@@ -7,7 +7,7 @@ import torchvision.models
 
 from . import bottleneck_transformer
 from . import effnetv2
-from .hourglass import HourglassBlock
+from .hourglass import HourglassBlock, convolution, residual
 
 LOG = logging.getLogger(__name__)
 
@@ -775,25 +775,29 @@ class Hourglass(BaseNetwork):
     def __init__(self, *args, inp_dim=256, bn=True, increase=0, **kwargs):
         super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
         self.hg_input_block = torch.nn.Sequential(
-            torch.nn.Conv2d(3, 128, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False),
-            torch.nn.BatchNorm2d(128, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False),
-            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
-            torch.nn.ReLU(inplace=True),
-            torch.nn.Conv2d(256, 256, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1), bias=False),
-            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
-            torch.nn.ReLU(inplace=True),
+            convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
+            residual(inp_dim=128, out_dim=inp_dim)
         )
+
+        # self.hg_input_block = torch.nn.Sequential(
+        #     torch.nn.Conv2d(3, 128, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False),
+        #     torch.nn.BatchNorm2d(128, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+        #     torch.nn.ReLU(inplace=True),
+        #     torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+        #     torch.nn.ReLU(inplace=True),
+        #     torch.nn.Conv2d(256, 256, kernel_size=(4, 4), stride=(1, 1), padding=(1, 1), bias=False),
+        #     torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+        #     torch.nn.ReLU(inplace=True),
+        # )
         self.hgs = torch.nn.Sequential(
-            HourglassBlock(4, inp_dim, bn, increase),
-            HourglassBlock(4, inp_dim, bn, increase),
+            HourglassBlock(2, inp_dim, bn, increase),
+            # HourglassBlock(2, inp_dim, bn, increase),
         )
         self.hg_output_block = torch.nn.Sequential(
             # torch.nn.Conv2d(256, 256, kernel_size=(7, 7), stride=(2, 2), padding=(1, 1), bias=False),
             # torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
             # torch.nn.ReLU(inplace=True),
-            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(4, 4), padding=(1, 1), bias=False),
+            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(8, 8), padding=(1, 1), bias=False),
             torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
             torch.nn.ReLU(inplace=True),
         )
