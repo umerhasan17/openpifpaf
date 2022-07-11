@@ -166,7 +166,7 @@ def main():
         net = torch.nn.parallel.DistributedDataParallel(
             net_cpu.to(device=args.device),
             device_ids=[args.local_rank], output_device=args.local_rank,
-            find_unused_parameters=isinstance(datamodule, datasets.MultiDataModule),
+            find_unused_parameters=True,
         )
         loss = loss.to(device=args.device)
     else:
