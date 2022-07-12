@@ -775,7 +775,7 @@ class Hourglass(BaseNetwork):
     def __init__(self, *args, inp_dim=256, bn=True, increase=0, **kwargs):
         super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
         self.hg_input_block = torch.nn.Sequential(
-            convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=1),
+            convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
             residual(inp_dim=128, out_dim=inp_dim)
         )
 
