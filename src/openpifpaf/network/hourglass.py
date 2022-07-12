@@ -106,9 +106,11 @@ class residual(nn.Module):
 
 
 class HourglassBlock(nn.Module):
-    def __init__(self, n, f, bn=None, increase=0):
+    def __init__(self, n, f, bn=None, increases=None):
         super(HourglassBlock, self).__init__()
-        nf = f + increase
+        assert increases is not None
+        assert len(increases) == n
+        nf = f + increases[0]
         self.up1 = residual(f, f)
         # Lower branch
         # self.extra_conv = nn.Conv2d(256, 256, (5, 5), padding=(1, 1), stride=(2, 2), bias=False)  # pool replacement
@@ -117,7 +119,7 @@ class HourglassBlock(nn.Module):
         self.n = n
         # Recursive hourglass
         if self.n > 1:
-            self.low2 = HourglassBlock(n - 1, nf, bn=bn)
+            self.low2 = HourglassBlock(n - 1, nf, bn=bn, increases=increases[1:])
         else:
             self.low2 = residual(nf, nf)
         self.low3 = residual(nf, f)

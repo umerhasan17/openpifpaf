@@ -790,7 +790,7 @@ class Hourglass(BaseNetwork):
         #     torch.nn.ReLU(inplace=True),
         # )
         self.hgs = torch.nn.Sequential(
-            HourglassBlock(2, inp_dim, bn, increase),
+            HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128]),
             # HourglassBlock(2, inp_dim, bn, increase),
         )
         self.hg_output_block = torch.nn.Sequential(
