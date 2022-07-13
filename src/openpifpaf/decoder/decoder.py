@@ -6,6 +6,7 @@ import time
 from typing import List
 
 import torch
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 from .. import annotation, visualizer
 
@@ -121,33 +122,52 @@ class Decoder:
             # then average the fields with the original fields before decoding
             hflip_image_batch = torch.flip(image_batch, [-1])
             hflip_fields_batch = self.fields_batch(model, hflip_image_batch, device=device)
+            image_batch = hflip_image_batch
             for i, fields in enumerate(fields_batch):
-                for j, field in enumerate(fields):
-                    hflip_field = hflip_fields_batch[i][j]
-                    hflip_field = torch.flip(hflip_field, [-1])
-                    hflip_field[:, 2, :, :] = torch.neg(hflip_field[:, 2, :, :])  # negate x regression field
+                for j, field_set in enumerate(fields):
+                    hflip_field_set = hflip_fields_batch[i][j]
+                    hflip_field_set = torch.flip(hflip_field_set, [-1])
+                    # flip x regression field again
+                    hflip_field_set[:, 2, :, :] = torch.flip(hflip_field_set[:, 2, :, :], [-1])
                     import matplotlib.pyplot as plt
+                    from PIL import Image
+
                     def field_plot_debug(cur_field, field_num=0, axarr=None, indices=None):
                         for i, (v1, v2) in enumerate(indices):
-                            axarr[v1, v2].imshow(cur_field[field_num, i, :, :].detach().cpu().numpy())
-                        # axarr[0, 1].imshow(cur_field[field_num, 1, :, :].detach().cpu().numpy())
-                        # axarr[1, 0].imshow(cur_field[field_num, 2, :, :].detach().cpu().numpy())
-                        # axarr[1, 1].imshow(cur_field[field_num, 3, :, :].detach().cpu().numpy())
-                        # axarr[2, 0].imshow(cur_field[field_num, 4, :, :].detach().cpu().numpy())
-                        # axarr[2, 1].imshow(cur_field[field_num, 5, :, :].detach().cpu().numpy())
+                            cur_img_arr = cur_field[field_num, i, :, :].detach().cpu().numpy()
+                            cur_img = axarr[v1, v2].imshow(cur_img_arr)
+                            axarr[v1, v2].set_xlabel(f'Field number {i}')
+                            divider = make_axes_locatable(axarr[v1, v2])
+                            cax = divider.append_axes('right', size='5%', pad=0.05)
+                            f.colorbar(cur_img, cax=cax, orientation='vertical')
 
-                    f, axarr = plt.subplots(3, 4)
-                    field_plot_debug(field, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
-                    field_plot_debug(hflip_field, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2, 4)])
+                    # def show_one_field(field_number=2):
+                    #     plt.imshow(fields_batch[i][j][0, field_number, :, :].detach().cpu().numpy())
+                    #     plt.xlabel(f'Field number: {field_number}')
+                    #     plt.colorbar()
+                    #     plt.show()
+                    #     plt.clf()
+                    #     plt.imshow(hflip_fields_batch[i][j][0, field_number, :, :].detach().cpu().numpy())
+                    #     plt.xlabel(f'Field number: {field_number}')
+                    #     plt.colorbar()
+                    #     plt.show()
+                    f, axarr = plt.subplots(3, 2, figsize=(15, 15))
+                    field_plot_debug(field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
                     plt.show()
+                    plt.clf()
+                    f, axarr = plt.subplots(3, 2, figsize=(15, 15))
+                    field_plot_debug(hflip_field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
+                    plt.show()
+                    plt.clf()
+                    # field_plot_debug(hflip_field, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2, 4)])
 
                     # plt.imshow(hflip_field[0, 1, :, :].detach().cpu().numpy())
                     # hflip_field[:, 1, :, :] = torch.flip(hflip_field[:, 1, :, :], [-1])  # flip confidence
                     # hflip_field[:, 2, :, :] = torch.neg(hflip_field[:, 2, :, :])  # negate x regression field
                     # hflip_field[:, 4, :, :] = torch.neg(hflip_field[:, 4, :, :])  # negate w field
-                    field = field.add(hflip_field)  # take an average of both fields
-                    field = torch.div(field, 2)
-                    fields_batch[i][j] = field
+                    field_set = field_set.add(hflip_field_set)  # take an average of both fields
+                    field_set = torch.div(field_set, 2)
+                    fields_batch[i][j] = field_set
 
         self.last_nn_time = time.perf_counter() - start_nn
 
