@@ -138,4 +138,11 @@ if __name__ == '__main__':
     with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
         test_annos = json.load(f)
 
+    image_id = 391895
+    test_annos['images'] = [img for img in test_annos['images'] if img['id'] == image_id]
+    test_annos['annotations'] = [ann for ann in test_annos['annotations'] if ann['image_id'] == image_id]
+
+    with open(os.path.join(anno_root_dir, 'detection_five_kp_test_person_only_overfit.json'), 'w') as outfile:
+        json.dump(test_annos, outfile)
+
     print('Done')
