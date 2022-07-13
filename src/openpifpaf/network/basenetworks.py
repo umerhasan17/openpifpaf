@@ -772,16 +772,25 @@ class BotNet(BaseNetwork):
 
 class Hourglass(BaseNetwork):
 
-    def __init__(self, *args, inp_dim=256, bn=True, **kwargs):
+    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, **kwargs):
         super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
         self.hg_input_block = torch.nn.Sequential(
             convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
             residual(inp_dim=128, out_dim=inp_dim)
         )
-        self.hgs = torch.nn.Sequential(
-            HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128]),
-            HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128]),
-        )
+
+        if layers == 104:
+            self.hgs = torch.nn.Sequential(
+                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
+                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
+            )
+        elif layers == 52:
+            self.hgs = torch.nn.Sequential(
+                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
+            )
+        else:
+            raise ValueError(f'Number of hourglass layers unsupported: {layers}')
+
         self.hg_output_block = torch.nn.Sequential(
             torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(8, 8), padding=(1, 1), bias=False),
             torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
