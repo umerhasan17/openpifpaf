@@ -772,8 +772,12 @@ class BotNet(BaseNetwork):
 
 class Hourglass(BaseNetwork):
 
-    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, **kwargs):
+    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, increases=None, modules=None, **kwargs):
         super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
+        if increases is None:
+            increases = [0, 128, 0, 0, 128]
+        if modules is None:
+            modules = [2, 2, 2, 2, 2, 4]
         self.hg_input_block = torch.nn.Sequential(
             convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
             residual(inp_dim=128, out_dim=inp_dim)
@@ -781,12 +785,12 @@ class Hourglass(BaseNetwork):
 
         if layers == 104:
             self.hgs = torch.nn.Sequential(
-                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
-                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
             )
         elif layers == 52:
             self.hgs = torch.nn.Sequential(
-                HourglassBlock(5, inp_dim, bn, increases=[128, 0, 0, 0, 128], use_conv=use_conv),
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
             )
         else:
             raise ValueError(f'Number of hourglass layers unsupported: {layers}')

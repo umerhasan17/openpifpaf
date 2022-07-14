@@ -106,26 +106,45 @@ class residual(nn.Module):
 
 
 class HourglassBlock(nn.Module):
-    def __init__(self, n, f, bn=None, increases=None, use_conv=True):
+    def __init__(self, n, f, bn=None, modules=None, increases=None, use_conv=True):
         super(HourglassBlock, self).__init__()
         assert increases is not None
+        assert modules is not None
         assert len(increases) == n
+        assert len(modules) == n + 1
+        cur_mod = modules[0]
         nf = f + increases[0]
-        self.up1 = residual(f, f)
+
+        self.up1 = self.make_residuals(f, f, cur_mod)
         # Lower branch
         if use_conv:
             self.extra = nn.Conv2d(f, f, (2, 2), padding=(0, 0), stride=(2, 2), bias=False)  # pool replacement
         else:
             self.extra = Pool(2, 2)
-        self.low1 = residual(f, nf)
+        self.low1 = self.make_residuals(f, nf, cur_mod)
         self.n = n
         # Recursive hourglass
         if self.n > 1:
-            self.low2 = HourglassBlock(n - 1, nf, bn=bn, increases=increases[1:], use_conv=use_conv)
+            self.low2 = HourglassBlock(n - 1, nf, bn=bn, increases=increases[1:], modules=modules[1:], use_conv=use_conv)
         else:
-            self.low2 = residual(nf, nf)
-        self.low3 = residual(nf, f)
+            self.low2 = self.make_residuals(nf, nf, modules[1])
+        self.low3 = self.make_residuals_revr(nf, f, cur_mod)
         self.up2 = nn.Upsample(scale_factor=2, mode='nearest')
+
+    @staticmethod
+    def make_residuals(inp_dim, out_dim, num_modules):
+        layers = [residual(inp_dim, out_dim)]
+        for _ in range(num_modules - 1):
+            layers.append(residual(out_dim, out_dim))
+        return nn.Sequential(*layers)
+
+    @staticmethod
+    def make_residuals_revr(inp_dim, out_dim, num_modules):
+        layers = []
+        for _ in range(num_modules - 1):
+            layers.append(residual(inp_dim, inp_dim))
+        layers.append(residual(inp_dim, out_dim))
+        return nn.Sequential(*layers)
 
     def forward(self, x):
         up1 = self.up1(x)
