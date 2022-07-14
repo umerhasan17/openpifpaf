@@ -210,7 +210,7 @@ class CocoDetKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
                 openpifpaf.transforms.RescaleAbsolute(self.square_edge),
                 openpifpaf.transforms.CenterPad(self.square_edge),
                 openpifpaf.transforms.EVAL_TRANSFORM,
-                openpifpaf.transforms.DetKpEncoders(encoders),
+                openpifpaf.transforms.Encoders(encoders),
             ])
 
         if self.extended_scale:
@@ -239,7 +239,7 @@ class CocoDetKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
             openpifpaf.transforms.Crop(self.square_edge, use_area_of_interest=True),
             openpifpaf.transforms.CenterPad(self.square_edge),
             openpifpaf.transforms.TRAIN_TRANSFORM,
-            openpifpaf.transforms.DetKpEncoders(encoders),
+            openpifpaf.transforms.Encoders(encoders),
         ])
 
     def train_loader(self):
