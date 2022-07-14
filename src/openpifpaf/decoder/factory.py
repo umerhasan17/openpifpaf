@@ -103,7 +103,7 @@ class Factory:
             dec_str, _, index = dec_str.partition(':')
             if index == 'detkpfull':
                 # append 91 decoders for 91 coco categories
-                for i in range(1):
+                for i in range(91):
                     cls.decoder_request[dec_str].append(i)
             else:
                 index = int(index)
