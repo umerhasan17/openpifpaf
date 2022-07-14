@@ -37,7 +37,7 @@ class Cif(Base):
             ).set(
                 ann['keypoints'], fixed_score='', fixed_bbox=ann['bbox'])
             if not ann['iscrowd']
-            else AnnotationCrowd(['keypoints']).set(1, ann['bbox'])
+            else AnnotationCrowd(['keypoints']).set(ann['category_id'], ann['bbox'])
             for ann in annotation_dicts
         ]
 
