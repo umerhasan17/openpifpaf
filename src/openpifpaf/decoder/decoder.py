@@ -125,9 +125,52 @@ class Decoder:
             for i, fields in enumerate(fields_batch):
                 for j, field_set in enumerate(fields):
                     hflip_field_set = hflip_fields_batch[i][j]
+                    # deal with vector offsets for x regression field
+                    fields_shape = field_set.shape
+                    offset_tensor = torch.arange(fields_shape[3]).repeat(fields_shape[0], fields_shape[2], 1)
+                    hflip_field_set[:, 2, :, :] = hflip_field_set[:, 2, :, :].subtract(offset_tensor)
+
+                    # horizontally flip all fields
                     hflip_field_set = torch.flip(hflip_field_set, [-1])
-                    # flip x regression field again
-                    hflip_field_set[:, 2, :, :] = torch.flip(hflip_field_set[:, 2, :, :], [-1])
+
+                    # add back in the vector offset tensor
+                    hflip_field_set[:, 2, :, :] = hflip_field_set[:, 2, :, :].add(offset_tensor)
+
+
+                    # import matplotlib.pyplot as plt
+                    # from PIL import Image
+                    # from mpl_toolkits.axes_grid1 import make_axes_locatable
+                    #
+                    # def field_plot_debug(cur_field, field_num=0, axarr=None, indices=None):
+                    #     for i, (v1, v2) in enumerate(indices):
+                    #         cur_img_arr = cur_field[field_num, i, :, :].detach().cpu().numpy()
+                    #         cur_img = axarr[v1, v2].imshow(cur_img_arr)
+                    #         axarr[v1, v2].set_xlabel(f'Field number {i}')
+                    #         divider = make_axes_locatable(axarr[v1, v2])
+                    #         cax = divider.append_axes('right', size='5%', pad=0.05)
+                    #         f.colorbar(cur_img, cax=cax, orientation='vertical')
+                    #
+                    # def compare_field_plot_debug(f1, f2, class_num=0, field_index=2):
+                    #     f , axarr = plt.subplots(1, 2, figsize=(15, 15))
+                    #     for arr_idx, field in [(0, f1), (1, f2)]:
+                    #         cur_img = axarr[arr_idx].imshow(field[class_num, field_index, :, :].detach().cpu().numpy())
+                    #         divider = make_axes_locatable(axarr[arr_idx])
+                    #         cax = divider.append_axes('right', size='5%', pad=0.05)
+                    #         f.colorbar(cur_img, cax=cax, orientation='vertical')
+                    #     plt.show()
+                    #     plt.clf()
+                    #
+                    # compare_field_plot_debug(field_set, hflip_field_set)
+                    #
+                    # f, axarr = plt.subplots(3, 2, figsize=(15, 15))
+                    # field_plot_debug(field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
+                    # plt.show()
+                    # plt.clf()
+                    # f, axarr = plt.subplots(3, 2, figsize=(15, 15))
+                    # field_plot_debug(hflip_field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
+                    # plt.show()
+                    # plt.clf()
+
                     # take an average of both fields
                     field_set = field_set.add(hflip_field_set)
                     field_set = torch.div(field_set, 2)
