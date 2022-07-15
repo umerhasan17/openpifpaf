@@ -137,51 +137,6 @@ class Decoder:
                     # add back offset
                     hflip_field_set[:, 2, :, :] = hflip_field_set[:, 2, :, :].add(offset_tensor)
 
-                    import matplotlib.pyplot as plt
-                    from PIL import Image
-                    from mpl_toolkits.axes_grid1 import make_axes_locatable
-
-                    # def field_plot_debug(cur_field, field_num=0, axarr=None, indices=None):
-                    #     for i, (v1, v2) in enumerate(indices):
-                    #         cur_img_arr = cur_field[field_num, i, :, :].detach().cpu().numpy()
-                    #         cur_img = axarr[v1, v2].imshow(cur_img_arr)
-                    #         axarr[v1, v2].set_xlabel(f'Field number {i}')
-                    #         divider = make_axes_locatable(axarr[v1, v2])
-                    #         cax = divider.append_axes('right', size='5%', pad=0.05)
-                    #         f.colorbar(cur_img, cax=cax, orientation='vertical')
-
-                    # def compare_field_plot_debug(f1, f2, class_num=0, field_index=2, difference=False):
-                    #     if difference:
-                    #         plt.imshow(f1.subtract(f2)[class_num, field_index, :, :].detach().cpu().numpy())
-                    #         plt.colorbar()
-                    #     else:
-                    #         f, axarr = plt.subplots(1, 2, figsize=(15, 15))
-                    #         plots = [(0, f1), (1, f2)]
-                    #         for arr_idx, field in plots:
-                    #             cur_img = axarr[arr_idx].imshow(field[class_num, field_index, :, :].detach().cpu().numpy())
-                    #             divider = make_axes_locatable(axarr[arr_idx])
-                    #             cax = divider.append_axes('right', size='5%', pad=0.05)
-                    #             f.colorbar(cur_img, cax=cax, orientation='vertical')
-                    #     plt.show()
-                    #     plt.clf()
-                    #
-                    # compare_field_plot_debug(field_set, hflip_field_set, difference=True)
-                    # compare_field_plot_debug(field_set, hflip_field_set, field_index=1, difference=True)
-                    # compare_field_plot_debug(field_set, hflip_field_set, field_index=3, difference=True)
-                    # compare_field_plot_debug(field_set, hflip_field_set, field_index=4, difference=True)
-                    # compare_field_plot_debug(field_set, hflip_field_set, field_index=5, difference=True)
-
-
-
-                    # f, axarr = plt.subplots(3, 2, figsize=(15, 15))
-                    # field_plot_debug(field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
-                    # plt.show()
-                    # plt.clf()
-                    # f, axarr = plt.subplots(3, 2, figsize=(15, 15))
-                    # field_plot_debug(hflip_field_set, axarr=axarr, indices=[(x, y) for x in range(3) for y in range(2)])
-                    # plt.show()
-                    # plt.clf()
-
                     # take an average of both fields
                     field_set = field_set.add(hflip_field_set)
                     field_set = torch.div(field_set, 2)
