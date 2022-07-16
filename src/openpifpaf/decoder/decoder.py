@@ -7,6 +7,7 @@ from typing import List
 
 import torch
 
+from .utils.hflip import hflip_average_fields_batch
 from .. import annotation, visualizer
 
 LOG = logging.getLogger(__name__)
@@ -118,29 +119,13 @@ class Decoder:
 
         if hflip:
             # take horizontal flipped image and generate fields
-            # then average the fields with the original fields before decoding
             hflip_image_batch = torch.flip(image_batch, [-1])
             hflip_fields_batch = self.fields_batch(model, hflip_image_batch, device=device)
-            image_batch = hflip_image_batch
-            for i, fields in enumerate(fields_batch):
-                for j, field_set in enumerate(fields):
-                    hflip_field_set = hflip_fields_batch[i][j]
-                    # deal with vector offsets for x regression field
-                    fields_shape = field_set.shape
-                    offset_tensor = torch.arange(fields_shape[3]).repeat(fields_shape[0], fields_shape[2], 1)
-                    # remove offset
-                    hflip_field_set[:, 2, :, :] = hflip_field_set[:, 2, :, :].subtract(offset_tensor)
-                    # horizontally flip all fields
-                    hflip_field_set = torch.flip(hflip_field_set, [-1])
-                    # negate x regression field
-                    hflip_field_set[:, 2, :, :] = torch.neg(hflip_field_set[:, 2, :, :])
-                    # add back offset
-                    hflip_field_set[:, 2, :, :] = hflip_field_set[:, 2, :, :].add(offset_tensor)
 
-                    # take an average of both fields
-                    field_set = field_set.add(hflip_field_set)
-                    field_set = torch.div(field_set, 2)
-                    fields_batch[i][j] = field_set
+            # average the fields with the original fields before decoding
+            fields_batch = hflip_average_fields_batch(
+                fields_batch=fields_batch, hflip_fields_batch=hflip_fields_batch, head_metas=model.head_metas
+            )
 
         self.last_nn_time = time.perf_counter() - start_nn
 
