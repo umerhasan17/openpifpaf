@@ -36,14 +36,18 @@ def hflip_average_fields_batch(fields_batch, hflip_fields_batch, head_metas):
             hflip_field_set = hflip_funcs[j](hflip_fields_batch[i][j])
 
             # TODO remove this debug code
-            # if hflip_funcs[j] == hflip_average_caf_fields_batch:
-            #     hflip_field_set = field_set
-            #     # for swp_idx in range(field_set.shape[0]):
-            #     # for swp_idx in [4, 7, 12]:
-            #     #     hflip_field_set[swp_idx, :, :, :] = field_set[swp_idx, :, :, :]
-            # if hflip_funcs[j] == hflip_average_cif_fields_batch:
-            #     hflip_field_set[:, 2, :, :] = field_set[:, 2, :, :]
-            #     run_debug(field_set, hflip_field_set)
+            if hflip_funcs[j] == hflip_average_caf_fields_batch:
+                hflip_field_set = field_set
+                # for swp_idx in range(field_set.shape[0]):
+                # for swp_idx in [4, 7, 12]:
+                #     hflip_field_set[swp_idx, :, :, :] = field_set[swp_idx, :, :, :]
+            if hflip_funcs[j] == hflip_average_cif_fields_batch:
+                # hflip_field_set[:, 0, :, :] = field_set[:, 0, :, :]
+                # hflip_field_set[:, 1, :, :] = field_set[:, 1, :, :]
+                hflip_field_set[:, 2, :, :] = field_set[:, 2, :, :]
+                hflip_field_set[:, 3, :, :] = field_set[:, 3, :, :]
+                hflip_field_set[:, 4, :, :] = field_set[:, 4, :, :]
+                run_debug(field_set, hflip_field_set)
 
             # take an average of both fields
             field_set = field_set.add(hflip_field_set)
