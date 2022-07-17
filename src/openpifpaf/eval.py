@@ -134,7 +134,7 @@ def evaluate(args):
         print('{} not found. Processing: {}'.format(stats_file, network.Factory.checkpoint))
 
     datamodule = datasets.factory(args.dataset)
-    predictor = Predictor(head_metas=datamodule.head_metas)
+    predictor = Predictor(head_metas=None)
 
     data_loader = datamodule.eval_loader()
     prediction_loader = predictor.enumerated_dataloader(enumerate(data_loader))
