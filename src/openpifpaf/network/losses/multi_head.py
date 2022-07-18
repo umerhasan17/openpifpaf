@@ -26,9 +26,23 @@ class MultiHeadLoss(torch.nn.Module):
         assert len(self.losses) == len(head_fields)
         assert len(self.losses) <= len(head_targets)
         assert self.task_sparsity_weight == 0.0  # TODO implement
-        flat_head_losses = [ll
-                            for l, f, t in zip(self.losses, head_fields, head_targets)
-                            for ll in l(f, t)]
+        flat_head_losses = []
+        for i, (l, f, t) in enumerate(zip(self.losses, head_fields, head_targets)):
+            if i not in [0, 1, 2, 273, 274, 275]:
+                with torch.no_grad():
+                    for ll in l(f, t):
+                        ll -= ll
+                        flat_head_losses.append(ll)
+            else:
+                for ll in l(f, t):
+                    flat_head_losses.append(ll)
+        # flat_head_losses = [ll
+        #                     for l, f, t in zip(self.losses, head_fields, head_targets)
+        #                     for ll in l(f, t)]
+        # with torch.no_grad():
+        #     for i in range(len(flat_head_losses)):
+        #         if i not in [0, 1, 2, 273, 274, 275]:
+        #             flat_head_losses[i] -= flat_head_losses[i]
 
         assert len(self.lambdas) == len(flat_head_losses)
         loss_values = [lam * l

@@ -300,7 +300,7 @@ class Factory(Configurable):
 
             # set weights to 0 for all cif and caf heads apart from cifcaf for the person class
             for i, head_net in enumerate(net_cpu.head_nets):
-                if i != 0 or i != 91:
+                if i != 0 and i != 91:
                     with torch.no_grad():
                         net_cpu.head_nets[i].conv.weight = torch.nn.Parameter(torch.zeros_like(net_cpu.head_nets[i].conv.weight))
                         net_cpu.head_nets[i].conv.bias = torch.nn.Parameter(torch.zeros_like(net_cpu.head_nets[i].conv.bias))
