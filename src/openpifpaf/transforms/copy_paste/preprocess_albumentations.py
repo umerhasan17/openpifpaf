@@ -1,10 +1,10 @@
 import logging
 from copy import deepcopy
-
+from collections import deque
 import albumentations as A
 import numpy as np
 from PIL import Image
-
+import random
 import openpifpaf.transforms
 from openpifpaf.transforms import Preprocess
 
@@ -26,11 +26,13 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
     Paste in annotations from previous image into current image
     """
 
-    def __init__(self, *args, max_annos=15, default_transformations=None, apply_copy_paste=True, **kwargs):
+    def __init__(self, *args, max_annos=50, default_transformations=None, apply_copy_paste=True,
+                 max_previous_images=16, **kwargs):
         super().__init__(*args, **kwargs)
         self.apply_copy_paste = apply_copy_paste
-        self.previous_image_data = None
+        self.previous_image_data = deque()
         self.max_annos = max_annos
+        self.max_previous_images = max_previous_images
         self.default_transformations = default_transformations
         if max_annos > 0 and self.apply_copy_paste:
             assert default_transformations is not None
@@ -38,26 +40,15 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         self.total_times = 0
         self.calls = 0
 
-    def update_previous_image(self, data, anns):
+    def update_previous_image_data(self, data, anns):
         """
             Masks and bboxes have been edited with cropping and padding.
             Annotations are the original annotations coming into the transformation function.
         """
         data['previous_anns'] = anns
-        self.previous_image_data = data
-
-    def convert_copy_paste_to_anns(self, unedited_image_data, original_annotations):
-        """ Convert masks and bboxes back to annotations """
-        annotations = []
-        # add annotations for current image to new annotations list
-        annotations.extend(self.reformat_annotations(original_annotations, unedited_image_data['bboxes']))
-        # add annotations for previous image to new annotations list
-        assert self.previous_image_data is not None
-        annotations.extend(self.reformat_annotations(
-            self.previous_image_data['previous_anns'],
-            self.previous_image_data['previous_bboxes']
-        ))
-        return annotations
+        self.previous_image_data.append(data)
+        if len(self.previous_image_data) > self.max_previous_images:
+            self.previous_image_data.popleft()
 
     @staticmethod
     def reformat_annotations(annotations, bboxes):
@@ -96,16 +87,17 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
         t3 = time.time()
         t4 = t5 = t6 = t3
         if self.apply_copy_paste:
-            if self.previous_image_data is not None:
+            if len(self.previous_image_data) > 0:
+                copy_paste_image_data = random.choice(self.previous_image_data)
                 # LOG.debug('Applying albumentations copy paste transform')
                 cp_data = dict(
                     image=data['image'],
                     bboxes=[bbox + (bbox[-1],) for bbox in data['bboxes']],
                     masks=data['masks'],
-                    paste_image=self.previous_image_data['image'],
-                    paste_masks=self.previous_image_data['masks'],
+                    paste_image=copy_paste_image_data['image'],
+                    paste_masks=copy_paste_image_data['masks'],
                     paste_bboxes=[bbox + (len(data['masks']) + bbox[-1],) for bbox in
-                                  self.previous_image_data['bboxes']],
+                                  copy_paste_image_data['bboxes']],
                 )
                 cp_transform = A.Compose(
                     [openpifpaf.transforms.CopyPaste(blend=True, sigma=1, pct_objects_paste=0.8, p=1)],
@@ -115,7 +107,7 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 # add annotation details back in
                 t4 = time.time()
                 updated_annotations = self.reformat_annotations(
-                    anns + self.previous_image_data['previous_anns'],
+                    anns + copy_paste_image_data['previous_anns'],
                     cp_output_data['bboxes']
                 )
                 t5 = time.time()
@@ -125,17 +117,110 @@ class AlbumentationsComposeWrapper(Preprocess, A.Compose, metaclass=Albumentatio
                 # import matplotlib.pyplot as plt
                 # try:
                 #     new_mask_idxs = [x[5] for x in cp_output_data['bboxes']]
+                #     COCO_CATEGORIES = [
+                #         'person',
+                #         'bicycle',
+                #         'car',
+                #         'motorcycle',
+                #         'airplane',
+                #         'bus',
+                #         'train',
+                #         'truck',
+                #         'boat',
+                #         'traffic light',
+                #         'fire hydrant',
+                #         'street sign',
+                #         'stop sign',
+                #         'parking meter',
+                #         'bench',
+                #         'bird',
+                #         'cat',
+                #         'dog',
+                #         'horse',
+                #         'sheep',
+                #         'cow',
+                #         'elephant',
+                #         'bear',
+                #         'zebra',
+                #         'giraffe',
+                #         'hat',
+                #         'backpack',
+                #         'umbrella',
+                #         'shoe',
+                #         'eye glasses',
+                #         'handbag',
+                #         'tie',
+                #         'suitcase',
+                #         'frisbee',
+                #         'skis',
+                #         'snowboard',
+                #         'sports ball',
+                #         'kite',
+                #         'baseball bat',
+                #         'baseball glove',
+                #         'skateboard',
+                #         'surfboard',
+                #         'tennis racket',
+                #         'bottle',
+                #         'plate',
+                #         'wine glass',
+                #         'cup',
+                #         'fork',
+                #         'knife',
+                #         'spoon',
+                #         'bowl',
+                #         'banana',
+                #         'apple',
+                #         'sandwich',
+                #         'orange',
+                #         'broccoli',
+                #         'carrot',
+                #         'hot dog',
+                #         'pizza',
+                #         'donut',
+                #         'cake',
+                #         'chair',
+                #         'couch',
+                #         'potted plant',
+                #         'bed',
+                #         'mirror',
+                #         'dining table',
+                #         'window',
+                #         'desk',
+                #         'toilet',
+                #         'door',
+                #         'tv',
+                #         'laptop',
+                #         'mouse',
+                #         'remote',
+                #         'keyboard',
+                #         'cell phone',
+                #         'microwave',
+                #         'oven',
+                #         'toaster',
+                #         'sink',
+                #         'refrigerator',
+                #         'blender',
+                #         'book',
+                #         'clock',
+                #         'vase',
+                #         'scissors',
+                #         'teddy bear',
+                #         'hair drier',
+                #         'toothbrush',
+                #         'hair brush',
+                #     ]
                 #     display_instances(cp_output_data['image'], np.array([x[:4] for x in cp_output_data['bboxes']]),
                 #                       np.moveaxis(np.array([cp_output_data['masks'][i] for i in new_mask_idxs]), 0, -1),
                 #                       np.array([i for i in range(len(cp_output_data['bboxes']))]),
-                #                       np.array(['c1'] * len(cp_output_data['bboxes'])))
-                #     plt.show()
+                #                       np.array([COCO_CATEGORIES[category_id-1] for category_id in list(map(lambda x: x[4], cp_output_data['bboxes']))]),
+                #                       call_number=self.calls)
                 # except Exception as e:
                 #     print('Visualisation failed: ', e)
             else:
                 updated_annotations = self.reformat_annotations(anns, data['bboxes'])
             # save current image details for next copy paste augmentation
-            self.update_previous_image(data, anns)
+            self.update_previous_image_data(data, anns)
             t6 = time.time()
         else:
             updated_annotations = self.reformat_annotations(anns, data['bboxes'])
