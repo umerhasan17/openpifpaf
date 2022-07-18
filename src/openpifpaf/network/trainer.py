@@ -216,6 +216,14 @@ class Trainer():
                 if self.train_profile and self.device.type != 'cpu':
                     torch.cuda.synchronize()
 
+        for i, head_net in enumerate(self.model.head_nets):
+            if i != 0 and i != 91:
+                try:
+                    assert (self.model.head_nets[i].conv.weight == 0).all().cpu().detach().item()
+                    assert (self.model.head_nets[i].conv.bias == 0).all().cpu().detach().item()
+                except:
+                    print('why')
+
         with torch.inference_mode():
             with torch.autograd.profiler.record_function('reduce-losses'):
                 loss = self.reduce_loss(loss)

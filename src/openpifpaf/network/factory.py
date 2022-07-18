@@ -297,6 +297,14 @@ class Factory(Configurable):
             net_cpu: nets.Shell = self.from_scratch(head_metas)
             net_cpu = self.init_net(net_cpu)
             epoch = 0
+
+            # set weights to 0 for all cif and caf heads apart from cifcaf for the person class
+            for i, head_net in enumerate(net_cpu.head_nets):
+                if i != 0 or i != 91:
+                    with torch.no_grad():
+                        net_cpu.head_nets[i].conv.weight = torch.nn.Parameter(torch.zeros_like(net_cpu.head_nets[i].conv.weight))
+                        net_cpu.head_nets[i].conv.bias = torch.nn.Parameter(torch.zeros_like(net_cpu.head_nets[i].conv.bias))
+
             return net_cpu, epoch
 
         net_cpu, epoch = self.from_checkpoint()

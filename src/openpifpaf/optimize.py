@@ -91,6 +91,10 @@ def factory_optimizer(args, parameters):
     if args.amsgrad:
         args.adam = True
 
+    for i, p in enumerate(parameters):
+        if i >= 159 and i not in [159, 160, 341, 342]:
+            p.requires_grad = False
+
     if args.adam:
         LOG.info('Adam optimizer')
         optimizer = torch.optim.Adam(
