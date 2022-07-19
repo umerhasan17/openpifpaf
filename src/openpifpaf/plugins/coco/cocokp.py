@@ -49,6 +49,7 @@ class CocoKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
     bmin = 0.1
 
     eval_annotation_filter = True
+    eval_square = False
     eval_long_edge = 641
     eval_orientation_invariant = 0.0
     eval_extended_scale = False
@@ -145,6 +146,8 @@ class CocoKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
         group.add_argument('--coco-eval-extended-scale', default=False, action='store_true')
         group.add_argument('--coco-eval-orientation-invariant',
                            default=cls.eval_orientation_invariant, type=float)
+        group.add_argument('--eval-square-edge', dest='eval_square', default=False, action='store_true',
+                           help='ensures evaluation image is square of dimensions long_edge')
 
     @classmethod
     def configure(cls, args: argparse.Namespace):
@@ -180,6 +183,7 @@ class CocoKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
             cls.eval_annotations = cls._testdev2017_annotations
             cls.annotation_filter = False
         cls.eval_long_edge = args.coco_eval_long_edge
+        cls.eval_square = args.eval_square
         cls.eval_orientation_invariant = args.coco_eval_orientation_invariant
         cls.eval_extended_scale = args.coco_eval_extended_scale
 
@@ -273,8 +277,8 @@ class CocoKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
         elif cls.eval_long_edge:
             rescale_t = openpifpaf.transforms.RescaleAbsolute(cls.eval_long_edge)
 
-        if cls.batch_size == 1:
-            padding_t = openpifpaf.transforms.CenterPadTight(16)
+        if cls.batch_size == 1 and not cls.square_edge:
+                padding_t = openpifpaf.transforms.CenterPadTight(16)
         else:
             assert cls.eval_long_edge
             padding_t = openpifpaf.transforms.CenterPad(cls.eval_long_edge)

@@ -124,6 +124,7 @@ setuptools.setup(
             'pycodestyle',
             'pytest',
             'opencv-python',
+            'tabulate',
             'thop',
         ],
         'train': [
