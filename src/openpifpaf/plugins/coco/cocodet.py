@@ -205,4 +205,5 @@ class CocoDet(openpifpaf.datasets.DataModule):
             max_per_image=100,
             category_ids=[],
             iou_type='bbox',
+            per_class_ap=True,
         )]

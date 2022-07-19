@@ -46,7 +46,9 @@ class Coco(Base):
                  category_ids=None,
                  iou_type='keypoints',
                  small_threshold=0.0,
-                 keypoint_oks_sigmas=None):
+                 keypoint_oks_sigmas=None,
+                 per_class_ap=False,
+                 ):
         super().__init__()
 
         if category_ids is None:
@@ -58,6 +60,7 @@ class Coco(Base):
         self.iou_type = iou_type
         self.small_threshold = small_threshold
         self.keypoint_oks_sigmas = keypoint_oks_sigmas
+        self.per_class_ap = per_class_ap
 
         self.predictions = []
         self.image_ids = []
@@ -73,7 +76,7 @@ class Coco(Base):
         LOG.debug('max = %d, category ids = %s, iou_type = %s',
                   self.max_per_image, self.category_ids, self.iou_type)
 
-    def _stats(self, predictions=None, image_ids=None):
+    def _stats(self, predictions=None, image_ids=None, stats_category_ids=None):
         # from pycocotools.cocoeval import COCOeval
         if predictions is None:
             predictions = self.predictions
@@ -86,6 +89,9 @@ class Coco(Base):
         LOG.info('cat_ids: %s', self.category_ids)
         if self.category_ids:
             self.eval.params.catIds = self.category_ids
+        # override self.category_ids with stats_category_ids if it's present
+        if stats_category_ids:
+            self.eval.params.catIds = stats_category_ids
         if self.keypoint_oks_sigmas is not None:
             self.eval.params.kpt_oks_sigmas = np.asarray(self.keypoint_oks_sigmas)
 
@@ -160,4 +166,6 @@ class Coco(Base):
             'text_labels': self.text_labels,
         }
 
+        if self.per_class_ap:
+            data['per_class_ap'] = [self._stats(stats_category_ids=[cur_category_id]).tolist() for cur_category_id in range(1, 92)],
         return data
