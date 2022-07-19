@@ -98,9 +98,10 @@ class Coco(Base):
         if image_ids is not None:
             print('image ids', image_ids)
             self.eval.params.imgIds = image_ids
-        self.eval.evaluate()
-        self.eval.accumulate()
-        self.eval.summarize()
+        if stats_category_ids is None:
+            self.eval.evaluate()
+            self.eval.accumulate()
+            self.eval.summarize()
         return self.eval.stats
 
     # pylint: disable=unused-argument
@@ -167,5 +168,5 @@ class Coco(Base):
         }
 
         if self.per_class_ap:
-            data['per_class_ap'] = [self._stats(stats_category_ids=[cur_category_id]).tolist() for cur_category_id in range(1, 92)],
+            data['per_class_ap'] = [self._stats(stats_category_ids=[cur_category_id]).tolist()[0] for cur_category_id in range(1, 92)],
         return data
