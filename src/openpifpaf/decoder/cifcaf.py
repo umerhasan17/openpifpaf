@@ -271,10 +271,15 @@ class CifCaf(Decoder):
                 ann.id_ = int(ann_id)
             min_x, max_x = np.min(ann.data[:, 0]), np.max(ann.data[:, 0])
             min_y, max_y = np.min(ann.data[:, 1]), np.max(ann.data[:, 1])
-            assert min_y <= max_y and min_x <= max_x
+            w, h = max_x - min_x, max_y - min_y
+            assert w >= 0 and h >= 0
+            # min_x -= w * 0.1
+            # min_y -= h * 0.1
+            # w *= 1.1
+            # h *= 1.1
             ann_bbox = AnnotationDet([1])
-            ann_bbox.set(1, ann.score, [min_x, min_y, max_x - min_x, max_y - min_y])
-            annotations_py.append(ann)
+            ann_bbox.set(1, ann.score, [min_x, min_y, w, h])
+            # annotations_py.append(ann)
             annotations_py.append(ann_bbox)
 
         # LOG.info('annotations %d: %s',
