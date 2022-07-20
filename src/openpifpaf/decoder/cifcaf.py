@@ -7,7 +7,7 @@ import numpy as np
 import torch
 
 from .decoder import Decoder
-from ..annotation import Annotation
+from ..annotation import Annotation, AnnotationDet
 from . import utils
 from .. import headmeta, visualizer
 
@@ -269,9 +269,15 @@ class CifCaf(Decoder):
             ann.joint_scales[:] = ann_data[:, 3]
             if ann_id != -1:
                 ann.id_ = int(ann_id)
+            min_x, max_x = np.min(ann.data[:, 0]), np.max(ann.data[:, 0])
+            min_y, max_y = np.min(ann.data[:, 1]), np.max(ann.data[:, 1])
+            assert min_y <= max_y and min_x <= max_x
+            ann_bbox = AnnotationDet([1])
+            ann_bbox.set(1, ann.score, [min_x, min_y, max_x - min_x, max_y - min_y])
             annotations_py.append(ann)
+            annotations_py.append(ann_bbox)
 
-        LOG.info('annotations %d: %s',
-                 len(annotations_py),
-                 [np.sum(ann.data[:, 2] > 0.1) for ann in annotations_py])
+        # LOG.info('annotations %d: %s',
+        #          len(annotations_py),
+        #          [np.sum(ann.data[:, 2] > 0.1) for ann in annotations_py])
         return annotations_py

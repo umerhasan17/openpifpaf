@@ -326,7 +326,13 @@ class CocoKp(openpifpaf.datasets.DataModule, openpifpaf.Configurable):
     def metrics(self):
         return [openpifpaf.metric.Coco(
             pycocotools.coco.COCO(self.eval_annotations),
-            max_per_image=20,
+            max_per_image=100,
             category_ids=[1],
-            iou_type='keypoints',
+            iou_type='bbox',
         )]
+        # return [openpifpaf.metric.Coco(
+        #     pycocotools.coco.COCO(self.eval_annotations),
+        #     max_per_image=20,
+        #     category_ids=[1],
+        #     iou_type='bbox',
+        # )]
