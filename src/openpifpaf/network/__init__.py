@@ -7,5 +7,6 @@ from .nets import Shell
 from .running_cache import RunningCache
 from .tracking_base import TrackingBase
 from .tracking_heads import TBaseSingleImage, Tcaf
+from .hourglass import HourglassBlock
 from .trainer import Trainer
 from . import losses
