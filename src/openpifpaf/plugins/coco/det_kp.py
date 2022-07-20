@@ -318,4 +318,5 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
             max_per_image=100,
             category_ids=[],
             iou_type='bbox',
+            per_class_ap=True,
         )]

@@ -3,14 +3,15 @@ Util functions for object detection with triplet keypoints
 """
 
 import os
-import json
+from collections import Counter, defaultdict
 
-import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from pycocotools.coco import COCO
 
 # Useful constants
+from openpifpaf.plugins.coco.constants import COCO_CATEGORIES
+
 DETKP_SKELETON = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 5), (3, 4), (3, 5), (4, 5)]
 DETKP_KEYPOINTS = ['top_left', 'top_right', 'center', 'bottom_left', 'bottom_right']
 DETKP_HFLIP = {
@@ -104,7 +105,8 @@ def create_det_keypoint_test_anno_file(root_dir):
     for i in range(num_images):
         cur_img = train_annos['images'][i]
         image_id = cur_img['id']
-        cur_annos = [ann for ann in train_annos['annotations'] if ann['image_id'] == image_id and ann['category_id'] == 1]
+        cur_annos = [ann for ann in train_annos['annotations'] if
+                     ann['image_id'] == image_id and ann['category_id'] == 1]
         images.append(cur_img)
         annotations.extend(cur_annos)
 
@@ -119,6 +121,31 @@ def create_det_keypoint_test_anno_file(root_dir):
         ), outfile)
 
 
+def category_counts(f_name):
+    with open(f_name, 'r') as ann_file:
+        anns = json.load(ann_file)
+
+    a = defaultdict(int)
+
+    for ann in anns['annotations']:
+        try:
+            for category in anns['categories']:
+                if category['id'] == ann['category_id']:
+                    a[category['id']] += 1
+            # a[anns['categories'][ann['category_id']-1]] += 1
+        except:
+            print(ann['category_id'])
+            # print(anns['categories'][ann['category_id'] - 1])
+            break
+
+    # a = [x[1] for x in sorted(a.items())]
+    print([cat['name'] for cat in anns['categories']])
+    # print(COCO_CATEGORIES)
+    # a = Counter([anns['categories'][ann['category_id'] - 1] for ann in anns['annotations']])
+
+    # print(a)
+
+
 if __name__ == '__main__':
     import json
 
@@ -127,7 +154,8 @@ if __name__ == '__main__':
     # create_det_keypoint_annotation_file(anno_root_dir, 'instances_train2017.json')
 
     # visualise_test(anno_root_dir + 'instances_val2017.json')
-
+    category_counts(anno_root_dir + 'instances_val2017.json')
+    # category_counts(anno_root_dir + 'instances_train2017.json')
     """
     --cocokp-train-annotations=data-mscoco/annotations/detection_triplet_kp_instances_train2017.json
     --cocokp-val-annotations=data-mscoco/annotations/detection_triplet_kp_instances_val2017.json
@@ -135,7 +163,7 @@ if __name__ == '__main__':
 
     # create_det_keypoint_test_anno_file(anno_root_dir)
 
-    with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
-        test_annos = json.load(f)
+    # with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
+    #     test_annos = json.load(f)
 
     print('Done')
