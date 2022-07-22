@@ -115,17 +115,23 @@ class Decoder:
     def batch(self, model, image_batch, *, device=None, hflip=False, gt_anns_batch=None):
         """From image batch straight to annotations batch."""
         start_nn = time.perf_counter()
-        fields_batch = self.fields_batch(model, image_batch, device=device)
 
         if hflip:
             # take horizontal flipped image and generate fields
             hflip_image_batch = torch.flip(image_batch, [-1])
-            hflip_fields_batch = self.fields_batch(model, hflip_image_batch, device=device)
+            combined_image_batch = torch.cat((image_batch, hflip_image_batch), dim=0)
+            combined_fields_batch = self.fields_batch(model, combined_image_batch, device=device)
+            cfb_len = len(combined_fields_batch)
+            assert cfb_len % 2 == 0
+            fields_batch = combined_fields_batch[:cfb_len // 2]
+            hflip_fields_batch = combined_fields_batch[cfb_len // 2:]
 
             # average the fields with the original fields before decoding
             fields_batch = hflip_average_fields_batch(
                 fields_batch=fields_batch, hflip_fields_batch=hflip_fields_batch, head_metas=model.head_metas
             )
+        else:
+            fields_batch = self.fields_batch(model, image_batch, device=device)
 
         self.last_nn_time = time.perf_counter() - start_nn
 
