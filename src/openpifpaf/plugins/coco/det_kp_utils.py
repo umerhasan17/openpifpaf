@@ -3,9 +3,7 @@ Util functions for object detection with triplet keypoints
 """
 
 import os
-import json
 
-import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 from pycocotools.coco import COCO
@@ -104,7 +102,8 @@ def create_det_keypoint_test_anno_file(root_dir):
     for i in range(num_images):
         cur_img = train_annos['images'][i]
         image_id = cur_img['id']
-        cur_annos = [ann for ann in train_annos['annotations'] if ann['image_id'] == image_id and ann['category_id'] == 1]
+        cur_annos = [ann for ann in train_annos['annotations'] if
+                     ann['image_id'] == image_id and ann['category_id'] == 1]
         images.append(cur_img)
         annotations.extend(cur_annos)
 
@@ -119,12 +118,34 @@ def create_det_keypoint_test_anno_file(root_dir):
         ), outfile)
 
 
+def create_class_agnostic_detection_annos(root_dir, detection_ann_file):
+    with open(os.path.join(root_dir, detection_ann_file)) as f:
+        detection_annos = json.load(f)
+
+    new_detection_annos_list = []
+
+    for ann in detection_annos['annotations']:
+        ann['category_id'] = 1
+        new_detection_annos_list.append(ann)
+
+    detection_annos['annotations'] = new_detection_annos_list
+    detection_annos['categories'] = detection_annos['categories'][:1]
+    detection_annos['categories'][0] = dict(supercategory='object', id=1, name='object')
+    with open(os.path.join(root_dir, 'detection_class_agnostic_' + detection_ann_file), 'w') as outfile:
+        json.dump(detection_annos, outfile)
+
+
 if __name__ == '__main__':
     import json
 
     anno_root_dir = '../../data-mscoco/annotations/'
-    # create_det_keypoint_annotation_file(anno_root_dir, 'instances_val2017.json')
-    # create_det_keypoint_annotation_file(anno_root_dir, 'instances_train2017.json')
+    f = create_class_agnostic_detection_annos
+    # f = create_det_keypoint_annotation_file
+    # f(anno_root_dir, 'instances_val2017.json')
+    # f(anno_root_dir, 'instances_train2017.json')
+    f(anno_root_dir, 'detection_triplet_kp_instances_train2017.json')
+    f(anno_root_dir, 'detection_triplet_kp_instances_val2017.json')
+
 
     # visualise_test(anno_root_dir + 'instances_val2017.json')
 
@@ -135,7 +156,7 @@ if __name__ == '__main__':
 
     # create_det_keypoint_test_anno_file(anno_root_dir)
 
-    with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
-        test_annos = json.load(f)
+    # with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
+    #     test_annos = json.load(f)
 
     print('Done')
