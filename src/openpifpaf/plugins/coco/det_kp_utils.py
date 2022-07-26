@@ -9,18 +9,11 @@ from PIL import Image
 from pycocotools.coco import COCO
 
 # Useful constants
-DETKP_SKELETON = [(1, 2), (1, 3), (1, 4), (2, 3), (2, 5), (3, 4), (3, 5), (4, 5)]
-DETKP_KEYPOINTS = ['top_left', 'top_right', 'center', 'bottom_left', 'bottom_right']
-DETKP_HFLIP = {
-    'top_left': 'top_right',
-    'top_right': 'top_left',
-    'center': 'center',
-    'bottom_left': 'bottom_right',
-    'bottom_right': 'bottom_left',
-}
-DETKP_POSE = np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0], [0.0, 0.0, 2.0]])
-DETKP_SIGMAS = [1.0, 1.0, 1.0, 1.0, 1.0]
-DETKP_SCORE_WEIGHTS = [1.0, 1.0, 1.0, 1.0, 1.0]
+DETKP_SKELETON = [(1, 2)]
+DETKP_KEYPOINTS = ['top_left', 'bottom_right']
+DETKP_POSE = np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 2.0]])
+DETKP_SIGMAS = [1.0, 1.0]
+DETKP_SCORE_WEIGHTS = [1.0, 1.0]
 
 
 def create_detection_keypoints_annotations(detection_annos):
@@ -30,9 +23,9 @@ def create_detection_keypoints_annotations(detection_annos):
         # keypoints are represented as 3 values (x coordinate, y coordinate, visibility flag=2)
         return [
             x, y, 2,
-            x + w, y, 2,
-            x + w / 2, y + h / 2, 2,
-            x, y + h, 2,
+            # x + w, y, 2,
+            # x + w / 2, y + h / 2, 2,
+            # x, y + h, 2,
             x + w, y + h, 2
         ]
 
@@ -89,7 +82,7 @@ def create_det_keypoint_annotation_file(root_dir, detection_ann_file):
 
     detection_tripkp_annos = create_detection_keypoints_annotations(detection_annos)
 
-    with open(os.path.join(root_dir, 'detection_five_kp_' + detection_ann_file), 'w') as outfile:
+    with open(os.path.join(root_dir, 'detection_cornernet_' + detection_ann_file), 'w') as outfile:
         json.dump(detection_tripkp_annos, outfile)
 
 
@@ -143,8 +136,10 @@ if __name__ == '__main__':
     # f = create_det_keypoint_annotation_file
     # f(anno_root_dir, 'instances_val2017.json')
     # f(anno_root_dir, 'instances_train2017.json')
-    f(anno_root_dir, 'detection_triplet_kp_instances_train2017.json')
-    f(anno_root_dir, 'detection_triplet_kp_instances_val2017.json')
+    f(anno_root_dir, 'detection_cornernet_instances_train2017.json')
+    f(anno_root_dir, 'detection_cornernet_instances_val2017.json')
+    # f(anno_root_dir, 'detection_triplet_kp_instances_train2017.json')
+    # f(anno_root_dir, 'detection_triplet_kp_instances_val2017.json')
 
 
     # visualise_test(anno_root_dir + 'instances_val2017.json')

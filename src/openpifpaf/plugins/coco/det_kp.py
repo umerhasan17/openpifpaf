@@ -12,7 +12,7 @@ from .det_kp_utils import (
     DETKP_KEYPOINTS,
     DETKP_POSE,
     DETKP_SIGMAS,
-    DETKP_SCORE_WEIGHTS, DETKP_HFLIP,
+    DETKP_SCORE_WEIGHTS
 )
 
 try:
@@ -209,7 +209,7 @@ class CocoDetKpTriplets(openpifpaf.datasets.DataModule, openpifpaf.Configurable)
         return openpifpaf.transforms.Compose([
             openpifpaf.transforms.NormalizeAnnotations(),
             openpifpaf.transforms.RandomApply(
-                openpifpaf.transforms.HFlip(DETKP_KEYPOINTS, DETKP_HFLIP), 0.5),
+                openpifpaf.transforms.HFlipDetKp(), 0.5),
             rescale_t,
             openpifpaf.transforms.RandomApply(
                 openpifpaf.transforms.Blur(), self.blur),

@@ -1,9 +1,8 @@
 import copy
 import logging
-import time
 
-import numpy as np
 import PIL
+import numpy as np
 
 from .preprocess import Preprocess
 
@@ -40,6 +39,7 @@ class _HorizontalSwap():
 
 class HFlip(Preprocess):
     """Horizontally flip image and annotations."""
+
     def __init__(self, keypoints, hflip):
         self.swap = _HorizontalSwap(keypoints, hflip)
 
@@ -55,6 +55,28 @@ class HFlip(Preprocess):
                 ann['keypoints'] = self.swap(ann['keypoints'])
                 meta['horizontal_swap'] = self.swap
             ann['bbox'][0] = -(ann['bbox'][0] + ann['bbox'][2]) - 1.0 + w
+
+        assert meta['hflip'] is False
+        meta['hflip'] = True
+
+        meta['valid_area'][0] = -(meta['valid_area'][0] + meta['valid_area'][2]) - 1.0 + w
+        return image, anns, meta
+
+
+class HFlipDetKp(Preprocess):
+    """ Horizontally flip image and annotations for keypoint object detection. """
+
+    def __call__(self, image, anns, meta):
+        meta = copy.deepcopy(meta)
+        anns = copy.deepcopy(anns)
+
+        w, _ = image.size
+        image = image.transpose(PIL.Image.FLIP_LEFT_RIGHT)
+        for ann in anns:
+            ann['bbox'][0] = -(ann['bbox'][0] + ann['bbox'][2]) - 1.0 + w
+            # update keypoints after bounding box changes
+            [x, y, w, h] = ann['bbox']
+            ann['keypoints'] = [x, y, 2, x + w, y + h, 2]
 
         assert meta['hflip'] is False
         meta['hflip'] = True
