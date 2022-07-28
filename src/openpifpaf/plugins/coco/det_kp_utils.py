@@ -132,10 +132,11 @@ if __name__ == '__main__':
     import json
 
     anno_root_dir = '../../data-mscoco/annotations/'
+    f = create_det_keypoint_annotation_file
+    f(anno_root_dir, 'instances_val2017.json')
+    f(anno_root_dir, 'instances_train2017.json')
+
     f = create_class_agnostic_detection_annos
-    # f = create_det_keypoint_annotation_file
-    # f(anno_root_dir, 'instances_val2017.json')
-    # f(anno_root_dir, 'instances_train2017.json')
     f(anno_root_dir, 'detection_cornernet_instances_train2017.json')
     f(anno_root_dir, 'detection_cornernet_instances_val2017.json')
     # f(anno_root_dir, 'detection_triplet_kp_instances_train2017.json')
