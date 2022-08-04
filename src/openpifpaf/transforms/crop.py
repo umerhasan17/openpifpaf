@@ -4,6 +4,7 @@ import logging
 import numpy as np
 import torch
 
+from .det_kp_transforms import create_keypoints_from_bbox
 from .preprocess import Preprocess
 
 LOG = logging.getLogger(__name__)
@@ -45,10 +46,7 @@ class Crop(Preprocess):
             new_rb = np.minimum(meta['valid_area'][:2] + meta['valid_area'][2:], new_rb)
             ann['bbox'][2:] = new_rb - ann['bbox'][:2]
             # keypoint
-            [x, y, w, h] = ann['bbox']
-            ann['keypoints'] = np.array([
-                [x, y, 2], [x+w, y, 2], [x+(w/2), y+(h/2), 2], [x, y+h, 2], [x+w, y+h, 2]
-            ])
+            ann['keypoints'] = create_keypoints_from_bbox(ann['bbox'])
         anns = [ann for ann in anns if ann['bbox'][2] > 0.0 and ann['bbox'][3] > 0.0]
 
         return image, anns, meta

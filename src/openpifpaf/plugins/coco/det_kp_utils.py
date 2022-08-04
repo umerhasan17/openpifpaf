@@ -9,6 +9,8 @@ from PIL import Image
 from pycocotools.coco import COCO
 
 # Useful constants
+from openpifpaf.transforms.det_kp_transforms import create_keypoints_from_bbox
+
 DETKP_SKELETON = [(1, 2)]
 DETKP_KEYPOINTS = ['top_left', 'bottom_right']
 DETKP_POSE = np.array([[0.0, 0.0, 2.0], [0.0, 0.0, 2.0]])
@@ -17,27 +19,15 @@ DETKP_SCORE_WEIGHTS = [1.0, 1.0]
 
 
 def create_detection_keypoints_annotations(detection_annos):
-    def create_bbox_keypoints(bbox: list):
-        assert len(bbox) == 4
-        [x, y, w, h] = bbox
-        # keypoints are represented as 3 values (x coordinate, y coordinate, visibility flag=2)
-        return [
-            x, y, 2,
-            # x + w, y, 2,
-            # x + w / 2, y + h / 2, 2,
-            # x, y + h, 2,
-            x + w, y + h, 2
-        ]
-
     kp_info = dict(description='COCO 2017 detection dataset formatted as keypoint triplets', version='1.0', year=2022,
                    date_created='2022/06/01')
     kp_annotations = [
         dict(
             segmentation=da['segmentation'],
-            num_keypoints=5,
+            num_keypoints=2,
             area=da['area'],
             iscrowd=da['iscrowd'],
-            keypoints=create_bbox_keypoints(da['bbox']),
+            keypoints=create_keypoints_from_bbox(da['bbox']),
             image_id=da['image_id'],
             bbox=da['bbox'],
             category_id=da['category_id'],
@@ -76,13 +66,13 @@ def visualise_test(ann_file):
         # display_img_anns(test_image, test_annos, coco)
 
 
-def create_det_keypoint_annotation_file(root_dir, detection_ann_file):
+def create_det_keypoint_annotation_file(root_dir, detection_ann_file, name_template='test_template_'):
     with open(os.path.join(root_dir, detection_ann_file)) as f:
         detection_annos = json.load(f)
 
     detection_tripkp_annos = create_detection_keypoints_annotations(detection_annos)
 
-    with open(os.path.join(root_dir, 'detection_cornernet_' + detection_ann_file), 'w') as outfile:
+    with open(os.path.join(root_dir, name_template + detection_ann_file), 'w') as outfile:
         json.dump(detection_tripkp_annos, outfile)
 
 
@@ -132,12 +122,10 @@ if __name__ == '__main__':
     import json
 
     anno_root_dir = '../../data-mscoco/annotations/'
-    f = create_class_agnostic_detection_annos
-    # f = create_det_keypoint_annotation_file
-    # f(anno_root_dir, 'instances_val2017.json')
-    # f(anno_root_dir, 'instances_train2017.json')
-    f(anno_root_dir, 'detection_cornernet_instances_train2017.json')
-    f(anno_root_dir, 'detection_cornernet_instances_val2017.json')
+    # create_det_keypoint_annotation_file(anno_root_dir, 'instances_val2017.json', name_template='detection_cornernet_')
+    # create_det_keypoint_annotation_file(anno_root_dir, 'instances_train2017.json', name_template='detection_cornernet_')
+    # create_class_agnostic_detection_annos(anno_root_dir, 'detection_cornernet_instances_train2017.json')
+    # create_class_agnostic_detection_annos(anno_root_dir, 'detection_cornernet_instances_val2017.json')
     # f(anno_root_dir, 'detection_triplet_kp_instances_train2017.json')
     # f(anno_root_dir, 'detection_triplet_kp_instances_val2017.json')
 
@@ -151,7 +139,7 @@ if __name__ == '__main__':
 
     # create_det_keypoint_test_anno_file(anno_root_dir)
 
-    # with open(anno_root_dir + 'detection_five_kp_test_person_only.json', 'r') as f:
-    #     test_annos = json.load(f)
+    with open(anno_root_dir + 'detection_class_agnostic_detection_cornernet_instances_val2017.json', 'r') as f:
+        test_annos = json.load(f)
 
     print('Done')

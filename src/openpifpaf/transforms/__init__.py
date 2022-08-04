@@ -9,7 +9,7 @@ from .compose import Compose
 from .crop import Crop
 from .deinterlace import Deinterlace
 from .encoders import Encoders
-from .hflip import HFlip
+from .hflip import HFlip, HFlipDetKp
 from .image import Blur, HorizontalBlur, ImageTransform, JpegCompression
 from .impute import AddCrowdForIncompleteHead
 from .minsize import MinSize

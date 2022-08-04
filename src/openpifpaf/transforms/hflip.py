@@ -4,6 +4,7 @@ import logging
 import PIL
 import numpy as np
 
+from .det_kp_transforms import create_keypoints_from_bbox
 from .preprocess import Preprocess
 
 LOG = logging.getLogger(__name__)
@@ -75,8 +76,7 @@ class HFlipDetKp(Preprocess):
         for ann in anns:
             ann['bbox'][0] = -(ann['bbox'][0] + ann['bbox'][2]) - 1.0 + w
             # update keypoints after bounding box changes
-            [x, y, w, h] = ann['bbox']
-            ann['keypoints'] = [x, y, 2, x + w, y + h, 2]
+            ann['keypoints'] = create_keypoints_from_bbox(ann['bbox'])
 
         assert meta['hflip'] is False
         meta['hflip'] = True
