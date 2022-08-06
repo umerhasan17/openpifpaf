@@ -117,6 +117,7 @@ class CifDet(Base):
     n_confidences: ClassVar[int] = 1
     n_vectors: ClassVar[int] = 2
     n_scales: ClassVar[int] = 0
+    n_categories: ClassVar[int] = 91
 
     vector_offsets = [True, False]
     decoder_min_scale = 0.0

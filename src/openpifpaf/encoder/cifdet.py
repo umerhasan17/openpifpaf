@@ -33,7 +33,7 @@ class CifDetGenerator():
         self.config = config
 
         self.rescaler = config.rescaler or AnnRescalerDet(
-            config.meta.stride, len(config.meta.categories))
+            config.meta.stride, 1)
         self.visualizer = config.visualizer or CifDetVisualizer(config.meta)
 
         self.intensities = None
@@ -42,6 +42,7 @@ class CifDetGenerator():
         self.fields_reg_bmin = None
         self.fields_wh_bmin = None
         self.fields_reg_l = None
+        self.classification_fields = None
 
         self.sink = create_sink(config.side_length)
         self.s_offset = (config.side_length - 1.0) / 2.0
@@ -55,8 +56,8 @@ class CifDetGenerator():
         valid_area = self.rescaler.valid_area(meta)
         LOG.debug('valid area: %s, pif side length = %d', valid_area, self.config.side_length)
 
-        n_fields = len(self.config.meta.categories)
-        self.init_fields(n_fields, bg_mask)
+        num_categories = len(self.config.meta.categories)
+        self.init_fields(num_categories, bg_mask)
         self.fill(detections)
         fields = self.fields(valid_area)
 
@@ -65,15 +66,16 @@ class CifDetGenerator():
 
         return fields
 
-    def init_fields(self, n_fields, bg_mask):
+    def init_fields(self, num_categories, bg_mask):
         field_w = bg_mask.shape[-1] + 2 * self.config.padding
         field_h = bg_mask.shape[-2] + 2 * self.config.padding
-        self.intensities = np.zeros((n_fields, field_h, field_w), dtype=np.float32)
-        self.fields_reg = np.full((n_fields, 2, field_h, field_w), np.nan, dtype=np.float32)
-        self.fields_wh = np.full((n_fields, 2, field_h, field_w), np.nan, dtype=np.float32)
-        self.fields_reg_bmin = np.full((n_fields, field_h, field_w), np.nan, dtype=np.float32)
-        self.fields_wh_bmin = np.full((n_fields, field_h, field_w), np.nan, dtype=np.float32)
-        self.fields_reg_l = np.full((n_fields, field_h, field_w), np.inf, dtype=np.float32)
+        self.intensities = np.zeros((1, field_h, field_w), dtype=np.float32)
+        self.fields_reg = np.full((1, 2, field_h, field_w), np.nan, dtype=np.float32)
+        self.fields_wh = np.full((1, 2, field_h, field_w), np.nan, dtype=np.float32)
+        self.fields_reg_bmin = np.full((1, field_h, field_w), np.nan, dtype=np.float32)
+        self.fields_wh_bmin = np.full((1, field_h, field_w), np.nan, dtype=np.float32)
+        self.fields_reg_l = np.full((1, field_h, field_w), np.inf, dtype=np.float32)
+        self.classification_fields = np.zeros((1, num_categories, field_h, field_w), dtype=np.float32)
 
         # bg_mask
         p = self.config.padding
@@ -86,7 +88,8 @@ class CifDetGenerator():
             wh = bbox[2:]
             self.fill_detection(category_id - 1, xy, wh)
 
-    def fill_detection(self, f, xy, wh):
+    def fill_detection(self, classification_field_index, xy, wh):
+        f = 0
         ij = np.round(xy - self.s_offset).astype(np.int) + self.config.padding
         minx, miny = int(ij[0]), int(ij[1])
         maxx, maxy = minx + self.config.side_length, miny + self.config.side_length
@@ -126,6 +129,9 @@ class CifDetGenerator():
         self.fields_reg_bmin[f, miny:maxy, minx:maxx][mask] = bmin
         self.fields_wh_bmin[f, miny:maxy, minx:maxx][mask] = bmin
 
+        # update classification field
+        self.classification_fields[:, classification_field_index, miny:maxy, minx:maxx] = 1.0
+
     def fields(self, valid_area):
         p = self.config.padding
         intensities = self.intensities[:, p:-p, p:-p]
@@ -133,6 +139,7 @@ class CifDetGenerator():
         fields_wh = self.fields_wh[:, :, p:-p, p:-p]
         fields_reg_bmin = self.fields_reg_bmin[:, p:-p, p:-p]
         fields_wh_bmin = self.fields_wh_bmin[:, p:-p, p:-p]
+        classification_fields = self.classification_fields[:, :, p:-p, p:-p]
 
         mask_valid_area(intensities, valid_area)
         mask_valid_area(fields_reg[:, 0], valid_area, fill_value=np.nan)
@@ -141,6 +148,9 @@ class CifDetGenerator():
         mask_valid_area(fields_wh[:, 1], valid_area, fill_value=np.nan)
         mask_valid_area(fields_reg_bmin, valid_area, fill_value=np.nan)
         mask_valid_area(fields_wh_bmin, valid_area, fill_value=np.nan)
+        assert len(self.config.meta.categories) == classification_fields.shape[1]
+        for cat_idx in range(classification_fields.shape[1]):
+            mask_valid_area(classification_fields[:, cat_idx], valid_area, fill_value=np.nan)
 
         return torch.from_numpy(np.concatenate([
             np.expand_dims(intensities, 1),
@@ -148,4 +158,5 @@ class CifDetGenerator():
             fields_wh,
             np.expand_dims(fields_reg_bmin, 1),
             np.expand_dims(fields_wh_bmin, 1),
+            classification_fields,
         ], axis=1))
