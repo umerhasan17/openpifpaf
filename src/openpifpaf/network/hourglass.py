@@ -1,3 +1,13 @@
+"""
+Code inspired by hourglass modules from other research repositories:
+    * https://github.com/princeton-vl/CornerNet/tree/master/models
+    BSD 3-Clause License: Copyright (c) 2018, University of Michigan
+
+    * https://github.com/princeton-vl/pytorch_stacked_hourglass
+    BSD 3-Clause License: Copyright (c) 2019, princeton-vl
+"""
+
+
 from torch import nn
 
 Pool = nn.MaxPool2d
