@@ -1,12 +1,17 @@
 """
+The hourglass module is able to process features across multiple scales and consolidate the results
+to best capture the spatial relationships associated with keypoints for the task of pose estimation.
+
 Code inspired by hourglass modules from other research repositories:
+
+    The CornerNet model for object detection utilises an hourglass backbone.
     * https://github.com/princeton-vl/CornerNet/tree/master/models
     BSD 3-Clause License: Copyright (c) 2018, University of Michigan
 
+    The original hourglass model written for the task of human pose estimation.
     * https://github.com/princeton-vl/pytorch_stacked_hourglass
     BSD 3-Clause License: Copyright (c) 2019, princeton-vl
 """
-
 
 from torch import nn
 
@@ -14,6 +19,10 @@ Pool = nn.MaxPool2d
 
 
 class convolution(nn.Module):
+    """
+    Standard convolution module that is a component of the hourglass module.
+    """
+
     def __init__(self, inp_dim, out_dim, kernel_size=3, stride=1, with_bn=True):
         super(convolution, self).__init__()
 
@@ -31,6 +40,10 @@ class convolution(nn.Module):
 
 
 class residual(nn.Module):
+    """
+    The residual module is used for up-sampling and down-sampling convolutions within the hourglass.
+    """
+
     def __init__(self, inp_dim, out_dim, stride=1):
         super(residual, self).__init__()
 

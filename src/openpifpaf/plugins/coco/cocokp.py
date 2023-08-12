@@ -3,6 +3,8 @@ import argparse
 import torch
 
 import openpifpaf
+
+from .dataset import CocoDataset
 from .constants import (
     COCO_CATEGORIES,
     COCO_KEYPOINTS,
@@ -13,11 +15,9 @@ from .constants import (
     DENSER_COCO_PERSON_CONNECTIONS,
     HFLIP,
 )
-from .dataset import CocoDataset
 
 try:
     import pycocotools.coco
-
     # monkey patch for Python 3 compat
     pycocotools.coco.unicode = str
 except ImportError:
