@@ -21,7 +21,7 @@ except ImportError:
 LOG = logging.getLogger(__name__)
 
 
-def _scale(image, anns, meta, target_w, target_h, resample, *, fast=False):
+def _scale(image, anns, meta, target_w, target_h, resample, *, fast=True):
     """target_w and target_h as integers
 
     Internally, resample in Pillow are aliases:
@@ -93,7 +93,7 @@ class RescaleRelative(Preprocess):
     def __init__(self, scale_range=(0.5, 1.0), *,
                  resample=PIL.Image.BILINEAR,
                  absolute_reference=None,
-                 fast=False,
+                 fast=True,
                  power_law=False,
                  stretch_range=None):
         self.scale_range = scale_range
@@ -146,7 +146,7 @@ class RescaleRelative(Preprocess):
 class RescaleAbsolute(Preprocess):
     """Rescale to a given size."""
 
-    def __init__(self, long_edge, *, fast=False, resample=PIL.Image.BILINEAR):
+    def __init__(self, long_edge, *, fast=True, resample=PIL.Image.BILINEAR):
         self.long_edge = long_edge
         self.fast = fast
         self.resample = resample

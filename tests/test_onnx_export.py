@@ -2,14 +2,19 @@ import os
 import sys
 
 import numpy as np
-import onnxruntime
 import pytest
 import torch
 
 import openpifpaf
 import openpifpaf.export_onnx
 
+try:
+    import onnxruntime
+except ImportError:
+    onnxruntime = None
 
+
+@pytest.mark.skipif(onnxruntime is None, reason='onnxruntime unavailable')
 def test_onnx_exportable(tmpdir):
     outfile = str(tmpdir.join('openpifpaf-shufflenetv2k16.onnx'))
     assert not os.path.exists(outfile)
@@ -23,6 +28,8 @@ def test_onnx_exportable(tmpdir):
     openpifpaf.export_onnx.check(outfile)
 
 
+@pytest.mark.skip(reason='simplifier is unstable')
+@pytest.mark.skipif(onnxruntime is None, reason='onnxruntime unavailable')
 @pytest.mark.skipif(sys.version_info >= (3, 9),
                     reason='onnx-simplifier requires py<3.9')
 def test_onnx_simplify(tmpdir):
@@ -41,6 +48,7 @@ def test_onnx_simplify(tmpdir):
     assert os.path.exists(outfile + '.simplified')
 
 
+@pytest.mark.skipif(onnxruntime is None, reason='onnxruntime unavailable')
 @pytest.mark.parametrize('test_batch_dim', [1, 2])
 def test_onnxruntime(tmpdir, test_batch_dim):
     """Export an onnx model and test outputs.

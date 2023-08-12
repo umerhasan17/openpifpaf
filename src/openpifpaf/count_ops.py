@@ -21,7 +21,8 @@ except ImportError as e:
 
 def count(model):
     dummy_input = torch.randn(1, 3, 641, 641)
-    return thop.profile(model, inputs=(dummy_input, ))
+    gmacs, params = thop.profile(model, inputs=(dummy_input, ))  # pylint: disable=unbalanced-tuple-unpacking
+    return gmacs, params
 
 
 class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter,
