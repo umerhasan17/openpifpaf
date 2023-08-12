@@ -110,7 +110,7 @@ def cli():
 def count_ops(model, height=641, width=641):
     device = next(model.parameters()).device
     dummy_input = torch.randn(1, 3, height, width, device=device)
-    gmacs, params = thop.profile(model, inputs=(dummy_input, ))
+    gmacs, params = thop.profile(model, inputs=(dummy_input, ))  # pylint: disable=unbalanced-tuple-unpacking
     LOG.info('GMACs = {0:.2f}, million params = {1:.2f}'.format(gmacs / 1e9, params / 1e6))
     return gmacs, params
 
@@ -143,13 +143,14 @@ def evaluate(args):
         time.sleep(args.loader_warmup)
         LOG.info('Done.')
 
+    image_number = min(len(data_loader.dataset), len(data_loader) * data_loader.batch_size)
     metrics = datamodule.metrics()
     total_start = time.perf_counter()
     loop_start = time.perf_counter()
 
     for image_i, (pred, gt_anns, image_meta) in enumerate(prediction_loader):
         LOG.info('image %d / %d, last loop: %.3fs, images per second=%.1f',
-                 image_i, len(data_loader), time.perf_counter() - loop_start,
+                 image_i, image_number, time.perf_counter() - loop_start,
                  image_i / max(1, (time.perf_counter() - total_start)))
         loop_start = time.perf_counter()
 

@@ -103,7 +103,7 @@ class ConvPatchEmbed(nn.Module):
                 conv3x3(embed_dim // 2, embed_dim, 2),
             )
         else:
-            raise("For convolutional projection, patch size has to be in [8, 16]")
+            raise ("For convolutional projection, patch size has to be in [8, 16]")
 
     def forward(self, x):
         x = self.proj(x)
