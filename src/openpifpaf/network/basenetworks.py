@@ -1,10 +1,13 @@
 import argparse
 import logging
 import math
+
 import torch
 import torchvision.models
-from . import effnetv2
+
 from . import bottleneck_transformer
+from . import effnetv2
+from .hourglass import HourglassBlock, convolution, residual
 
 LOG = logging.getLogger(__name__)
 
@@ -760,8 +763,46 @@ class BotNet(BaseNetwork):
         group.add_argument('--botnet-input-image-size',
                            default=cls.input_image_size, type=int,
                            help='Input image size. Needs to be the same for training and'
-                           ' prediction, as BotNet only accepts fixed input sizes')
+                                ' prediction, as BotNet only accepts fixed input sizes')
 
     @classmethod
     def configure(cls, args: argparse.Namespace):
         cls.input_image_size = args.botnet_input_image_size
+
+
+class Hourglass(BaseNetwork):
+
+    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, increases=None, modules=None, **kwargs):
+        super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
+        if increases is None:
+            increases = [0, 128, 0, 0, 128]
+        if modules is None:
+            modules = [2, 2, 2, 2, 2, 4]
+        self.hg_input_block = torch.nn.Sequential(
+            convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
+            residual(inp_dim=128, out_dim=inp_dim)
+        )
+
+        if layers == 104:
+            self.hgs = torch.nn.Sequential(
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
+            )
+        elif layers == 52:
+            self.hgs = torch.nn.Sequential(
+                HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
+            )
+        else:
+            raise ValueError(f'Number of hourglass layers unsupported: {layers}')
+
+        self.hg_output_block = torch.nn.Sequential(
+            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(8, 8), padding=(1, 1), bias=False),
+            torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
+            torch.nn.ReLU(inplace=True),
+        )
+
+    def forward(self, x):
+        x1 = self.hg_input_block(x)
+        x2 = self.hgs(x1)
+        x3 = self.hg_output_block(x2)
+        return x3
