@@ -71,6 +71,9 @@ class Predictor:
         group.add_argument('--precise-rescaling', dest='fast_rescaling',
                            default=True, action='store_false',
                            help='use more exact image rescaling (requires scipy)')
+        group.add_argument('--tta-hflip', dest='tta_hflip',
+                           default=False, action='store_true',
+                           help='apply horizontal flipping as test time augmentation')
 
     @classmethod
     def configure(cls, args: argparse.Namespace):
@@ -80,6 +83,7 @@ class Predictor:
         cls.fast_rescaling = args.fast_rescaling
         cls.loader_workers = args.loader_workers
         cls.long_edge = args.long_edge
+        cls.tta_hflip = args.tta_hflip
 
     def preprocess_factory(self):
         rescale_t = None
@@ -125,7 +129,10 @@ class Predictor:
             if self.visualize_processed_image:
                 visualizer.Base.processed_image(processed_image_batch[0])
 
-            pred_batch = self.processor.batch(self.model, processed_image_batch, device=self.device)
+            pred_batch = self.processor.batch(
+                self.model, processed_image_batch, hflip=self.tta_hflip, device=self.device
+            )
+
             self.last_decoder_time = self.processor.last_decoder_time
             self.last_nn_time = self.processor.last_nn_time
             self.total_decoder_time += self.processor.last_decoder_time

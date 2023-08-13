@@ -7,6 +7,7 @@ from typing import List
 
 import torch
 
+from .utils.hflip import hflip_average_fields_batch
 from .. import annotation, visualizer
 
 LOG = logging.getLogger(__name__)
@@ -111,10 +112,31 @@ class Decoder:
         LOG.debug('nn processing time: %.1fms', (time.time() - start) * 1000.0)
         return heads
 
-    def batch(self, model, image_batch, *, device=None, gt_anns_batch=None):
+    def batch(self, model, image_batch, *, device=None, hflip=False, gt_anns_batch=None):
         """From image batch straight to annotations batch."""
         start_nn = time.perf_counter()
-        fields_batch = self.fields_batch(model, image_batch, device=device)
+
+        if hflip:
+            # The horizontal-flip evaluation technique improves accuracy when evaluating the test set.
+            # We average the predictions generated for the original and flipped image and use that as the
+            # final prediction. This method reduces prediction noise.
+
+            # Take horizontal flipped image and generate fields.
+            hflip_image_batch = torch.flip(image_batch, [-1])
+            combined_image_batch = torch.cat((image_batch, hflip_image_batch), dim=0)
+            combined_fields_batch = self.fields_batch(model, combined_image_batch, device=device)
+            cfb_len = len(combined_fields_batch)
+            assert cfb_len % 2 == 0
+            fields_batch = combined_fields_batch[:cfb_len // 2]
+            hflip_fields_batch = combined_fields_batch[cfb_len // 2:]
+
+            # Average the fields with the original fields before decoding to the final prediction.
+            fields_batch = hflip_average_fields_batch(
+                fields_batch=fields_batch, hflip_fields_batch=hflip_fields_batch, head_metas=model.head_metas
+            )
+        else:
+            fields_batch = self.fields_batch(model, image_batch, device=device)
+
         self.last_nn_time = time.perf_counter() - start_nn
 
         if gt_anns_batch is None:
