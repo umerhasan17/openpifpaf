@@ -771,9 +771,21 @@ class BotNet(BaseNetwork):
 
 
 class Hourglass(BaseNetwork):
+    """
+    Input Image Data Tensor Shape: (batch_size, 3, 513, 513)  where 513 = image height and width (can be different)
+    Input Hourglass Block Tensor Shape: (batch_size, 3, 256, 256) where 256 must be a fixed image height and width
+    Output Hourglass Block Tensor Shape: (batch_size, 3, 256, 256)
+    Input of CifDet Head Module: (batch_size, 256, 257, 257)
+    Output of CifDet Head Module: (batch_size, 91, 6, 513, 513)
+    Output Target Tensor Shape: (batch_size, 91, 7, 513, 513)
+                                where 91 = number of detection categories
+                                       7 = number of fields + 1 = 6 + 1
+                                     513 = prediction image height and width
+    """
 
-    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, increases=None, modules=None, **kwargs):
-        super().__init__(*args, stride=16, out_features=inp_dim, **kwargs)
+    def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, increases=None, modules=None, stride=2,
+                 **kwargs):
+        super().__init__(*args, stride=stride, out_features=inp_dim, **kwargs)
         if increases is None:
             increases = [0, 128, 0, 0, 128]
         if modules is None:
@@ -796,13 +808,13 @@ class Hourglass(BaseNetwork):
             raise ValueError(f'Number of hourglass layers unsupported: {layers}')
 
         self.hg_output_block = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(8, 8), padding=(1, 1), bias=False),
+            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(self.stride // 2, self.stride // 2), padding=(1, 1), bias=False),
             torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
             torch.nn.ReLU(inplace=True),
         )
 
     def forward(self, x):
-        x1 = self.hg_input_block(x)
-        x2 = self.hgs(x1)
-        x3 = self.hg_output_block(x2)
-        return x3
+        x = self.hg_input_block(x)
+        x = self.hgs(x)
+        x = self.hg_output_block(x)
+        return x
