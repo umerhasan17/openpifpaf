@@ -785,17 +785,37 @@ class Hourglass(BaseNetwork):
 
     def __init__(self, *args, inp_dim=256, bn=True, use_conv=True, layers=104, increases=None, modules=None, stride=2,
                  **kwargs):
+        """
+        :param inp_dim: Input dimension of the hourglass blocks.
+        :param bn: Hourglass batch normalization flag.
+        :param use_conv: Hourglass apply convolutions flag.
+        :param layers: Selects the type of hourglass network (e.g. 52 or 104).
+        :param increases: The difference between data resolution at each component of the hourglass.
+        :param modules: The number of residual modules at each component of the hourglass.
+        :param stride: Stride of the BaseNetwork.
+        """
         super().__init__(*args, stride=stride, out_features=inp_dim, **kwargs)
         if increases is None:
             increases = [0, 128, 0, 0, 128]
         if modules is None:
             modules = [2, 2, 2, 2, 2, 4]
+
+        # 1 convolution block takes the data from the input image data tensor shape to the input hourglass block tensor
+        # shape. We opted for this to keep the hourglass architecture the same as the original architecture (it took
+        # in image data of size 256x256). The input image of the hourglass ideally would be a power of 2 to account for
+        # the sizes of the intermediate down-sampled data. If the resolution of the input is too large, it is possible
+        # the same amount of hourglass layers are not able to capture distinct features at low resolutions. Adding more
+        # layers to fully capture down-sampling of high resolution images would significantly increase training time.
+        # Future baselines can be investigated by adjusting hyperparameters such as the number of hourglass layers,
+        # the input image resolution, the amount of down-sampling between each hourglass layer.
         self.hg_input_block = torch.nn.Sequential(
             convolution(inp_dim=3, out_dim=128, kernel_size=8, stride=2),
             residual(inp_dim=128, out_dim=inp_dim)
         )
 
+        # Number of components in each hourglass block is fixed at 5 (to replicate the original architecture).
         if layers == 104:
+            # The hourglass-104 network is 2 sequential hourglass blocks.
             self.hgs = torch.nn.Sequential(
                 HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
                 HourglassBlock(5, inp_dim, bn, increases=increases, modules=modules, use_conv=use_conv),
@@ -807,8 +827,12 @@ class Hourglass(BaseNetwork):
         else:
             raise ValueError(f'Number of hourglass layers unsupported: {layers}')
 
+        # This output block transforms data from the output hourglass block tensor shape to the input shape of the
+        # CifDet head module. The output resolution of the hourglass will be 256x256 (power of 2) and the input of the
+        # CifDet is typically (power of 2 + 1) e.g. 257x257.
         self.hg_output_block = torch.nn.Sequential(
-            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(self.stride // 2, self.stride // 2), padding=(1, 1), bias=False),
+            torch.nn.Conv2d(256, 256, kernel_size=(2, 2), stride=(self.stride // 2, self.stride // 2), padding=(1, 1),
+                            bias=False),
             torch.nn.BatchNorm2d(256, eps=1e-5, momentum=0.1, affine=True, track_running_stats=True),
             torch.nn.ReLU(inplace=True),
         )
