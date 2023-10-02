@@ -1,5 +1,6 @@
 import copy
 import logging
+import time
 
 import numpy as np
 import PIL
@@ -59,5 +60,4 @@ class HFlip(Preprocess):
         meta['hflip'] = True
 
         meta['valid_area'][0] = -(meta['valid_area'][0] + meta['valid_area'][2]) - 1.0 + w
-
         return image, anns, meta

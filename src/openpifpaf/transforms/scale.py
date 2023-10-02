@@ -18,6 +18,7 @@ try:
 except ImportError:
     scipy = None  # pylint: disable=invalid-name
 
+import time
 LOG = logging.getLogger(__name__)
 
 
@@ -140,7 +141,8 @@ class RescaleRelative(Preprocess):
             )
 
         target_w, target_h = int(w * scale_factor * stretch_factor), int(h * scale_factor)
-        return _scale(image, anns, meta, target_w, target_h, self.resample, fast=self.fast)
+        x = _scale(image, anns, meta, target_w, target_h, self.resample, fast=self.fast)
+        return x
 
 
 class RescaleAbsolute(Preprocess):

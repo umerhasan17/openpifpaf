@@ -9,6 +9,7 @@ from .preprocess import Preprocess
 
 LOG = logging.getLogger(__name__)
 
+import time
 
 class CenterPad(Preprocess):
     """Pad to a square of given size."""
@@ -28,7 +29,6 @@ class CenterPad(Preprocess):
         meta['offset'] -= ltrb[:2]
         meta['valid_area'][:2] += ltrb[:2]
         LOG.debug('valid area after pad: %s, image size = %s', meta['valid_area'], image.size)
-
         return image, anns, meta
 
     def center_pad(self, image, anns):

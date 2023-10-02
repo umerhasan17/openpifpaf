@@ -2,6 +2,7 @@ from collections import defaultdict
 import copy
 import logging
 import os
+import time
 
 import torch.utils.data
 from PIL import Image
